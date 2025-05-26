@@ -1,39 +1,30 @@
+import { BasesSidebar } from '@/components/ui/widgets/BasesSidebar'
 import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
+
+import { AppPage } from '@/components/ui/layout/AppPage';
+import { AppHeader } from '@/components/ui/layout/AppHeader';
+import { useMemo } from 'react';
 
 export const Route = createFileRoute('/')({
   component: App,
 })
 
 function App() {
+  const breadcrumbItems = useMemo(() => [
+    { label: 'Bases', href: '/bases' },
+  ], []);
+
   return (
-    <div className="text-center">
-      <header className="flex flex-col items-center justify-center text-white text-[calc(10px+2vmin)]">
-        <img
-          src={logo}
-          className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
-          alt="logo"
-        />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
-    </div>
+    <AppPage
+      sidebar={<BasesSidebar />}
+    >
+      <AppHeader
+        breadcrumb={breadcrumbItems}
+        showSidebarTrigger={true}
+      />
+      <div className='p-4'>
+        hello world
+      </div>
+    </AppPage>
   )
 }

@@ -1,7 +1,7 @@
 import { ThemeProvider } from "../ThemeProvider";
-import { AppSidebar } from "./AppSidebar";
-import { AppSidebarInset } from "./AppSidebarInset";
+import { AppMenu } from "./AppMenu";
 import { SidebarProvider } from "@/components/ui/primitives/sidebar";
+import { SidebarInset } from "@/components/ui/primitives/sidebar";
 
 type ProviderProps = {
 	children: React.ReactNode;
@@ -14,8 +14,10 @@ export async function AppLayout({ children }: ProviderProps) {
 			storageKey="theme"
 		>
 			<SidebarProvider defaultOpen={false}>
-				<AppSidebar />
-				<AppSidebarInset>{children}</AppSidebarInset>
+				<AppMenu />
+				<SidebarInset className="overflow-x-hidden">
+					{children}
+				</SidebarInset>
 			</SidebarProvider>
 		</ThemeProvider>
 	);

@@ -32,7 +32,7 @@ const user = {
 
 const itemClassName = 'text-sidebar-accent-foreground/60 data-[status=active]:!bg-sidebar-accent data-[status=active]:!text-sidebar-accent-foreground '
 
-export function AppSidebar() {
+export function AppMenu() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -59,7 +59,7 @@ export function AppSidebar() {
               {/* Bases */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="bases" className={itemClassName}>
-                  <Link to="/bases" >
+                  <Link to="/" >
                     <Home />
                   </Link>
                 </SidebarMenuButton>
@@ -91,7 +91,7 @@ export function AppSidebar() {
               {/* What's New */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="What's New" className={itemClassName}>
-                  <Link to="/whats-new">
+                  <Link to="/news">
                     <Megaphone />
                   </Link>
                 </SidebarMenuButton>
