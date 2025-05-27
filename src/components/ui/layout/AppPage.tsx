@@ -9,7 +9,6 @@ interface AppPageProps {
 
 const appPageClassName = "flex w-full h-full";
 
-
 export function AppPage({ children, sidebar }: AppPageProps) {
     const sidebarStatus = useSidebarStatus();
     const sidebarVisible = sidebar && sidebarStatus.visible;

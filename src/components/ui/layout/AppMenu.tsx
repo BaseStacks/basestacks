@@ -3,7 +3,6 @@
 import {
   Blocks,
   Cog,
-  Command,
   Home,
   Search,
   Settings2,
@@ -21,34 +20,19 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/primitives/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "../primitives/avatar";
 import { Link } from "@tanstack/react-router";
-
-const user = {
-  name: "John Doe",
-  email: "",
-  avatar: "",
-};
+import { WorkspaceSwitcher } from "../widgets/WorkspaceSwitcher";
+import { UserButton } from "../widgets/UserButton";
 
 const itemClassName = 'text-sidebar-accent-foreground/60 data-[status=active]:!bg-sidebar-accent data-[status=active]:!text-sidebar-accent-foreground '
 
 export function AppMenu() {
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader>
+      <SidebarHeader className="h-16 flex items-center justify-center">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild className="md:h-8 md:p-0">
-              <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
+            <WorkspaceSwitcher />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
@@ -99,19 +83,7 @@ export function AppMenu() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenuButton
-          size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-8 md:p-0"
-        >
-          <Avatar className="h-8 w-8 rounded-full">
-            <AvatarImage src={user.avatar} alt={user.name} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">{user.name}</span>
-            <span className="truncate text-xs">{user.email}</span>
-          </div>
-        </SidebarMenuButton>
+        <UserButton />
       </SidebarFooter>
     </Sidebar>
   );

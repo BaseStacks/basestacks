@@ -2,6 +2,7 @@ import { Sidebar, SidebarClose } from "lucide-react";
 import { Button } from "../primitives/button";
 import { useSidebarStatus } from "@/states";
 import { AppBreadcrumb, type AppBreadcrumbItem } from "./AppBreadcrumb";
+import { Separator } from "../primitives/separator";
 
 interface AppHeaderProps {
     readonly breadcrumb?: AppBreadcrumbItem[];
@@ -25,7 +26,12 @@ export function AppHeader({ breadcrumb, showSidebarTrigger }: AppHeaderProps) {
                         </Button>
                     )
                 }
-                {breadcrumb && <AppBreadcrumb items={breadcrumb} />}
+                {breadcrumb && (
+                    <>
+                        <Separator className="!h-4" orientation="vertical" />
+                        <AppBreadcrumb items={breadcrumb} />
+                    </>
+                )}
             </div>
         </header>
     );

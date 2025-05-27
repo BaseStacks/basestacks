@@ -4,14 +4,19 @@ import { createFileRoute } from '@tanstack/react-router'
 import { AppPage } from '@/components/ui/layout/AppPage';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
 import { useMemo } from 'react';
+import type { AppBreadcrumbItem } from '@/components/ui/layout/AppBreadcrumb';
+import { BaseSwitcher } from '@/components/ui/widgets/BaseSwitcher';
 
 export const Route = createFileRoute('/')({
   component: App,
 })
 
 function App() {
-  const breadcrumbItems = useMemo(() => [
-    { label: 'Bases', href: '/' },
+  const breadcrumbItems = useMemo((): AppBreadcrumbItem[] => [
+    {
+      type: 'menu',
+      label: (<BaseSwitcher />),
+    },
     { label: 'Bases', href: '/' },
   ], []);
 
