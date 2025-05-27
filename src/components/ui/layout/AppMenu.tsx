@@ -2,9 +2,9 @@
 
 import {
   Blocks,
+  Cog,
   Command,
   Home,
-  Megaphone,
   Search,
   Settings2,
 } from "lucide-react";
@@ -64,6 +64,13 @@ export function AppMenu() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Automation" className={itemClassName}>
+                  <Link to="/automation">
+                    <Cog />
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
               {/* Search */}
               <SidebarMenuItem>
                 <SidebarMenuButton tooltip="search" className={itemClassName}>
@@ -84,15 +91,6 @@ export function AppMenu() {
                 <SidebarMenuButton asChild tooltip="Integrations" className={itemClassName}>
                   <Link to="/integrations">
                     <Blocks />
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarSeparator />
-              {/* What's New */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="What's New" className={itemClassName}>
-                  <Link to="/news">
-                    <Megaphone />
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

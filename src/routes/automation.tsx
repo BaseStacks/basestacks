@@ -1,18 +1,16 @@
-import { BasesSidebar } from '@/components/ui/widgets/BasesSidebar'
 import { createFileRoute } from '@tanstack/react-router'
-
+import { BasesSidebar } from '@/components/ui/widgets/BasesSidebar'
 import { AppPage } from '@/components/ui/layout/AppPage';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
 import { useMemo } from 'react';
 
-export const Route = createFileRoute('/')({
-  component: App,
+export const Route = createFileRoute('/automation')({
+  component: RouteComponent,
 })
 
-function App() {
+function RouteComponent() {
   const breadcrumbItems = useMemo(() => [
-    { label: 'Bases', href: '/' },
-    { label: 'Bases', href: '/' },
+    { label: 'Bases', href: '/bases' },
   ], []);
 
   return (
@@ -24,7 +22,7 @@ function App() {
         showSidebarTrigger={true}
       />
       <div className='p-4'>
-        hello world
+        Automation
       </div>
     </AppPage>
   )

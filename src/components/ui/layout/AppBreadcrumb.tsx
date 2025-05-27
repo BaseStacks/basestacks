@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "../primitives/breadcrumb";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "../primitives/breadcrumb";
 import { Fragment } from "react/jsx-runtime";
 
 export interface AppBreadcrumbItem {
+  readonly type?: "link" | "menu";
   readonly label: string;
   readonly href?: string;
 }

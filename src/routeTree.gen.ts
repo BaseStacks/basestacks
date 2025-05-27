@@ -12,8 +12,8 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SettingsImport } from './routes/settings'
-import { Route as NewsImport } from './routes/news'
 import { Route as IntegrationsImport } from './routes/integrations'
+import { Route as AutomationImport } from './routes/automation'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -24,15 +24,15 @@ const SettingsRoute = SettingsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const NewsRoute = NewsImport.update({
-  id: '/news',
-  path: '/news',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IntegrationsRoute = IntegrationsImport.update({
   id: '/integrations',
   path: '/integrations',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AutomationRoute = AutomationImport.update({
+  id: '/automation',
+  path: '/automation',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,18 +53,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/automation': {
+      id: '/automation'
+      path: '/automation'
+      fullPath: '/automation'
+      preLoaderRoute: typeof AutomationImport
+      parentRoute: typeof rootRoute
+    }
     '/integrations': {
       id: '/integrations'
       path: '/integrations'
       fullPath: '/integrations'
       preLoaderRoute: typeof IntegrationsImport
-      parentRoute: typeof rootRoute
-    }
-    '/news': {
-      id: '/news'
-      path: '/news'
-      fullPath: '/news'
-      preLoaderRoute: typeof NewsImport
       parentRoute: typeof rootRoute
     }
     '/settings': {
@@ -81,46 +81,46 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
-  '/news': typeof NewsRoute
   '/settings': typeof SettingsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
-  '/news': typeof NewsRoute
   '/settings': typeof SettingsRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
-  '/news': typeof NewsRoute
   '/settings': typeof SettingsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/integrations' | '/news' | '/settings'
+  fullPaths: '/' | '/automation' | '/integrations' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/integrations' | '/news' | '/settings'
-  id: '__root__' | '/' | '/integrations' | '/news' | '/settings'
+  to: '/' | '/automation' | '/integrations' | '/settings'
+  id: '__root__' | '/' | '/automation' | '/integrations' | '/settings'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AutomationRoute: typeof AutomationRoute
   IntegrationsRoute: typeof IntegrationsRoute
-  NewsRoute: typeof NewsRoute
   SettingsRoute: typeof SettingsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AutomationRoute: AutomationRoute,
   IntegrationsRoute: IntegrationsRoute,
-  NewsRoute: NewsRoute,
   SettingsRoute: SettingsRoute,
 }
 
@@ -135,19 +135,19 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/automation",
         "/integrations",
-        "/news",
         "/settings"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/automation": {
+      "filePath": "automation.tsx"
+    },
     "/integrations": {
       "filePath": "integrations.tsx"
-    },
-    "/news": {
-      "filePath": "news.tsx"
     },
     "/settings": {
       "filePath": "settings.tsx"
