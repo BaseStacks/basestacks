@@ -8,7 +8,7 @@ interface ViewMenuProps {
 export function ViewMenu({ children }: ViewMenuProps) {
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger asChild className="data-[state=open]:bg-accent data-[state=open]:text-accent-foreground">
+            <DropdownMenuTrigger asChild>
                 {children}
             </DropdownMenuTrigger>
             <DropdownMenuContent

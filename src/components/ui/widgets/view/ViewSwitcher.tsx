@@ -25,7 +25,6 @@ export function ViewSwitcher() {
                 <Button
                     size="sm"
                     variant="ghost"
-                    className={cn('data-[state=open]:bg-accent data-[state=open]:text-accent-foreground')}
                 >
                     {activeView.name}
                 </Button>

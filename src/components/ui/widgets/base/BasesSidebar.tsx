@@ -48,7 +48,7 @@ export function BasesSidebar() {
                         <Link
                             to="."
                             search={{ page: 'overview' }}
-                            className="!px-4 w-full data-[status=active]:bg-accent data-[status=active]:text-accent-foreground"
+                            className="!px-4 w-full"
                         >
                             <LayoutDashboard />
                             <span className="grow text-left block">Overview</span>
@@ -91,7 +91,7 @@ function TableList() {
                     >
                         <Button
                             variant="ghost"
-                            className="!px-4 w-full data-[status=active]:bg-accent data-[status=active]:text-accent-foreground !pr-2 group"
+                            className="!px-4 w-full !pr-1 group"
                             asChild
                         >
                             <Link
@@ -101,12 +101,12 @@ function TableList() {
                                 <Table2 />
                                 <span className="grow text-left ">{table.name}</span>
                                 <div className="hidden group-hover:flex">
-                                    <Button variant="ghost" size="iconSm" >
+                                    <Button variant="ghost" size="iconXs" >
                                         <Ellipsis />
                                     </Button>
                                     <Button
                                         variant="ghost"
-                                        size="iconSm"
+                                        size="iconXs"
                                         onClick={(e) => {
                                             handleToggleTable(table.id);
                                             e.preventDefault();
@@ -140,7 +140,7 @@ function ViewList({ tableId }: ViewListProps) {
         <div className="flex flex-col gap-1">
             <Button
                 variant="ghost"
-                className="!px-10 w-full data-[status=active]:bg-accent data-[status=active]:text-accent-foreground"
+                className="!px-10 w-full"
             >
                 <Plus /> <span className="grow text-left">New view</span>
             </Button>
@@ -148,7 +148,7 @@ function ViewList({ tableId }: ViewListProps) {
                 <Button
                     key={view.id}
                     variant="ghost"
-                    className="!pl-10 !pr-1 w-full data-[status=active]:bg-accent data-[status=active]:text-accent-foreground group"
+                    className="!pl-10 !pr-1 w-full group"
                     asChild
                 >
                     <Link
@@ -159,7 +159,7 @@ function ViewList({ tableId }: ViewListProps) {
                         <span className="grow text-left">{view.name}</span>
                         <Button
                             variant="ghost"
-                            size="iconSm"
+                            size="iconXs"
                             className="invisible group-hover:visible"
                             onClick={(e) => {
                                 e.preventDefault();

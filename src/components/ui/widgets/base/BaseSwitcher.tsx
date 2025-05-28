@@ -27,7 +27,7 @@ export function BaseSwitcher() {
                 <Button
                     size="iconSm"
                     variant="ghost"
-                    className={cn('data-[state=open]:bg-accent', getTextColorClass(activeBase.color), getTextColorClass(activeBase.color, 'hover'))}
+                    className={cn(getTextColorClass(activeBase.color), getTextColorClass(activeBase.color, 'hover'))}
                 >
                     <Database className="size-4" />
                 </Button>

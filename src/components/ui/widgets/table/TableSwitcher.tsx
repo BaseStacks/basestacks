@@ -25,11 +25,7 @@ export function TableSwitcher() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button
-                    size="sm"
-                    variant="ghost"
-                    className={cn('data-[state=open]:bg-accent data-[state=open]:text-accent-foreground')}
-                >
+                <Button size="sm" variant="ghost">
                     {activeTable.name}
                 </Button>
             </DropdownMenuTrigger>
