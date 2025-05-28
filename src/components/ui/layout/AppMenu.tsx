@@ -34,10 +34,10 @@ export function AppMenu() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="py-2">
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu >
               {/* Bases */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="bases" className={itemClassName}>
