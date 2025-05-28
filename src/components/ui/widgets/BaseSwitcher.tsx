@@ -26,7 +26,14 @@ export function BaseSwitcher() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <SidebarMenuButton className={cn('flex aspect-square size-8 items-center justify-center rounded-lg md:h-8 md:p-0', getTextColorClass(activeBase.color), getTextColorClass(activeBase.color, 'hover'))} >
+                <SidebarMenuButton
+                    className={cn(
+                        'flex aspect-square size-8 items-center justify-center rounded-lg md:h-8 md:p-0',
+                        'data-[state=open]:bg-accent',
+                        getTextColorClass(activeBase.color),
+                        getTextColorClass(activeBase.color, 'hover')
+                    )}
+                >
                     <Database className="size-4" />
                 </SidebarMenuButton>
             </DropdownMenuTrigger>

@@ -1,4 +1,4 @@
-import { Sidebar, SidebarClose } from "lucide-react";
+import { ChevronsLeftIcon, ChevronsRight } from "lucide-react";
 import { Button } from "../primitives/button";
 import { useSidebarStatus } from "@/states";
 import { AppBreadcrumb, type AppBreadcrumbItem } from "./AppBreadcrumb";
@@ -16,21 +16,18 @@ export function AppHeader({ breadcrumb, showSidebarTrigger }: AppHeaderProps) {
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] border-b ease-linear justify-between">
             <div className="flex items-center gap-2 px-4">
                 {
-                    showSidebarTrigger && (
+                    (showSidebarTrigger && !sidebarStatus.visible) && (
                         <Button
                             size="icon"
                             variant="ghost"
                             onClick={() => sidebarStatus.toggle()}
                         >
-                            {sidebarStatus.visible ? <SidebarClose /> : <Sidebar />}
+                            {sidebarStatus.visible ? <ChevronsLeftIcon /> : <ChevronsRight />}
                         </Button>
                     )
                 }
                 {breadcrumb && (
-                    <>
-                        <Separator className="!h-4" orientation="vertical" />
-                        <AppBreadcrumb items={breadcrumb} />
-                    </>
+                    <AppBreadcrumb items={breadcrumb} />
                 )}
             </div>
         </header>

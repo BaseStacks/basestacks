@@ -6,6 +6,8 @@ import { AppHeader } from '@/components/ui/layout/AppHeader';
 import { useMemo } from 'react';
 import type { AppBreadcrumbItem } from '@/components/ui/layout/AppBreadcrumb';
 import { BaseSwitcher } from '@/components/ui/widgets/BaseSwitcher';
+import { TableSwitcher } from '@/components/ui/widgets/TableSwitcher';
+import { ViewSwitcher } from '@/components/ui/widgets/ViewSwitcher';
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -17,7 +19,16 @@ function App() {
       type: 'menu',
       label: (<BaseSwitcher />),
     },
-    { label: 'Bases', href: '/' },
+    {
+      type: 'menu',
+      label: <TableSwitcher />,
+      href: '/'
+    },
+    {
+      type: 'menu',
+      label: <ViewSwitcher />,
+      href: '/'
+    },
   ], []);
 
   return (

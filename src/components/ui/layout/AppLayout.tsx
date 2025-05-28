@@ -7,7 +7,7 @@ type ProviderProps = {
 	children: React.ReactNode;
 };
 
-export async function AppLayout({ children }: ProviderProps) {
+export function AppLayout({ children }: ProviderProps) {
 	return (
 		<ThemeProvider
 			defaultTheme="dark"
