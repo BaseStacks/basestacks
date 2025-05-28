@@ -6,13 +6,11 @@ import {
     Plus,
 } from "lucide-react";
 
-import {
-    SidebarMenuButton,
-} from "@/components/ui/primitives/sidebar";
 import { useBases } from "@/states";
 import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 import { getTextColorClass } from "@/lib/colorUtils";
+import { Button } from "../../primitives/button";
 
 export function BaseSwitcher() {
     const { bases, activeBaseId } = useBases();
@@ -26,16 +24,13 @@ export function BaseSwitcher() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <SidebarMenuButton
-                    className={cn(
-                        'flex aspect-square size-8 items-center justify-center rounded-lg md:h-8 md:p-0',
-                        'data-[state=open]:bg-accent',
-                        getTextColorClass(activeBase.color),
-                        getTextColorClass(activeBase.color, 'hover')
-                    )}
+                <Button
+                    size="iconSm"
+                    variant="ghost"
+                    className={cn('data-[state=open]:bg-accent', getTextColorClass(activeBase.color), getTextColorClass(activeBase.color, 'hover'))}
                 >
                     <Database className="size-4" />
-                </SidebarMenuButton>
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
@@ -43,7 +38,7 @@ export function BaseSwitcher() {
                 side={"bottom"}
                 sideOffset={4}
             >
-                {bases.map((base, index) => (
+                {bases.map((base) => (
                     <DropdownMenuItem
                         key={base.name}
                         className={cn('gap-2 p-2 mb-1', activeBaseId === base.id && 'bg-accent text-accent-foreground')}

@@ -1,9 +1,9 @@
 import { ChevronDown, ChevronRight, ChevronsLeftIcon, Database, Ellipsis, Grid2x2, LayoutDashboard, Plus, PlusCircle, Search, Square, SquareKanban, Table2 } from "lucide-react";
-import { Button } from "../primitives/button";
+import { Button } from "../../primitives/button";
 import { getTextColorClass } from "@/lib/colorUtils";
 import { useBases, useSidebarStatus, useTables, useViews } from "@/states";
 import { Link } from "@tanstack/react-router";
-import { Label } from "../primitives/label";
+import { Label } from "../../primitives/label";
 import { useMemo, useState } from "react";
 
 export function BasesSidebar() {

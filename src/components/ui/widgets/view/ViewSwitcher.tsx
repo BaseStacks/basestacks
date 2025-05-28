@@ -5,12 +5,10 @@ import {
     Plus,
 } from "lucide-react";
 
-import {
-    SidebarMenuButton,
-} from "@/components/ui/primitives/sidebar";
 import { useViews } from "@/states";
 import { cn } from "@/lib/utils";
 import { useMemo } from "react";
+import { Button } from "../../primitives/button";
 
 export function ViewSwitcher() {
     const { views, activeViewId } = useViews();
@@ -24,9 +22,13 @@ export function ViewSwitcher() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <SidebarMenuButton className={cn('flex items-center justify-center rounded-lg data-[state=open]:bg-accent')} >
+                <Button
+                    size="sm"
+                    variant="ghost"
+                    className={cn('data-[state=open]:bg-accent data-[state=open]:text-accent-foreground')}
+                >
                     {activeView.name}
-                </SidebarMenuButton>
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
@@ -51,6 +53,6 @@ export function ViewSwitcher() {
                     <div className="font-medium text-muted-foreground">Add View</div>
                 </DropdownMenuItem>
             </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu >
     );
 }

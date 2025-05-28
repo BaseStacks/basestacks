@@ -1,13 +1,20 @@
-import { BasesSidebar } from '@/components/ui/widgets/BasesSidebar'
+import { BasesSidebar } from '@/components/ui/widgets/base/BasesSidebar'
 import { createFileRoute } from '@tanstack/react-router'
 
 import { AppPage } from '@/components/ui/layout/AppPage';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
 import { useMemo } from 'react';
 import type { AppBreadcrumbItem } from '@/components/ui/layout/AppBreadcrumb';
-import { BaseSwitcher } from '@/components/ui/widgets/BaseSwitcher';
-import { TableSwitcher } from '@/components/ui/widgets/TableSwitcher';
-import { ViewSwitcher } from '@/components/ui/widgets/ViewSwitcher';
+import { BaseSwitcher } from '@/components/ui/widgets/base/BaseSwitcher';
+import { TableSwitcher } from '@/components/ui/widgets/table/TableSwitcher';
+import { ViewSwitcher } from '@/components/ui/widgets/view/ViewSwitcher';
+import { RecordFields } from '@/components/ui/widgets/record/RecordFields';
+import { RecordFilters } from '@/components/ui/widgets/record/RecordFilters';
+import { RecordSorts } from '@/components/ui/widgets/record/RecordSorts';
+import { RecordHeights } from '@/components/ui/widgets/record/RecordHeights';
+import { ViewMenu } from '@/components/ui/widgets/view/ViewMenu';
+import { Button } from '@/components/ui/primitives/button';
+import { Ellipsis } from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -39,8 +46,18 @@ function App() {
         breadcrumb={breadcrumbItems}
         showSidebarTrigger={true}
       />
+      <div className='flex h-12 w-full flex-row items-center border-b px-4 gap-2'>
+        <RecordFields />
+        <RecordFilters />
+        <RecordSorts />
+        <RecordHeights />
+        <ViewMenu>
+          <Button variant="ghost" size="iconSm">
+            <Ellipsis />
+          </Button>
+        </ViewMenu>
+      </div>
       <div className='p-4'>
-        hello world
       </div>
     </AppPage>
   )
