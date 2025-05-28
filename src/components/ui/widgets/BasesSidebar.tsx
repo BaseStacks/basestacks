@@ -33,7 +33,7 @@ export function BasesSidebar() {
                 <div className="py-2 w-full">
                     <Button variant="outline" className="!px-4 w-full">
                         <Search />
-                        <span className="grow text-left font-light block">Quick search</span>
+                        <span className="grow text-left block font-light">Quick search</span>
                         <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                             <span className="text-xs">Ctrl K</span>
                         </kbd>
@@ -42,7 +42,7 @@ export function BasesSidebar() {
                 <div className="w-full flex flex-col gap-1 mb-4">
                     <Button variant="ghost" className="!px-4 w-full">
                         <PlusCircle />
-                        <span className="grow text-left font-light block">New table</span>
+                        <span className="grow text-left ">New table</span>
                     </Button>
                     <Button variant="ghost" asChild>
                         <Link
@@ -51,7 +51,7 @@ export function BasesSidebar() {
                             className="!px-4 w-full data-[status=active]:bg-accent data-[status=active]:text-accent-foreground"
                         >
                             <LayoutDashboard />
-                            <span className="grow text-left font-light block">Overview</span>
+                            <span className="grow text-left block">Overview</span>
                         </Link>
                     </Button>
                 </div>
@@ -148,7 +148,7 @@ function ViewList({ tableId }: ViewListProps) {
                 <Button
                     key={view.id}
                     variant="ghost"
-                    className="!pl-10 !pr-1 w-full data-[status=active]:bg-accent data-[status=active]:text-accent-foreground"
+                    className="!pl-10 !pr-1 w-full data-[status=active]:bg-accent data-[status=active]:text-accent-foreground group"
                     asChild
                 >
                     <Link
@@ -160,6 +160,7 @@ function ViewList({ tableId }: ViewListProps) {
                         <Button
                             variant="ghost"
                             size="iconSm"
+                            className="invisible group-hover:visible"
                             onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
