@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "../primitives/breadcrumb";
 import { Fragment } from "react/jsx-runtime";
 import type React from "react";
+import { useIsMobile } from "@/hooks/ui/useIsMobile";
+import { ChevronDown } from "lucide-react";
 
 export interface AppBreadcrumbItem {
   readonly type?: "link" | "menu" | "button";
@@ -10,10 +12,25 @@ export interface AppBreadcrumbItem {
 }
 
 interface AppBreadcrumbProps {
-  readonly items?: AppBreadcrumbItem[];
+  readonly items: AppBreadcrumbItem[];
 }
 
 export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    const lastItem = items?.[items.length - 1];
+    return (
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <AppBreadcrumbItem item={lastItem} />
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    );
+  }
+
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -22,7 +39,7 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
             const isLast = index === items.length - 1;
             return (
               <Fragment key={index}>
-                <BreadcrumbItem className="hidden md:block">
+                <BreadcrumbItem>
                   <AppBreadcrumbItem item={item} />
                 </BreadcrumbItem>
                 {!isLast && <BreadcrumbSeparator />}
@@ -46,5 +63,9 @@ function AppBreadcrumbItem({ item }: { item: AppBreadcrumbItem; }) {
     );
   }
 
-  return <span className="text-foreground font-normal">{item.label}</span>;
+  return (
+    <span className="text-foreground font-normal">
+      {item.label}
+    </span>
+  );
 }

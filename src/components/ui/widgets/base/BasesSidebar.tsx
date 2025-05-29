@@ -1,12 +1,14 @@
-import { ChevronDown, ChevronRight, ChevronsLeftIcon, Database, Ellipsis, Grid2x2, LayoutDashboard, Plus, PlusCircle, Search, Square, SquareKanban, Table2 } from "lucide-react";
+import { ChevronDown, ChevronRight, ChevronsLeftIcon, Database, Ellipsis, Grid2x2, LayoutDashboard, Plus, PlusCircle, Search, Square, SquareKanban, Table2, X, XIcon } from "lucide-react";
 import { Button } from "../../primitives/button";
 import { getTextColorClass } from "@/lib/colorUtils";
 import { useBases, useSidebarStatus, useTables, useViews } from "@/states";
 import { Link } from "@tanstack/react-router";
 import { Label } from "../../primitives/label";
 import { useMemo, useState } from "react";
+import { useIsMobile } from "@/hooks/ui/useIsMobile";
 
 export function BasesSidebar() {
+    const isMobile = useIsMobile();
     const sidebarStatus = useSidebarStatus();
     const { getActiveBase } = useBases();
 
@@ -21,13 +23,26 @@ export function BasesSidebar() {
                         <ChevronDown />
                     </Button>
                 </div>
-                <Button
-                    size="icon"
-                    variant="ghost"
-                    onClick={() => sidebarStatus.toggle()}
-                >
-                    <ChevronsLeftIcon />
-                </Button>
+                {
+                    isMobile ? (
+                        <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => sidebarStatus.toggle()}
+                        >
+                            <XIcon />
+                        </Button>
+                    )
+                        : (
+                            <Button
+                                size="icon"
+                                variant="ghost"
+                                onClick={() => sidebarStatus.toggle()}
+                            >
+                                <ChevronsLeftIcon />
+                            </Button>
+                        )
+                }
             </div>
             <div className="flex flex-col gap-2 px-4">
                 <div className="py-2 w-full">

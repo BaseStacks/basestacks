@@ -2,6 +2,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 
 import {
     Check,
+    ChevronDown,
     Plus,
 } from "lucide-react";
 
@@ -9,8 +10,10 @@ import { useViews } from "@/states";
 import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 import { Button } from "../../primitives/button";
+import { useIsMobile } from "@/hooks/ui/useIsMobile";
 
 export function ViewSwitcher() {
+    const isMobile = useIsMobile();
     const { views, activeViewId } = useViews();
 
     const activeView = useMemo(() => views.find(view => view.id === activeViewId), [views, activeViewId]);
@@ -27,6 +30,7 @@ export function ViewSwitcher() {
                     variant="ghost"
                 >
                     {activeView.name}
+                    {isMobile && <ChevronDown />}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent

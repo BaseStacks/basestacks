@@ -1,8 +1,9 @@
-import { ChevronsLeftIcon, ChevronsRight } from "lucide-react";
+import { ChevronsLeftIcon, ChevronsRight, Menu } from "lucide-react";
 import { Button } from "../primitives/button";
 import { useSidebarStatus } from "@/states";
 import { AppBreadcrumb, type AppBreadcrumbItem } from "./AppBreadcrumb";
-import { Separator } from "../primitives/separator";
+import { useIsMobile } from "@/hooks/ui/useIsMobile";
+import { cn } from "@/lib/utils";
 
 interface AppHeaderProps {
     readonly breadcrumb?: AppBreadcrumbItem[];
@@ -10,21 +11,29 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({ breadcrumb, showSidebarTrigger }: AppHeaderProps) {
+    const isMobile = useIsMobile();
+
     const sidebarStatus = useSidebarStatus();
 
     return (
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] border-b ease-linear justify-between">
-            <div className="flex items-center gap-2 px-4">
+            <div className={cn('flex items-center gap-2 px-4 w-full')}>
                 {
-                    (showSidebarTrigger && !sidebarStatus.visible) && (
-                        <Button
-                            size="icon"
-                            variant="ghost"
-                            onClick={() => sidebarStatus.toggle()}
-                        >
-                            {sidebarStatus.visible ? <ChevronsLeftIcon /> : <ChevronsRight />}
-                        </Button>
-                    )
+                    isMobile
+                        ? (
+                            <Button size="icon" variant="outline" onClick={() => sidebarStatus.toggle()}>
+                                <Menu />
+                            </Button>
+                        )
+                        : (showSidebarTrigger && !sidebarStatus.visible) && (
+                            <Button
+                                size="icon"
+                                variant="ghost"
+                                onClick={() => sidebarStatus.toggle()}
+                            >
+                                {sidebarStatus.visible ? <ChevronsLeftIcon /> : <ChevronsRight />}
+                            </Button>
+                        )
                 }
                 {breadcrumb && (
                     <AppBreadcrumb items={breadcrumb} />
