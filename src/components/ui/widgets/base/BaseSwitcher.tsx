@@ -26,22 +26,17 @@ export function BaseSwitcher() {
             <DropdownMenuTrigger asChild>
                 <Button
                     size="iconSm"
-                    variant="ghost"
+                    variant="outline"
                     className={cn(getTextColorClass(activeBase.color), getTextColorClass(activeBase.color, 'hover'))}
                 >
                     <Database className="size-4" />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                align="start"
-                side={"bottom"}
-                sideOffset={4}
-            >
+            <DropdownMenuContent align="start">
                 {bases.map((base) => (
                     <DropdownMenuItem
                         key={base.name}
-                        className={cn('gap-2 p-2 mb-1', activeBaseId === base.id && 'bg-accent text-accent-foreground')}
+                        className={cn('gap-2 p-2', activeBaseId === base.id && 'bg-accent text-accent-foreground')}
                     >
                         {base.name}
                         {activeBaseId === base.id && (<Check className="ml-auto size-4 text-green-500" />)}

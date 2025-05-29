@@ -9,7 +9,7 @@ import {
     SidebarMenuButton,
 } from "@/components/ui/primitives/sidebar";
 import { useWorkspaces } from "@/states";
-import { cn } from "@/lib/utils";
+import { Button } from "../../primitives/button";
 
 export function WorkspaceSwitcher() {
     const { workspaces, activeWorkspaceId } = useWorkspaces();
@@ -17,24 +17,15 @@ export function WorkspaceSwitcher() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <SidebarMenuButton size="lg" asChild className="md:h-8 md:p-0">
-                    <div>
-                        <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                            <Command className="size-4" />
-                        </div>
-                    </div>
-                </SidebarMenuButton>
+                <Button size="iconSm">
+                    <Command />
+                </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                align="start"
-                side={"bottom"}
-                sideOffset={4}
-            >
+            <DropdownMenuContent align="start" >
                 {workspaces.map((workspace, index) => (
                     <DropdownMenuItem
                         key={workspace.name}
-                        className={cn('gap-2 p-2 mb-1', activeWorkspaceId === workspace.id && 'bg-accent text-accent-foreground')}
+                        variant={activeWorkspaceId === workspace.id ? 'active' : 'default'}
                     >
                         {workspace.name}
                         <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>

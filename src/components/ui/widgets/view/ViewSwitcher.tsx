@@ -33,16 +33,11 @@ export function ViewSwitcher() {
                     {isMobile && <ChevronDown />}
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                align="start"
-                side={"bottom"}
-                sideOffset={4}
-            >
-                {views.map((view, index) => (
+            <DropdownMenuContent align="start" >
+                {views.map((view) => (
                     <DropdownMenuItem
                         key={view.name}
-                        className={cn('gap-2 p-2 mb-1', activeViewId === view.id && 'bg-accent text-accent-foreground')}
+                        className={cn('gap-2 p-2', activeViewId === view.id && 'bg-accent text-accent-foreground')}
                     >
                         {view.name}
                         {activeViewId === view.id && (<Check className="ml-auto size-4 text-green-500" />)}

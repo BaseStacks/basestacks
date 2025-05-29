@@ -10,12 +10,7 @@ export function RecordHeights() {
                     <MoveVertical />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                align="start"
-                side={"bottom"}
-                sideOffset={4}
-            >
+            <DropdownMenuContent align="start">
                 <DropdownMenuItem className="gap-2 p-2">
                     <div className="flex size-6 items-center justify-center rounded-md border bg-background">
                         <Plus className="size-4" />
