@@ -151,3 +151,33 @@ export const useViews = create<ViewsState>((set, get) => ({
     addView: (view) => set((state) => ({ views: [...state.views, view] })),
     getViewsByTableId: (tableId: string) => get().views.filter(view => view.tableId === tableId),
 }));
+
+export interface Field {
+    id: string;
+    name: string;
+    type: 'single-line-text' | 'number' | 'date' | 'select' | 'checkbox';
+    options?: Array<string>; // For select fields
+    tableId: string;
+}
+
+export interface FieldsState {
+    fields: Array<Field>;
+    addField: (field: Field) => void;
+    getFieldsByTableId: (tableId: string) => Array<Field>;
+}
+
+export const useFields = create<FieldsState>((set, get) => ({
+    fields: [{
+        id: '1',
+        name: 'Field 1',
+        type: 'single-line-text',
+        tableId: '1',
+    }, {
+        id: '2',
+        name: 'Field 2',
+        type: 'number',
+        tableId: '1',
+    }],
+    addField: (field) => set((state) => ({ fields: [...state.fields, field] })),
+    getFieldsByTableId: (tableId: string) => get().fields.filter(field => field.tableId === tableId),
+}));

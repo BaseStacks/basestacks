@@ -1,4 +1,4 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
 
 import {
     Check,
@@ -28,20 +28,16 @@ export function TableSwitcher() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
                 {tables.map((table) => (
-                    <DropdownMenuItem
+                    <DropdownMenuCheckboxItem
                         key={table.name}
-                        className={cn('gap-2 p-2', activeTableId === table.id && 'bg-accent text-accent-foreground')}
+                        checked={activeTableId === table.id}
                     >
                         {table.name}
-                        {activeTableId === table.id && (<Check className="ml-auto size-4 text-green-500" />)}
-                    </DropdownMenuItem>
+                    </DropdownMenuCheckboxItem>
                 ))}
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="gap-2 p-2">
-                    <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                        <Plus className="size-4" />
-                    </div>
-                    <div className="font-medium text-muted-foreground">Add Table</div>
+                <DropdownMenuItem>
+                    <Plus /> Add Table
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

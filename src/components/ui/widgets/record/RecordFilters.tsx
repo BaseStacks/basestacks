@@ -1,24 +1,46 @@
-import { Plus, Filter } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../../primitives/dropdown-menu";
+import { Plus, Filter, Save, Download } from "lucide-react";
 import { Button } from "../../primitives/button";
+import { Popover, PopoverContent, PopoverTrigger } from "../../primitives/popover";
+import React from "react";
+import { Separator } from "../../primitives/separator";
 
 export function RecordFilters() {
+
+    const [open, setOpen] = React.useState(false)
+
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button size="sm" variant="ghost">
+        <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild >
+                <Button size="sm" variant="ghost" aria-expanded={open}>
                     <Filter /> Filters
                 </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-                <DropdownMenuItem className="gap-2 p-2">
-                    <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                        <Plus className="size-4" />
+            </PopoverTrigger >
+            <PopoverContent align="start" className="p-0">
+                <div className="p-1">
+                    <Button variant="ghost" size="sm" className="w-full justify-start">
+                        <Download /> Load saved filters
+                    </Button>
+                </div>
+                <Separator />
+                <div className="p-1">
+                    <span className="text-xs text-muted-foreground block p-4">
+                        No filters applied
+                    </span>
+                </div>
+                <Separator />
+                <div className="p-1 flex flex-row justify-between">
+                    <div>
+                        <Button variant="ghost" size="sm" className="w-full justify-start">
+                            <Plus /> Add filter
+                        </Button>
                     </div>
-                    <div className="font-medium text-muted-foreground">Some actions</div>
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-
+                    <div>
+                        <Button variant="ghost" size="sm" className="w-full justify-start">
+                            <Save /> Save
+                        </Button>
+                    </div>
+                </div>
+            </PopoverContent>
+        </Popover>
     )
 };

@@ -1,24 +1,40 @@
-import { Plus, SortAsc } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../../primitives/dropdown-menu";
+import { Plus, Eye, SortAsc } from "lucide-react";
 import { Button } from "../../primitives/button";
+import React from "react";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../primitives/command";
+import { Popover, PopoverContent, PopoverTrigger } from "../../primitives/popover";
+import { Separator } from "../../primitives/separator";
+import { useFields } from "@/states";
+import { FieldTypeIcon } from "../../icons/FieldTypIcon";
 
 export function RecordSorts() {
+    const { fields } = useFields();
+
+    const [open, setOpen] = React.useState(false)
+
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button size="sm" variant="ghost">
+        <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild >
+                <Button size="sm" variant="ghost" aria-expanded={open}>
                     <SortAsc /> Sort
                 </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-                <DropdownMenuItem className="gap-2 p-2">
-                    <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                        <Plus className="size-4" />
-                    </div>
-                    <div className="font-medium text-muted-foreground">Some actions</div>
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-
+            </PopoverTrigger >
+            <PopoverContent align="start" className="p-0">
+                <Command>
+                    <CommandInput placeholder="Select a field" className="h-9" />
+                    <CommandList>
+                        <CommandEmpty>No field found.</CommandEmpty>
+                        <CommandGroup className="gap-1">
+                            {fields.map((field) => (
+                                <CommandItem key={field.id} value={field.id}>
+                                    <FieldTypeIcon type={field.type} />
+                                    <div className="grow">{field.name}</div>
+                                </CommandItem>
+                            ))}
+                        </CommandGroup>
+                    </CommandList>
+                </Command>
+            </PopoverContent>
+        </Popover>
     )
 };

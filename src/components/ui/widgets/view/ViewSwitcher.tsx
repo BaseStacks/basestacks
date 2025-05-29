@@ -1,4 +1,4 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
 
 import {
     Check,
@@ -25,30 +25,23 @@ export function ViewSwitcher() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button
-                    size="sm"
-                    variant="ghost"
-                >
+                <Button size="sm" variant="ghost">
                     {activeView.name}
                     {isMobile && <ChevronDown />}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" >
                 {views.map((view) => (
-                    <DropdownMenuItem
+                    <DropdownMenuCheckboxItem
                         key={view.name}
-                        className={cn('gap-2 p-2', activeViewId === view.id && 'bg-accent text-accent-foreground')}
+                        checked={activeViewId === view.id}
                     >
                         {view.name}
-                        {activeViewId === view.id && (<Check className="ml-auto size-4 text-green-500" />)}
-                    </DropdownMenuItem>
+                    </DropdownMenuCheckboxItem>
                 ))}
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="gap-2 p-2">
-                    <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                        <Plus className="size-4" />
-                    </div>
-                    <div className="font-medium text-muted-foreground">Add View</div>
+                <DropdownMenuItem>
+                    <Plus /> Add View
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu >
