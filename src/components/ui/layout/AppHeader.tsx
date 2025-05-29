@@ -21,7 +21,7 @@ export function AppHeader({ breadcrumb, showSidebarTrigger }: AppHeaderProps) {
                 {
                     isMobile
                         ? (
-                            <Button size="icon" variant="outline" onClick={() => sidebarStatus.toggle()}>
+                            <Button size="icon" variant="outline" onClick={() => sidebarStatus.toggleMobile()}>
                                 <Menu />
                             </Button>
                         )

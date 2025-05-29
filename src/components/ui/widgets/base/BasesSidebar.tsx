@@ -28,7 +28,7 @@ export function BasesSidebar() {
                         <Button
                             size="icon"
                             variant="ghost"
-                            onClick={() => sidebarStatus.toggle()}
+                            onClick={() => sidebarStatus.toggleMobile()}
                         >
                             <XIcon />
                         </Button>

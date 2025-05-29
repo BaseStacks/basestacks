@@ -3,12 +3,16 @@ import type { Color } from './Types';
 
 interface UseSidebarStatus {
     visible: boolean;
+    mobileVisible: boolean;
     toggle: () => void;
+    toggleMobile: () => void;
 }
 
 export const useSidebarStatus = create<UseSidebarStatus>((set) => ({
     visible: true,
+    mobileVisible: false,
     toggle: () => set((state) => ({ visible: !state.visible })),
+    toggleMobile: () => set((state) => ({ mobileVisible: !state.mobileVisible })),
 }))
 
 export interface UserState {

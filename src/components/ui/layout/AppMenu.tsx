@@ -22,7 +22,7 @@ import { Link } from "@tanstack/react-router";
 import { WorkspaceSwitcher } from "../widgets/workspace/WorkspaceSwitcher";
 import { UserButton } from "../widgets/UserButton";
 
-const itemClassName = 'text-sidebar-accent-foreground/60 data-[status=active]:!bg-sidebar-accent data-[status=active]:!text-sidebar-accent-foreground '
+const itemClassName = 'data-[status=active]:!bg-sidebar-accent data-[status=active]:!text-sidebar-accent-foreground '
 
 export function AppMenu() {
   return (
