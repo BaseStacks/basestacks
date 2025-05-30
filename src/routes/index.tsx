@@ -15,6 +15,7 @@ import { RecordHeights } from '@/components/ui/widgets/record/RecordHeights';
 import { ViewMenu } from '@/components/ui/widgets/view/ViewMenu';
 import { Button } from '@/components/ui/primitives/button';
 import { Ellipsis } from 'lucide-react';
+import { BsDataGrid } from '@/components/grid/BsDataGrid';
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -58,6 +59,7 @@ function App() {
         </ViewMenu>
       </div>
       <div className='p-4'>
+        <BsDataGrid />
       </div>
     </AppPage>
   )
