@@ -58,7 +58,7 @@ function App() {
           </Button>
         </ViewMenu>
       </div>
-      <div className='p-4'>
+      <div>
         <BsDataGrid />
       </div>
     </AppPage>

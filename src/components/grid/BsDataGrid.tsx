@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils';
-import { DataGridCell, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridScrollArea, useDataGrid, usePlugin, LayoutPlugin, useDataGridState, DataGridRowContainer, DataGridCellContent, CellSelectionPlugin } from '@basestacks/datagrid';
+import { DataGridCell, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridScrollArea, useDataGrid, usePlugin, LayoutPlugin, useDataGridState, DataGridRowContainer, DataGridCellContent, CellSelectionPlugin, CellEditablePlugin, CellFillPlugin, ColumnPinningPlugin, CopyPastePlugin, HistoryPlugin, RowPinningPlugin, StayInViewPlugin, type Column } from '@basestacks/datagrid';
+import { GripVertical } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Button } from '../ui/primitives/button';
 
 export function BsDataGrid() {
     const [data, setData] = useState<any[]>([{
@@ -13,10 +15,20 @@ export function BsDataGrid() {
         email: 'd@gmail.com'
     }]);
 
-    const columns = useMemo(() => [
+    const columns = useMemo((): Column[] => [
         {
             key: 'id',
-            header: 'ID'
+            header: 'ID',
+            width: 75,
+            selectable: false,
+            cell: ({ value }) => (
+                <div className='px-2'>
+                    <Button variant="ghost" size="iconXs" >
+                        <span className='justify-center group-hover/row:hidden'>{value}</span>
+                        <GripVertical className='hidden group-hover/row:flex' />
+                    </Button>
+                </div>
+            )
         },
         {
             key: 'name',
@@ -36,6 +48,20 @@ export function BsDataGrid() {
     });
 
     usePlugin(dataGrid, LayoutPlugin);
+    usePlugin(dataGrid, CellSelectionPlugin);
+    usePlugin(dataGrid, CellFillPlugin);
+    usePlugin(dataGrid, StayInViewPlugin);
+    usePlugin(dataGrid, CellEditablePlugin);
+    usePlugin(dataGrid, ColumnPinningPlugin, {
+        pinnedLeftColumns: [],
+        pinnedRightColumns: []
+    });
+    usePlugin(dataGrid, RowPinningPlugin, {
+        pinnedTopRows: [],
+        pinnedBottomRows: []
+    });
+    usePlugin(dataGrid, CopyPastePlugin);
+    usePlugin(dataGrid, HistoryPlugin);
 
     const headers = useDataGridState(dataGrid.state.headers);
     const rows = useDataGridState(dataGrid.state.rows);
@@ -67,31 +93,23 @@ export function BsDataGrid() {
     );
 }
 
-
 const clxs = {
     table: 'text-sm max-h-[400px]',
-    headerGroup: 'bg-white dark:bg-gray-950 ',
-    header: 'bg-white dark:bg-gray-950 flex items-center border border-transparent p-2 text-left font-medium text-gray-400 dark:text-gray-200',
-    row: 'overflow-hidden border-gray-200 dark:border-gray-600',
+    headerGroup: 'border-b',
+    header: 'flex items-center border-r px-4 text-left font-bold',
+    row: 'border-b group/row',
     rowPinned: `
         data-pinned:z-20
         data-pinned-top-last:border-b-2
         data-pinned-bottom-first:border-t-2
     `,
-    cell: 'user-select-none bg-white flex items-center border border-transparent p-2 text-gray-500 outline-blue-600 dark:text-gray-400 dark:bg-gray-800',
+    cell: 'flex items-center border-r',
     cellActive: `
-        data-active:bg-white 
         data-active:outline 
         data-active:outline-offset-[-1px]
-        data-active:bg-gray-800
-        dark:data-active:bg-gray-800
     `,
     cellSelected: `
-        data-selected:bg-blue-950
-        data-[edge-top=true]:border-t-blue-600
-        data-[edge-left=true]:border-l-blue-600 
-        data-[edge-right=true]:border-r-blue-600 
-        data-[edge-bottom=true]:border-b-blue-600
+        data-selected:bg-primary/20
     `,
     cellPinned: `
         data-pinned:z-10
@@ -106,6 +124,6 @@ const clxs = {
         data-[editing="floating"]:outline-none
         data-[editing="floating"]:border-transparent
     `,
-    selectedRangeRect: 'absolute pointer-events-none outline-2 outline-offset-[-2px] outline-blue-600 bg-blue-600/5',
+    selectedRangeRect: 'absolute pointer-events-none outline-2 outline-offset-[-2px] outline-primary bg-blue-600/5',
     editor: '',
 };

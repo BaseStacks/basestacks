@@ -47,7 +47,7 @@ export function AppPage({ children, sidebar }: AppPageProps) {
                     )
                 }
                 <ResizableHandle disabled={!sidebarVisible} />
-                <ResizablePanel>
+                <ResizablePanel defaultSize={80} minSize={70} maxSize={85}>
                     <div className="flex flex-col h-full w-full">
                         {children}
                     </div>
