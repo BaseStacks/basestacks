@@ -66,7 +66,7 @@ function App() {
           </Button>
         </ViewMenu>
       </div>
-      <div className='p-4'>
+      <div className='h-full'>
         <BsDataGrid />
       </div>
     </AppPage>

@@ -1,5 +1,10 @@
-import { DataGridCell, DataGridCellContent, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridRowContainer, DataGridScrollArea, LayoutPlugin, useDataGrid, useDataGridState, usePlugin } from '@basestacks/datagrid';
+import { CellEditablePlugin, CellFillPlugin, CellSelectionPlugin, ColumnPinningPlugin, CopyPastePlugin, DataGridCell, DataGridCellContent, DataGridContainer, DataGridFillHandle, DataGridFillRange, DataGridFloatingEditor, DataGridFooter, DataGridFooterGroup, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridRowContainer, DataGridScrollArea, HistoryPlugin, LayoutPlugin, RowPinningPlugin, StayInViewPlugin, useDataGrid, useDataGridState, usePlugin } from '@basestacks/datagrid';
+import { GripVertical, Maximize2, Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Button } from '../ui/primitives/button';
+import { Checkbox } from '../ui/primitives/checkbox';
+
+import type { Column, ColumnKey, RowKey } from '@basestacks/datagrid';
 import { cn } from '@/lib/utils';
 
 export function BsDataGrid() {
@@ -13,18 +18,43 @@ export function BsDataGrid() {
         email: 'd@gmail.com'
     }]);
 
-    const columns = useMemo(() => [
+    const columns = useMemo((): Array<Column> => [
         {
-            key: 'id',
-            header: 'ID'
+            key: 'row-header',
+            dataKey: 'id',
+            header: 'ID',
+            width: 100,
+            selectable: false,
+            cell: ({ rowIndex }) => (
+                <div className='px-2 flex items-center gap-1'>
+                    <Button variant="ghost" size="iconXs" >
+                        <span className='justify-center group-hover/row:hidden'>{rowIndex + 1}</span>
+                        <GripVertical className='hidden group-hover/row:flex' />
+                    </Button>
+                    <Checkbox className='hidden group-hover/row:flex' />
+                    <Button variant="ghost" size="iconXs" className='hidden group-hover/row:flex' >
+                        <Maximize2 />
+                    </Button>
+                </div>
+            )
         },
         {
             key: 'name',
-            header: 'Name'
+            header: 'Name',
+            cell: ({ value }) => (
+                <div className='px-2'>
+                    <span className='first-letter:uppercase'>{value}</span>
+                </div>
+            ),
         },
         {
             key: 'email',
-            header: 'Email'
+            header: 'Email',
+            cell: ({ value }) => (
+                <div className='px-2'>
+                    <span className='first-letter:uppercase'>{value}</span>
+                </div>
+            )
         },
     ], []);
 
@@ -36,20 +66,40 @@ export function BsDataGrid() {
     });
 
     usePlugin(dataGrid, LayoutPlugin);
+    usePlugin(dataGrid, CellSelectionPlugin);
+    usePlugin(dataGrid, CellFillPlugin);
+    usePlugin(dataGrid, StayInViewPlugin);
+    usePlugin(dataGrid, CellEditablePlugin);
+    usePlugin(dataGrid, ColumnPinningPlugin, {
+        pinnedLeftColumns: [] as Array<ColumnKey>,
+        pinnedRightColumns: [] as Array<ColumnKey>
+    });
+    usePlugin(dataGrid, RowPinningPlugin, {
+        pinnedTopRows: [] as Array<RowKey>,
+        pinnedBottomRows: [] as Array<RowKey>
+    });
+    usePlugin(dataGrid, CopyPastePlugin);
+    usePlugin(dataGrid, HistoryPlugin);
 
     const headers = useDataGridState(dataGrid.state.headers);
     const rows = useDataGridState(dataGrid.state.rows);
+    const footers = useDataGridState(dataGrid.state.footers);
 
     return (
         <DataGridProvider dataGrid={dataGrid}>
-            <DataGridContainer className={clxs.table}>
+            <DataGridContainer className={clxs.container}>
                 <DataGridHeaderGroup className={clxs.headerGroup}>
                     {headers.map((header, index) => (
                         <DataGridHeader key={index} header={header} className={cn(clxs.header, clxs.cellPinned)} />
                     ))}
-                    <span className="absolute right-0 w-[-15px] h-full bg-white dark:bg-gray-950" />
+                    <Button
+                        variant="ghost"
+                        className='absolute right-0 top-0 translate-x-full w-[42px] h-[42px] border-b border-r rounded-none'
+                    >
+                        <Plus />
+                    </Button>
                 </DataGridHeaderGroup>
-                <DataGridScrollArea className="h-[300px] overflow-auto">
+                <DataGridScrollArea className="flex-grow overflow-auto">
                     <DataGridRowContainer className="relative">
                         {rows.map((row) => (
                             <DataGridRow key={row.id} row={row} className={cn(clxs.row, clxs.rowPinned)}>
@@ -60,38 +110,47 @@ export function BsDataGrid() {
                                 ))}
                             </DataGridRow>
                         ))}
+                        <div className='h-[42px] w-full border-b border-r absolute bottom-0 translate-y-full'>
+                            <Button variant='ghost' className='w-full h-full rounded-none justify-start !pl-4'>
+                                <Plus />
+                            </Button>
+                        </div>
                     </DataGridRowContainer>
+                    <DataGridFillHandle className="size-2 bg-primary z-99 cursor-cell -translate-full" />
+                    <DataGridFillRange className="border border-dashed border-primary  z-99 " />
+                    <DataGridFloatingEditor className="!z-99" />
                 </DataGridScrollArea>
+                <DataGridFooterGroup className='border-t'>
+                    {footers.map((footer, index) => (
+                        <DataGridFooter
+                            key={index}
+                            footer={footer}
+                            className={cn(clxs.header, clxs.cellPinned)}
+                        />
+                    ))}
+                </DataGridFooterGroup>
             </DataGridContainer>
         </DataGridProvider>
     );
 }
 
-
 const clxs = {
-    table: 'text-sm max-h-[400px]',
-    headerGroup: 'bg-white dark:bg-gray-950 ',
-    header: 'bg-white dark:bg-gray-950 flex items-center border border-transparent p-2 text-left font-medium text-gray-400 dark:text-gray-200',
-    row: 'overflow-hidden border-gray-200 dark:border-gray-600',
+    container: 'text-sm flex flex-col h-full',
+    headerGroup: 'border-b',
+    header: 'flex items-center border-r px-4 text-left font-bold',
+    row: 'border-b group/row',
     rowPinned: `
         data-pinned:z-20
         data-pinned-top-last:border-b-2
         data-pinned-bottom-first:border-t-2
     `,
-    cell: 'user-select-none bg-white flex items-center border border-transparent p-2 text-gray-500 outline-blue-600 dark:text-gray-400 dark:bg-gray-800',
+    cell: 'flex items-center border-r',
     cellActive: `
-        data-active:bg-white 
         data-active:outline 
         data-active:outline-offset-[-1px]
-        data-active:bg-gray-800
-        dark:data-active:bg-gray-800
     `,
     cellSelected: `
-        data-selected:bg-blue-950
-        data-[edge-top=true]:border-t-blue-600
-        data-[edge-left=true]:border-l-blue-600 
-        data-[edge-right=true]:border-r-blue-600 
-        data-[edge-bottom=true]:border-b-blue-600
+        data-selected:bg-primary/10
     `,
     cellPinned: `
         data-pinned:z-10
@@ -106,6 +165,6 @@ const clxs = {
         data-[editing="floating"]:outline-none
         data-[editing="floating"]:border-transparent
     `,
-    selectedRangeRect: 'absolute pointer-events-none outline-2 outline-offset-[-2px] outline-blue-600 bg-blue-600/5',
+    selectedRangeRect: 'absolute pointer-events-none outline-2 outline-offset-[-2px] outline-primary bg-blue-600/5',
     editor: '',
 };
