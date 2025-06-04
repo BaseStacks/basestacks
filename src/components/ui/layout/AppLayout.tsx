@@ -10,7 +10,7 @@ type ProviderProps = {
 export function AppLayout({ children }: ProviderProps) {
 	return (
 		<ThemeProvider
-			defaultTheme="dark"
+			defaultTheme="light"
 			storageKey="theme"
 		>
 			<SidebarProvider defaultOpen={false}>
