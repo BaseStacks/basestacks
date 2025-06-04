@@ -1,6 +1,5 @@
 import {
   Alert,
-  AlertDescription,
   AlertTitle,
 } from "@/components/ui/primitives/alert";
 import {
@@ -20,11 +19,9 @@ import {
 } from "@/components/ui/primitives/card";
 import { Input } from "@/components/ui/primitives/input";
 import { cn } from "@/lib/utils";
-import { AlertCircleIcon, TriangleAlert } from "lucide-react";
+import { TriangleAlert } from "lucide-react";
 
-interface SettingProps {}
-
-function Setting(props: SettingProps) {
+function Setting() {
   return (
     <div className="container mx-auto px-4 py-10 max-w-2xl">
       <div className="flex flex-col justify-center gap-10">
