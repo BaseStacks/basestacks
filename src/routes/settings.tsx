@@ -2,6 +2,7 @@ import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { AppHeader } from '@/components/ui/layout/AppHeader'
 import { AppPage } from '@/components/ui/layout/AppPage'
 import { AppTabs } from '@/components/ui/layout/AppTabs';
+import Setting from '@/pages/settings/setting';
 import { Settings, Users } from 'lucide-react';
 import Member from '@/pages/settings/Member';
 import { useMemo } from 'react';
@@ -40,9 +41,7 @@ function RouteComponent() {
           page === 'members' ? (
             <Member/>
           ) : page === 'settings' ? (
-            <div >
-              Settings Content
-            </div>
+            <Setting/>
           ) : (
             <div>
               Select a tab to view content.
