@@ -58,7 +58,7 @@ function App() {
           </Button>
         </ViewMenu>
       </div>
-      <div>
+      <div className='h-full'>
         <BsDataGrid />
       </div>
     </AppPage>

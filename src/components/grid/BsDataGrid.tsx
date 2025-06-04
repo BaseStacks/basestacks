@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils';
-import { DataGridCell, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridScrollArea, useDataGrid, usePlugin, LayoutPlugin, useDataGridState, DataGridRowContainer, DataGridCellContent, CellSelectionPlugin, CellEditablePlugin, CellFillPlugin, ColumnPinningPlugin, CopyPastePlugin, HistoryPlugin, RowPinningPlugin, StayInViewPlugin, type Column } from '@basestacks/datagrid';
-import { GripVertical } from 'lucide-react';
+import { DataGridCell, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridScrollArea, useDataGrid, usePlugin, LayoutPlugin, useDataGridState, DataGridRowContainer, DataGridCellContent, CellSelectionPlugin, CellEditablePlugin, CellFillPlugin, ColumnPinningPlugin, CopyPastePlugin, HistoryPlugin, RowPinningPlugin, StayInViewPlugin, type Column, DataGridFooterGroup, DataGridFooter, DataGridFillHandle, DataGridFillRange, DataGridFloatingEditor } from '@basestacks/datagrid';
+import { GripVertical, Maximize2, Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Button } from '../ui/primitives/button';
+import { Checkbox } from '../ui/primitives/checkbox';
 
 export function BsDataGrid() {
     const [data, setData] = useState<any[]>([{
@@ -17,26 +18,41 @@ export function BsDataGrid() {
 
     const columns = useMemo((): Column[] => [
         {
-            key: 'id',
+            key: 'row-header',
+            dataKey: 'id',
             header: 'ID',
-            width: 75,
+            width: 100,
             selectable: false,
-            cell: ({ value }) => (
-                <div className='px-2'>
+            cell: ({ rowIndex }) => (
+                <div className='px-2 flex items-center gap-1'>
                     <Button variant="ghost" size="iconXs" >
-                        <span className='justify-center group-hover/row:hidden'>{value}</span>
+                        <span className='justify-center group-hover/row:hidden'>{rowIndex + 1}</span>
                         <GripVertical className='hidden group-hover/row:flex' />
+                    </Button>
+                    <Checkbox className='hidden group-hover/row:flex' />
+                    <Button variant="ghost" size="iconXs" className='hidden group-hover/row:flex' >
+                        <Maximize2 />
                     </Button>
                 </div>
             )
         },
         {
             key: 'name',
-            header: 'Name'
+            header: 'Name',
+            cell: ({ value }) => (
+                <div className='px-2'>
+                    <span className='first-letter:uppercase'>{value}</span>
+                </div>
+            ),
         },
         {
             key: 'email',
-            header: 'Email'
+            header: 'Email',
+            cell: ({ value }) => (
+                <div className='px-2'>
+                    <span className='first-letter:uppercase'>{value}</span>
+                </div>
+            )
         },
     ], []);
 
@@ -65,17 +81,23 @@ export function BsDataGrid() {
 
     const headers = useDataGridState(dataGrid.state.headers);
     const rows = useDataGridState(dataGrid.state.rows);
+    const footers = useDataGridState(dataGrid.state.footers);
 
     return (
         <DataGridProvider dataGrid={dataGrid}>
-            <DataGridContainer className={clxs.table}>
+            <DataGridContainer className={clxs.container}>
                 <DataGridHeaderGroup className={clxs.headerGroup}>
                     {headers.map((header, index) => (
                         <DataGridHeader key={index} header={header} className={cn(clxs.header, clxs.cellPinned)} />
                     ))}
-                    <span className="absolute right-0 w-[-15px] h-full bg-white dark:bg-gray-950" />
+                    <Button
+                        variant="ghost"
+                        className='absolute right-0 top-0 translate-x-full w-[42px] h-[42px] border-b border-r rounded-none'
+                    >
+                        <Plus />
+                    </Button>
                 </DataGridHeaderGroup>
-                <DataGridScrollArea className="h-[300px] overflow-auto">
+                <DataGridScrollArea className="flex-grow overflow-auto">
                     <DataGridRowContainer className="relative">
                         {rows.map((row) => (
                             <DataGridRow key={row.id} row={row} className={cn(clxs.row, clxs.rowPinned)}>
@@ -86,15 +108,32 @@ export function BsDataGrid() {
                                 ))}
                             </DataGridRow>
                         ))}
+                        <div className='h-[42px] w-full border-b border-r absolute bottom-0 translate-y-full'>
+                            <Button variant='ghost' className='w-full h-full rounded-none justify-start !pl-4'>
+                                <Plus />
+                            </Button>
+                        </div>
                     </DataGridRowContainer>
+                    <DataGridFillHandle className="size-2 bg-primary z-99 cursor-cell" />
+                    <DataGridFillRange className="border border-dashed border-primary  z-99 " />
+                    <DataGridFloatingEditor className="!z-99" />
                 </DataGridScrollArea>
+                <DataGridFooterGroup className='border-t'>
+                    {footers.map((footer, index) => (
+                        <DataGridFooter
+                            key={index}
+                            footer={footer}
+                            className={cn(clxs.header, clxs.cellPinned)}
+                        />
+                    ))}
+                </DataGridFooterGroup>
             </DataGridContainer>
         </DataGridProvider>
     );
 }
 
 const clxs = {
-    table: 'text-sm max-h-[400px]',
+    container: 'text-sm flex flex-col h-full',
     headerGroup: 'border-b',
     header: 'flex items-center border-r px-4 text-left font-bold',
     row: 'border-b group/row',
@@ -109,7 +148,7 @@ const clxs = {
         data-active:outline-offset-[-1px]
     `,
     cellSelected: `
-        data-selected:bg-primary/20
+        data-selected:bg-primary/10
     `,
     cellPinned: `
         data-pinned:z-10
