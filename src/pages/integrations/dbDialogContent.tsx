@@ -26,7 +26,7 @@ import {
 import { Separator } from "@/components/ui/primitives/separator";
 import { Switch } from "@/components/ui/primitives/switch";
 import { Textarea } from "@/components/ui/primitives/textarea";
-import { BookOpen, Copy, Eye, EyeOff, Trash2 } from "lucide-react";
+import { Asterisk, BookOpen, Copy, Eye, EyeOff, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 
@@ -92,7 +92,7 @@ function DbDialogContent() {
                     name="connectionName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Connection name</FormLabel>
+                        <FormLabel aria-required>Connection name<Asterisk color="red" size={9}/></FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Enter connection name"
@@ -113,7 +113,7 @@ function DbDialogContent() {
                       name="hostName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Host address</FormLabel>
+                          <FormLabel>Host address<Asterisk color="red" size={9}/></FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -126,7 +126,7 @@ function DbDialogContent() {
                       name="port"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Port number</FormLabel>
+                          <FormLabel>Port number<Asterisk color="red" size={9}/></FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -139,7 +139,7 @@ function DbDialogContent() {
                       name="username"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Username</FormLabel>
+                          <FormLabel>Username<Asterisk color="red" size={9}/></FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>

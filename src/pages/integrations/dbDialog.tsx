@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/primitives/dialog";
-import { Button } from "./button";
+import { Button } from "../../components/ui/primitives/button";
 interface DialogCustomProps {
   buttonClassName?: string;
   dialogContent?: React.ReactNode;
@@ -21,7 +21,7 @@ interface DialogCustomProps {
   width?: string;
 }
 
-function DialogCustom({
+export default function DbDialog({
   buttonClassName,
   dialogContent,
   title,
@@ -75,4 +75,3 @@ function DialogCustom({
     </Dialog>
   );
 }
-export default DialogCustom;

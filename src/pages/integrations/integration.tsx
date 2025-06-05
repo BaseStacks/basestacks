@@ -2,7 +2,7 @@ import mysqlIcon from "@/assets/integrations/MySQL 6 Logo.png";
 import postgreSQLIcon from "@/assets/integrations/PostgreSQL Elephant.png";
 import mongoIcon from "@/assets/integrations/MongoDB Icon.svg";
 import { Button } from "@/components/ui/primitives/button";
-import DialogCustom from "@/components/ui/primitives/dialog-custom";
+import DbDialog from "@/pages/integrations/dbDialog";
 import DbDialogContent from "./dbDialogContent";
 
 function Integration() {
@@ -19,7 +19,7 @@ function Integration() {
           <div className="database-title">Database</div>
           <div className="flex gap-4 ">
             <div className="integration-item basis-full md:basis-1/6">
-              <DialogCustom
+              <DbDialog
                 buttonClassName="rounded-xl flex items-center gap-4 border p-3 w-full"
                 title="MYSQL"
                 showSubmit
@@ -45,10 +45,10 @@ function Integration() {
                   />
                 </span>
                 <span className="integration-name">MySQL</span>
-              </DialogCustom>
+              </DbDialog>
             </div>
             <div className="integration-item basis-full md:basis-1/6">
-              <DialogCustom
+              <DbDialog
                 buttonClassName="rounded-xl flex items-center gap-4 border p-3 w-full"
                 title="PostgreSQL"
                 showSubmit
@@ -74,10 +74,10 @@ function Integration() {
                   />
                 </span>
                 <span className="integration-name">PostgreSQL</span>
-              </DialogCustom>
+              </DbDialog>
             </div>
             <div className="integration-item basis-full md:basis-1/6">
-              <DialogCustom
+              <DbDialog
                 buttonClassName="rounded-xl flex items-center gap-4 border p-3 w-full"
                 title="MongoDB"
                 showSubmit
@@ -103,7 +103,7 @@ function Integration() {
                   />
                 </span>
                 <span className="integration-name">MongoDB</span>
-              </DialogCustom>
+              </DbDialog>
             </div>
           </div>
         </div>
