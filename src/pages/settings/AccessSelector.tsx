@@ -14,7 +14,8 @@ import {
   EyeOff,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
+import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
+import type { Color } from "@/Types";
 
 export type AccessLevel =
   | "Owner"
@@ -22,52 +23,45 @@ export type AccessLevel =
   | "Editor"
   | "Commenter"
   | "Viewer"
-  | "No Access";
+  | "No_Access";
 
 export const accessMap: Record<
   AccessLevel,
   {
-    icon: ReactNode;
+    icon: React.ComponentType<{ className?: string }>;
     label: string;
-    bgColorLightClass: string;
-    textColorClass: string;
+    color?: Color;
   }
 > = {
   Owner: {
-    icon: <ShieldCheck className="w-4 h-4 text-purple-700" />,
+    icon: ShieldCheck,
     label: "Owner",
-    bgColorLightClass: "bg-purple-100 hover:bg-purple-300",
-    textColorClass: "text-purple-700",
+    color: "purple",
   },
   Creator: {
-    icon: <User className="w-4 h-4 text-blue-700" />,
+    icon: User,
     label: "Creator",
-    bgColorLightClass: "bg-blue-100 hover:bg-blue-300",
-    textColorClass: "text-blue-700",
+    color: "blue",
   },
   Editor: {
-    icon: <Edit className="w-4 h-4 text-green-700" />,
+    icon: Edit,
     label: "Editor",
-    bgColorLightClass: "bg-green-100 hover:bg-green-300",
-    textColorClass: "text-green-700",
+    color: "green",
   },
   Commenter: {
-    icon: <MessageSquare className="w-4 h-4 text-orange-700" />,
+    icon: MessageSquare,
     label: "Commenter",
-    bgColorLightClass: "bg-orange-100 hover:bg-orange-300",
-    textColorClass: "text-orange-700",
+    color: "yellow",
   },
   Viewer: {
-    icon: <Eye className="w-4 h-4 text-yellow-700" />,
+    icon: Eye,
     label: "Viewer",
-    bgColorLightClass: "bg-yellow-100 hover:bg-yellow-300",
-    textColorClass: "text-yellow-700",
+    color: "gray",
   },
-  "No Access": {
-    icon: <EyeOff className="w-4 h-4 text-red-700" />,
+  No_Access: {
+    icon: EyeOff,
     label: "No Access",
-    bgColorLightClass: "bg-red-100 hover:bg-red-300",
-    textColorClass: "text-red-700",
+    color: "red",
   },
 };
 
@@ -78,7 +72,7 @@ interface AccessSelectorProps {
 }
 
 export function AccessSelector({ value, onChange, className }: AccessSelectorProps) {
-  const currentAccessConfig = accessMap[value];
+  const currentRole = accessMap[value];
 
   return (
     <Select value={value} onValueChange={(v) => onChange(v as AccessLevel)}>
@@ -87,25 +81,22 @@ export function AccessSelector({ value, onChange, className }: AccessSelectorPro
           "w-[200px] h-10 focus:ring-2 focus:ring-ring focus:ring-offset-2 data-[state=open]:ring-2 data-[state=open]:ring-ring data-[state=open]:ring-offset-2",
           "justify-start text-left !border-none rounded-md transition-colors duration-150",
           className,
-          currentAccessConfig
-            ? currentAccessConfig.bgColorLightClass
-            : "bg-gray-100 hover:bg-gray-200",
-          currentAccessConfig
-            ? currentAccessConfig.textColorClass
-            : "text-gray-900"
+          getBgColorClass(currentRole?.color || "gray", "100"),
+          getBgColorClass(currentRole?.color || "gray", "300", "hover"),
+          getTextColorClass(currentRole?.color || "gray")
         )}
       >
         <SelectValue placeholder="Select access level">
-          {currentAccessConfig && (
+          {currentRole && (
             <div className="flex items-center gap-x-2">
-              {currentAccessConfig.icon}
-              <span>{currentAccessConfig.label}</span>
+              <currentRole.icon className={getTextColorClass(currentRole.color)} />
+              <span>{currentRole.label}</span>
             </div>
           )}
         </SelectValue>
       </SelectTrigger>
       <SelectContent className="p-1 bg-white rounded-md shadow-lg border">
-        {Object.entries(accessMap).map(([key, itemConfig]) => (
+        {Object.entries(accessMap).map(([key, role]) => (
           <SelectItem
             key={key}
             value={key as AccessLevel}
@@ -117,16 +108,17 @@ export function AccessSelector({ value, onChange, className }: AccessSelectorPro
             <div
               className={cn(
                 "flex flex-1 items-center gap-x-2 w-full px-2.5 py-0.5 my-1 rounded-md transition-colors duration-100",
-                itemConfig.bgColorLightClass,
-                itemConfig.textColorClass
+                getBgColorClass(role?.color || "gray", "100"),
+                getBgColorClass(role?.color || "gray", "300", "hover"),
+                getTextColorClass(role?.color || "gray")
               )}
             >
-              {itemConfig.icon}
-              <span className="font-normal">{itemConfig.label}</span>
+              <role.icon className={getTextColorClass(role?.color || "gray")} />
+              <span>{role.label}</span>
             </div>
           </SelectItem>
         ))}
       </SelectContent>
-    </Select>
+    </Select >
   );
 }

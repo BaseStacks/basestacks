@@ -1,33 +1,64 @@
-import type { Color, ElementState } from "@/Types";
+import type { Color, ColorWeight, ElementState } from "@/Types";
 
 export const getTextColorClass = (color: Color, elementState: ElementState = 'default'): string => {
     switch (color) {
         case "red":
-            if(elementState === 'hover') return 'hover:text-red-600';
+            if (elementState === 'hover') return 'hover:text-red-600';
             return 'text-red-500';
         case "blue":
-            if(elementState === 'hover') return 'hover:text-blue-600';
+            if (elementState === 'hover') return 'hover:text-blue-600';
             return 'text-blue-500';
             break;
         case "green":
-            if(elementState === 'hover') return 'hover:text-green-600';
+            if (elementState === 'hover') return 'hover:text-green-600';
             return 'text-green-500';
         case "yellow":
-            if(elementState === 'hover') return 'hover:text-yellow-600';
+            if (elementState === 'hover') return 'hover:text-yellow-600';
             return 'text-yellow-500';
         case "purple":
-            if(elementState === 'hover') return 'hover:text-purple-600';
+            if (elementState === 'hover') return 'hover:text-purple-600';
             return 'text-purple-500';
         case "pink":
-            if(elementState === 'hover') return 'hover:text-pink-600';
-            return 'text-pink-500';
+            if (elementState === 'hover') return 'hover:text-pink-600';
+            return `text-pink-500`;
         case "orange":
-            if(elementState === 'hover') return 'hover:text-orange-600';
+            if (elementState === 'hover') return 'hover:text-orange-600';
             return 'text-orange-500';
         case "gray":
-            if(elementState === 'hover') return 'hover:text-gray-600';
+            if (elementState === 'hover') return 'hover:text-gray-600';
             return 'text-gray-500';
         default:
             return color;
     }
+};
+
+export const getBgColorClass = (color: Color, weight: ColorWeight, elementState: ElementState = 'default') => {
+    switch (color) {
+        case "red":
+            if (elementState === 'hover') return `hover:bg-red-${weight}`;
+            return `bg-red-${weight}`;
+        case "blue":
+            if (elementState === 'hover') return `hover:bg-blue-${weight}`;
+            return `bg-blue-${weight}`;
+        case "green":
+            if (elementState === 'hover') return `hover:bg-green-${weight}`;
+            return `bg-green-${weight}`;
+        case "yellow":
+            if (elementState === 'hover') return `hover:bg-yellow-${weight}`;
+            return `bg-yellow-${weight}`;
+        case "purple":
+            if (elementState === 'hover') return `hover:bg-purple-${weight}`;
+            return `bg-purple-${weight}`;
+        case "pink":
+            if (elementState === 'hover') return `hover:bg-pink-${weight}`;
+            return `bg-pink-${weight}`;
+        case "orange":
+            if (elementState === 'hover') return `hover:bg-orange-${weight}`;
+            return `bg-orange-${weight}`;
+        case "gray":
+            if (elementState === 'hover') return `hover:bg-gray-${weight}`;
+            return `bg-gray-${weight}`;
+        default:
+            return color;
+    };
 };

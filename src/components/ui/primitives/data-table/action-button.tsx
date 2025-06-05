@@ -27,10 +27,10 @@ function ActionButton(props: ActionButtonProps) {
           <div
             className={cn(
               "flex flex-1 items-center gap-x-2 rounded-md transition-colors duration-100",
-              "hover:bg-red-100 text-red-500 px-2.5 py-1.5 rounded-md"
+              "hover:bg-red-100 text-destructive px-2.5 py-1.5 rounded-md"
             )}
           >
-            <Trash2 className="text-red-500" />
+            <Trash2 className="text-destructive" />
             <span className="font-normal">Remove user</span>
           </div>
         </DropdownMenuItem>

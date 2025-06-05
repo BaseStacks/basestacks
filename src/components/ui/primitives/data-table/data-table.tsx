@@ -18,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/primitives/table";
+import { cn } from "@/lib/utils";
 
 interface DataTableColumnMeta {
   headerClass?: string;
@@ -27,7 +28,7 @@ interface DataTableColumnMeta {
 // Extend TanStack Table's ColumnMeta to include our custom meta
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends unknown, TValue>
-    extends DataTableColumnMeta {}
+    extends DataTableColumnMeta { }
 }
 
 interface DataTableProps<TData, TValue> {
@@ -105,16 +106,14 @@ export function DataTable<TData, TValue>({
                   return (
                     <TableHead
                       key={header.id}
-                      className={`text-sm font-medium text-gray-500 py-2 px-4 ${
-                        header.column.columnDef.meta?.headerClass ?? ""
-                      }`}
+                      className={cn('text-sm font-medium text-gray-500 py-2 px-4', header.column.columnDef.meta?.headerClass ?? "")}
                     >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
@@ -131,9 +130,8 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className={`text-sm py-2 px-4 ${
-                        cell.column.columnDef.meta?.cellClass ?? ""
-                      }`}
+                      className={`text-sm py-2 px-4 ${cell.column.columnDef.meta?.cellClass ?? ""
+                        }`}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

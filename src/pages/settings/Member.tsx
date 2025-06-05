@@ -1,4 +1,4 @@
-import headerSorted from "@/components/ui/primitives/data-table/header-sorted";
+import { HeaderSorted } from "@/components/ui/primitives/data-table/header-sorted";
 import ActionButton from "@/components/ui/primitives/data-table/action-button";
 import { DataTable } from "@/components/ui/primitives/data-table/data-table";
 import { DialogCustom } from "@/components/ui/primitives/dialog-custom";
@@ -22,7 +22,7 @@ const columns: ColumnDef<MemberProps>[] = [
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          (table.getIsSomePageRowsSelected() ? "indeterminate" : false)
         }
         onCheckedChange={(value) => {
           table.toggleAllPageRowsSelected(!!value);
@@ -47,7 +47,7 @@ const columns: ColumnDef<MemberProps>[] = [
   {
     accessorKey: "users",
     header: ({ column }) => {
-      return headerSorted("Users", column);
+      return <HeaderSorted title="User" column={column} />
     },
     meta: {
       headerClass: "text-left",
@@ -57,7 +57,7 @@ const columns: ColumnDef<MemberProps>[] = [
   {
     accessorKey: "access",
     header: ({ column }) => {
-      return headerSorted("Access", column);
+      return <HeaderSorted title="Access" column={column} />
     },
     cell: ({ row }: any) => (
       <AccessSelector
@@ -82,7 +82,7 @@ const columns: ColumnDef<MemberProps>[] = [
   {
     accessorKey: "actions",
     header: "Actions",
-    cell: ({ row }: any) => <ActionButton id={row.original.id} />,
+    cell: ({ row }) => <ActionButton id={row.original.id} />,
     meta: {
       headerClass: "text-right",
       cellClass: "text-right",
@@ -90,79 +90,76 @@ const columns: ColumnDef<MemberProps>[] = [
   },
 ];
 
-async function getData(): Promise<MemberProps[]> {
-  return [
-    {
-      id: "728ed52f",
-      users: "m@example.com",
-      access: "Owner",
-      dateJoined: "2023-10-01",
-    },
-    {
-      id: "a93d7e1c",
-      users: "user1@mail.com",
-      access: "Creator",
-      dateJoined: "2024-05-17",
-    },
-    {
-      id: "b72ac8d0",
-      users: "user2@example.com",
-      access: "Owner",
-      dateJoined: "2023-12-03",
-    },
-    {
-      id: "c4f12a67",
-      users: "user3@gmail.com",
-      access: "Viewer",
-      dateJoined: "2024-08-21",
-    },
-    {
-      id: "f0be9a25",
-      users: "user4@mail.com",
-      access: "Viewer",
-      dateJoined: "2023-11-09",
-    },
-    {
-      id: "e1c34598",
-      users: "user5@gmail.com",
-      access: "Owner",
-      dateJoined: "2024-03-14",
-    },
-    {
-      id: "d88ac472",
-      users: "user6@example.com",
-      access: "Commenter",
-      dateJoined: "2023-09-28",
-    },
-    {
-      id: "ab29cd90",
-      users: "user7@mail.com",
-      access: "No Access",
-      dateJoined: "2024-01-19",
-    },
-    {
-      id: "fe9021d4",
-      users: "user8@example.com",
-      access: "Creator",
-      dateJoined: "2023-07-30",
-    },
-    {
-      id: "bc18f276",
-      users: "user9@gmail.com",
-      access: "Owner",
-      dateJoined: "2024-06-02",
-    },
-    {
-      id: "a7c34d89",
-      users: "user10@mail.com",
-      access: "Editor",
-      dateJoined: "2023-10-15",
-    },
-  ];
-}
+const data: MemberProps[] = [
+  {
+    id: "728ed52f",
+    users: "m@example.com",
+    access: "Owner",
+    dateJoined: "2023-10-01",
+  },
+  {
+    id: "a93d7e1c",
+    users: "user1@mail.com",
+    access: "Creator",
+    dateJoined: "2024-05-17",
+  },
+  {
+    id: "b72ac8d0",
+    users: "user2@example.com",
+    access: "Owner",
+    dateJoined: "2023-12-03",
+  },
+  {
+    id: "c4f12a67",
+    users: "user3@gmail.com",
+    access: "Viewer",
+    dateJoined: "2024-08-21",
+  },
+  {
+    id: "f0be9a25",
+    users: "user4@mail.com",
+    access: "Viewer",
+    dateJoined: "2023-11-09",
+  },
+  {
+    id: "e1c34598",
+    users: "user5@gmail.com",
+    access: "Owner",
+    dateJoined: "2024-03-14",
+  },
+  {
+    id: "d88ac472",
+    users: "user6@example.com",
+    access: "Commenter",
+    dateJoined: "2023-09-28",
+  },
+  {
+    id: "ab29cd90",
+    users: "user7@mail.com",
+    access: "No_Access",
+    dateJoined: "2024-01-19",
+  },
+  {
+    id: "fe9021d4",
+    users: "user8@example.com",
+    access: "Creator",
+    dateJoined: "2023-07-30",
+  },
+  {
+    id: "bc18f276",
+    users: "user9@gmail.com",
+    access: "Owner",
+    dateJoined: "2024-06-02",
+  },
+  {
+    id: "a7c34d89",
+    users: "user10@mail.com",
+    access: "Editor",
+    dateJoined: "2023-10-15",
+  },
+];
 
-async function Member() {
-  const data = await getData();
+export function Member() {
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="flex flex-col justify-center text-center">
@@ -170,7 +167,7 @@ async function Member() {
           <SearchBox
             search=""
             placeholder="Search member..."
-            setSearch={() => {}}
+            setSearch={() => { }}
           />
 
           <DialogCustom
@@ -178,11 +175,11 @@ async function Member() {
             title="Invite to Workspace"
             submitText="Invite to Workspace"
           >
-            <Input placeholder="Enter email addresses"/>
+            <Input placeholder="Enter email addresses" />
             <AccessSelector
-              value="No Access"
+              value="No_Access"
               className="px-3 py-2"
-              onChange={() => {}}
+              onChange={() => { }}
             />
           </DialogCustom>
         </div>
@@ -191,5 +188,3 @@ async function Member() {
     </div>
   );
 }
-
-export default Member;

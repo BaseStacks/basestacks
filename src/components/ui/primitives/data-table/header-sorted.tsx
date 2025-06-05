@@ -1,7 +1,7 @@
 import { ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
 import { Button } from "../button";
 
-function headerSorted(title: string, column: any) {
+export function HeaderSorted({ title, column }) {
   return (
     <Button
       variant="ghost"
@@ -19,4 +19,3 @@ function headerSorted(title: string, column: any) {
     </Button>
   );
 }
-export default headerSorted;

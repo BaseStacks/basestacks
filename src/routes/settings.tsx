@@ -4,7 +4,7 @@ import { AppPage } from '@/components/ui/layout/AppPage'
 import { AppTabs } from '@/components/ui/layout/AppTabs';
 import Setting from '@/pages/settings/setting';
 import { Settings, Users } from 'lucide-react';
-import Member from '@/pages/settings/Member';
+import { Member } from '@/pages/settings/Member';
 import { useMemo } from 'react';
 import { z } from 'zod'
 
@@ -39,9 +39,9 @@ function RouteComponent() {
       <div className='p-4'>
         {
           page === 'members' ? (
-            <Member/>
+            <Member />
           ) : page === 'settings' ? (
-            <Setting/>
+            <Setting />
           ) : (
             <div>
               Select a tab to view content.
