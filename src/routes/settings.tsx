@@ -1,8 +1,10 @@
+import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { AppHeader } from '@/components/ui/layout/AppHeader'
 import { AppPage } from '@/components/ui/layout/AppPage'
 import { AppTabs } from '@/components/ui/layout/AppTabs';
-import { createFileRoute, useSearch } from '@tanstack/react-router'
+import Setting from '@/pages/settings/setting';
 import { Settings, Users } from 'lucide-react';
+import { Member } from '@/pages/settings/Member';
 import { useMemo } from 'react';
 import { z } from 'zod'
 
@@ -37,13 +39,9 @@ function RouteComponent() {
       <div className='p-4'>
         {
           page === 'members' ? (
-            <div >
-              Members Content
-            </div>
+            <Member />
           ) : page === 'settings' ? (
-            <div >
-              Settings Content
-            </div>
+            <Setting />
           ) : (
             <div>
               Select a tab to view content.
