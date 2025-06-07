@@ -6,7 +6,7 @@ export function HeaderSorted({ title, column }) {
     <Button
       variant="ghost"
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      className="!px-0"
+      className="!px-0 w-full h-[50px]"
     >
       {title}
       {column.getIsSorted() == false ? (

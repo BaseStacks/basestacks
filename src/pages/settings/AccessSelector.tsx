@@ -56,7 +56,7 @@ export const accessMap: Record<
   Viewer: {
     icon: Eye,
     label: "Viewer",
-    color: "gray",
+    color: "orange",
   },
   No_Access: {
     icon: EyeOff,
@@ -71,7 +71,11 @@ interface AccessSelectorProps {
   className?: string;
 }
 
-export function AccessSelector({ value, onChange, className }: AccessSelectorProps) {
+export function AccessSelector({
+  value,
+  onChange,
+  className,
+}: AccessSelectorProps) {
   const currentRole = accessMap[value];
 
   return (
@@ -89,13 +93,20 @@ export function AccessSelector({ value, onChange, className }: AccessSelectorPro
         <SelectValue placeholder="Select access level">
           {currentRole && (
             <div className="flex items-center gap-x-2">
-              <currentRole.icon className={getTextColorClass(currentRole.color)} />
+              <currentRole.icon
+                className={getTextColorClass(currentRole.color)}
+              />
               <span>{currentRole.label}</span>
             </div>
           )}
         </SelectValue>
       </SelectTrigger>
-      <SelectContent className="p-1 bg-white rounded-md shadow-lg border">
+      <SelectContent
+        className={cn(
+          "bg-white rounded-md shadow-lg border",
+          ` dark:${getBgColorClass("gray", "900")}`
+        )}
+      >
         {Object.entries(accessMap).map(([key, role]) => (
           <SelectItem
             key={key}
@@ -119,6 +130,6 @@ export function AccessSelector({ value, onChange, className }: AccessSelectorPro
           </SelectItem>
         ))}
       </SelectContent>
-    </Select >
+    </Select>
   );
 }

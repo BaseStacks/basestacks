@@ -3,7 +3,8 @@ import postgreSQLIcon from "@/assets/integrations/PostgreSQL Elephant.png";
 import mongoIcon from "@/assets/integrations/MongoDB Icon.svg";
 import { Button } from "@/components/ui/primitives/button";
 import DbDialog from "@/pages/integrations/dbDialog";
-import DbDialogContent from "./dbDialogContent";
+import { SQLDialogContent } from "./SQLDialogContent";
+import { NoSQLDialogContent } from "./NoSQLDialogContent";
 
 function Integration() {
   return (
@@ -35,7 +36,7 @@ function Integration() {
                     </Button>
                   </>
                 }
-                dialogContent={<DbDialogContent />}
+                dialogContent={<SQLDialogContent />}
               >
                 <span className="integration-icon p-2">
                   <img
@@ -64,7 +65,7 @@ function Integration() {
                     </Button>
                   </>
                 }
-                dialogContent={<DbDialogContent />}
+                dialogContent={<SQLDialogContent />}
               >
                 <span className="integration-icon p-2">
                   <img
@@ -93,7 +94,7 @@ function Integration() {
                     </Button>
                   </>
                 }
-                dialogContent={<DbDialogContent />}
+                dialogContent={<NoSQLDialogContent />}
               >
                 <span className="integration-icon p-2">
                   <img

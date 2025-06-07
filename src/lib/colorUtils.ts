@@ -62,3 +62,34 @@ export const getBgColorClass = (color: Color, weight: ColorWeight, elementState:
             return color;
     };
 };
+
+export const getBorderColorClass = (color: Color, weight: ColorWeight, elementState: ElementState = 'default') => {
+    switch (color) {
+        case "red":
+            if (elementState === 'hover') return `hover:border-red-${weight}`;
+            return `border-red-${weight}`;
+        case "blue":
+            if (elementState === 'hover') return `hover:border-blue-${weight}`;
+            return `border-blue-${weight}`;
+        case "green":
+            if (elementState === 'hover') return `hover:border-green-${weight}`;
+            return `border-green-${weight}`;
+        case "yellow":
+            if (elementState === 'hover') return `hover:border-yellow-${weight}`;
+            return `border-yellow-${weight}`;
+        case "purple":
+            if (elementState === 'hover') return `hover:border-purple-${weight}`;
+            return `border-purple-${weight}`;
+        case "pink":
+            if (elementState === 'hover') return `hover:border-pink-${weight}`;
+            return `border-pink-${weight}`;
+        case "orange":
+            if (elementState === 'hover') return `hover:border-orange-${weight}`;
+            return `border-orange-${weight}`;
+        case "gray":
+            if (elementState === 'hover') return `hover:border-gray-${weight}`;
+            return `border-gray-${weight}`;
+        default:
+            return color;
+    };
+};

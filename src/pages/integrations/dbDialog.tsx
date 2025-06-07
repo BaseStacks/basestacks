@@ -58,9 +58,7 @@ export default function DbDialog({
             </div>
           </div>
         </DialogHeader>
-        <div className="pr-4 pl-4">
-          {dialogContent}
-        </div>
+        {dialogContent}
         {showFooter && (
           <DialogFooter className="sm:justify-end p-4">
             <DialogClose asChild>
