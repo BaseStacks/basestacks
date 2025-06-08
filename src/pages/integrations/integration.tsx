@@ -2,9 +2,11 @@ import mysqlIcon from "@/assets/integrations/MySQL 6 Logo.png";
 import postgreSQLIcon from "@/assets/integrations/PostgreSQL Elephant.png";
 import mongoIcon from "@/assets/integrations/MongoDB Icon.svg";
 import { Button } from "@/components/ui/primitives/button";
-import DbDialog from "@/pages/integrations/dbDialog";
-import { SQLDialogContent } from "./SQLDialogContent";
-import { NoSQLDialogContent } from "./NoSQLDialogContent";
+import DbDialog from "@/pages/integrations/integration-part/dbDialog";
+import { SQLDialogContent } from "./integration-part/SQLDialogContent";
+import { NoSQLDialogContent } from "./integration-part/NoSQLDialogContent";
+import { cn } from "@/lib/utils";
+import { getTextColorClass } from "@/lib/colorUtils";
 
 function Integration() {
   return (
@@ -12,7 +14,14 @@ function Integration() {
       <div className="flex flex-col justify-center gap-10">
         <span className="text-sm font-normal text-gray-600 mb-2">
           Connect integrations with NocoDB.
-          <a href="#" className="text-blue-500 hover:text-blue-700 ml-1">
+          <a
+            href="#"
+            className={cn(
+              "ml-1",
+              getTextColorClass("blue"),
+              getTextColorClass("blue", "hover")
+            )}
+          >
             Learn more
           </a>
         </span>

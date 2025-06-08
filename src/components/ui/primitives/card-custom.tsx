@@ -31,9 +31,7 @@ export function CardCustom(props: CardCustomProps) {
           <CardDescription>{props.description}</CardDescription>
         )}
       </CardHeader>
-      <CardContent>
-        <div className="flex items-center gap-4">{props.children}</div>
-      </CardContent>
+      <CardContent>{props.children}</CardContent>
       <CardFooter className="justify-end">
         <CardAction>
           {props.footer ? (

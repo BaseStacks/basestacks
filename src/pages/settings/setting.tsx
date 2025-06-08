@@ -27,63 +27,65 @@ export function Setting() {
         <CardCustom
           title="Workspace Appearance"
           submitButton
-          textButton="Save"
+          textSubmit="Save"
           onSubmit={() => alert("Workspace appearance saved!")}
         >
-          <Avatar className="rounded-lg w-[66px] h-[66px]">
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col w-full gap-3">
-            <div className="flex flex-col w-full gap-1">
-              <label htmlFor="workspace-name-input">Name</label>
-              <Input
-                id="workspace-name-input"
-                placeholder="Enter workspace name..."
-              />
-            </div>
-            <div className="flex flex-col w-full gap-1">
-              <label htmlFor="workspace-theme-input">Theme color</label>
-              <div className="flex flex w-full gap-3">
-                <div
-                  className={cn(
-                    "theme-option cursor-pointer rounded-lg border-2 transition-all relative",
-                    themeMode === "light" && "border-primary"
-                  )}
-                  data-theme="light"
-                  onClick={() => themeColorChangeHandler("light")}
-                >
-                  {themeMode === "light" && (
-                    <Check className="absolute bg-primary rounded-br-md" />
-                  )}
-                  <div className="bg-white text-black p-6 rounded"></div>
-                </div>
+          <div className="flex items-start gap-4">
+            <Avatar className="rounded-lg w-[66px] h-[66px]">
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col w-full gap-3">
+              <div className="flex flex-col w-full gap-1">
+                <label htmlFor="workspace-name-input">Name</label>
+                <Input
+                  id="workspace-name-input"
+                  placeholder="Enter workspace name..."
+                />
+              </div>
+              <div className="flex flex-col w-full gap-1">
+                <label htmlFor="workspace-theme-input">Theme color</label>
+                <div className="flex flex w-full gap-3">
+                  <div
+                    className={cn(
+                      "theme-option cursor-pointer rounded-lg border-2 transition-all relative",
+                      themeMode === "light" && "border-primary"
+                    )}
+                    data-theme="light"
+                    onClick={() => themeColorChangeHandler("light")}
+                  >
+                    {themeMode === "light" && (
+                      <Check className="absolute bg-primary rounded-br-md" />
+                    )}
+                    <div className="bg-white p-6 rounded"></div>
+                  </div>
 
-                <div
-                  className={cn(
-                    "theme-option cursor-pointer rounded-lg border-2 transition-all relative",
-                    themeMode === "dark" && "border-primary"
-                  )}
-                  data-theme="dark"
-                  onClick={() => themeColorChangeHandler("dark")}
-                >
-                  {themeMode === "dark" && (
-                    <Check className="absolute bg-primary rounded-br-md" />
-                  )}
-                  <div className="bg-gray-900 text-white p-6 rounded"></div>
-                </div>
-                <div
-                  className={cn(
-                    "theme-option cursor-pointer rounded-lg border-2 transition-all relative",
-                    themeMode === "system" && "border-primary"
-                  )}
-                  data-theme="system"
-                  onClick={() => themeColorChangeHandler("system")}
-                >
-                  {themeMode === "system" && (
-                    <Check className="absolute bg-primary rounded-br-md" />
-                  )}
-                  <div className="bg-gradient-to-r from-white to-gray-900 text-white p-6 rounded"></div>
+                  <div
+                    className={cn(
+                      "theme-option cursor-pointer rounded-lg border-2 transition-all relative",
+                      themeMode === "dark" && "border-primary"
+                    )}
+                    data-theme="dark"
+                    onClick={() => themeColorChangeHandler("dark")}
+                  >
+                    {themeMode === "dark" && (
+                      <Check className="absolute bg-primary rounded-br-md" />
+                    )}
+                    <div className="bg-gray-900 p-6 rounded"></div>
+                  </div>
+                  <div
+                    className={cn(
+                      "theme-option cursor-pointer rounded-lg border-2 transition-all relative",
+                      themeMode === "system" && "border-primary"
+                    )}
+                    data-theme="system"
+                    onClick={() => themeColorChangeHandler("system")}
+                  >
+                    {themeMode === "system" && (
+                      <Check className="absolute bg-primary rounded-br-md" />
+                    )}
+                    <div className="bg-gradient-to-r to-gray-900 text-white p-6 rounded"></div>
+                  </div>
                 </div>
               </div>
             </div>

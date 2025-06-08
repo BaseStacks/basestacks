@@ -195,6 +195,7 @@ export function SQLDialogContent() {
                       <div key="ssl-select" className="rounded-lg border p-4">
                         <FormFieldCustom
                           name="ssl"
+                          label="SSL mode"
                           control={form.control}
                           placeholder="Select a fruit"
                           type="select"

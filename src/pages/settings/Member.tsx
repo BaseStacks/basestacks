@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/primitives/checkbox";
 import SearchBox from "@/components/ui/primitives/search-box";
 import { Input } from "@/components/ui/primitives/input";
 import type { ColumnDef } from "@tanstack/react-table";
+import { Trash2 } from "lucide-react";
 
 export interface MemberProps {
   id: string;
@@ -47,7 +48,7 @@ const columns: ColumnDef<MemberProps>[] = [
   {
     accessorKey: "users",
     header: ({ column }) => {
-      return <HeaderSorted title="User" column={column} />
+      return <HeaderSorted title="User" column={column} />;
     },
     meta: {
       headerClass: "text-left",
@@ -57,7 +58,7 @@ const columns: ColumnDef<MemberProps>[] = [
   {
     accessorKey: "access",
     header: ({ column }) => {
-      return <HeaderSorted title="Access" column={column} />
+      return <HeaderSorted title="Access" column={column} />;
     },
     cell: ({ row }: any) => (
       <AccessSelector
@@ -82,7 +83,19 @@ const columns: ColumnDef<MemberProps>[] = [
   {
     accessorKey: "actions",
     header: "Actions",
-    cell: ({ row }) => <ActionButton id={row.original.id} />,
+    cell: ({ row }) => (
+      <ActionButton
+        id={row.original.id}
+        listAction={[
+          {
+            title: "Remove user",
+            icon: Trash2,
+            color: "red",
+            onClick: () => {},
+          },
+        ]}
+      />
+    ),
     meta: {
       headerClass: "text-right",
       cellClass: "text-right",
@@ -161,14 +174,10 @@ const data: MemberProps[] = [
 
 export function Member() {
   return (
-    <div className="container mx-auto px-4 py-10">
+    <div className="container mx-auto py-10">
       <div className="flex flex-col justify-center text-center">
         <div className="flex justify-between mb-6">
-          <SearchBox
-            search=""
-            placeholder="Search member..."
-            setSearch={() => { }}
-          />
+          <SearchBox placeholder="Search member..." setSearch={() => {}} />
 
           <DialogCustom
             buttonText="+ Add Member"
@@ -176,11 +185,7 @@ export function Member() {
             submitText="Invite to Workspace"
           >
             <Input placeholder="Enter email addresses" />
-            <AccessSelector
-              value="No_Access"
-              className="px-3 py-2"
-              onChange={() => { }}
-            />
+            <AccessSelector value="No_Access" onChange={() => {}} />
           </DialogCustom>
         </div>
         <DataTable columns={columns} data={data} />

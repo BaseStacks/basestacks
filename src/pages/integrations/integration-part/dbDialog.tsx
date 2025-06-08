@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/primitives/dialog";
-import { Button } from "../../components/ui/primitives/button";
+import { Button } from "../../../components/ui/primitives/button";
 interface DialogCustomProps {
   buttonClassName?: string;
   dialogContent?: React.ReactNode;
