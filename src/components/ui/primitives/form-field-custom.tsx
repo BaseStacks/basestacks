@@ -19,7 +19,7 @@ import {
 } from "./select";
 import type { Control } from "react-hook-form";
 
-type selectItem = {
+type SelectItemType = {
   label: string;
   value: string;
 };
@@ -31,7 +31,7 @@ interface FormFieldCustomProps {
   label?: string;
   placeholder?: string;
   type?: "text" | "password" | "select";
-  selectItems?: Array<selectItem>;
+  selectItems?: Array<SelectItemType>;
 }
 
 export function FormFieldCustom({

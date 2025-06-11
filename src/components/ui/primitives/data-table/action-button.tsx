@@ -10,18 +10,20 @@ import type { Color } from "@/Types";
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
 
-type actionListItem = {
+type ActionListItem = {
   title: string;
   icon?: React.ComponentType<{ className?: string }>;
   color?: Color;
   className?: string;
   onClick: () => void;
 };
+
 interface ActionButtonProps {
   id: string;
-  listAction: Array<actionListItem>;
+  listAction: Array<ActionListItem>;
 }
-function ActionButton(props: ActionButtonProps) {
+
+export function ActionButton(props: ActionButtonProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -64,4 +66,3 @@ function ActionButton(props: ActionButtonProps) {
     </DropdownMenu>
   );
 }
-export default ActionButton;

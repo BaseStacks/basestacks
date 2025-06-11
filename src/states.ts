@@ -86,11 +86,11 @@ export const useBases = create<BasesState>((set, get) => ({
     }],
     activeBaseId: '1',
     getActiveBase: () => {
-        const base = get().bases.find(base => base.id === get().activeBaseId);
-        if (!base) {
+        const activeBase = get().bases.find(base => base.id === get().activeBaseId);
+        if (!activeBase) {
             throw new Error(`Base with ID ${get().activeBaseId} not found`);
         }
-        return base;
+        return activeBase;
     },
     addBase: (base) => set((state) => ({ bases: [...state.bases, base] })),
 }));
