@@ -16,9 +16,17 @@ import { RecordHeights } from '@/components/ui/widgets/record/RecordHeights';
 import { ViewMenu } from '@/components/ui/widgets/view/ViewMenu';
 import { Button } from '@/components/ui/primitives/button';
 import { BsDataGrid } from '@/components/grid/BsDataGrid';
+import z from 'zod';
+
+const searchSchema = z.object({
+  page: z.string().optional(),
+  viewId: z.string().optional(),
+  tableId: z.string().optional(),
+});
 
 export const Route = createFileRoute('/')({
   component: App,
+  validateSearch: (search) => searchSchema.parse(search),
 })
 
 function App() {

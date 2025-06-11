@@ -1,4 +1,4 @@
-import { CellSelectionPlugin, DataGridCell, DataGridCellContent, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridRowContainer, DataGridScrollArea, LayoutPlugin, useDataGrid, useDataGridState, usePlugin } from '@basestacks/datagrid';
+import { DataGridCell, DataGridCellContent, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridRowContainer, DataGridScrollArea, LayoutPlugin, useDataGrid, useDataGridState, usePlugin } from '@basestacks/datagrid';
 import { useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 

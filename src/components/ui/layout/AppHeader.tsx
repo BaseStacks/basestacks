@@ -1,4 +1,4 @@
-import { ChevronsLeftIcon, ChevronsRight, Menu } from "lucide-react";
+import { ChevronsRight, Menu } from "lucide-react";
 import { Button } from "../primitives/button";
 import { AppBreadcrumb } from "./AppBreadcrumb";
 import type { AppBreadcrumbItem } from "./AppBreadcrumb";

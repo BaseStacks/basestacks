@@ -1,5 +1,4 @@
 import {
-    Check,
     Database,
     Plus,
 } from "lucide-react";

@@ -1,9 +1,8 @@
-import { Eye, Plus, SortAsc } from "lucide-react";
+import { SortAsc } from "lucide-react";
 import React from "react";
 import { Button } from "../../primitives/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../primitives/command";
 import { Popover, PopoverContent, PopoverTrigger } from "../../primitives/popover";
-import { Separator } from "../../primitives/separator";
 import { FieldTypeIcon } from "../../icons/FieldTypIcon";
 import { useFields } from "@/states";
 

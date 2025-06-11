@@ -1,14 +1,11 @@
 import {
-    Check,
     Plus,
 } from "lucide-react";
 import { useMemo } from "react";
 import { Button } from "../../primitives/button";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
 
-
 import { useTables } from "@/states";
-import { cn } from "@/lib/utils";
 
 export function TableSwitcher() {
     const { tables, activeTableId } = useTables();

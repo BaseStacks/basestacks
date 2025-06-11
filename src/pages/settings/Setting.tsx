@@ -10,13 +10,14 @@ import { Alert, AlertTitle } from "@/components/ui/primitives/alert";
 import { CardCustom } from "@/components/ui/primitives/card-custom";
 import { Input } from "@/components/ui/primitives/input";
 import { cn } from "@/lib/utils";
+import type { Theme } from "@/components/ui/ThemeProvider";
 
 export function Setting() {
-  const [themeMode, setThemeMode] = useState<"light" | "dark" | "system">(
-    localStorage.getItem("theme") as "light" | "dark" | "system" | null
+  const [themeMode, setThemeMode] = useState<Theme>(
+    (localStorage.getItem("theme") || 'system') as Theme
   );
 
-  const themeColorChangeHandler = (mode: "light" | "dark" | "system") => {
+  const themeColorChangeHandler = (mode: Theme) => {
     localStorage.setItem("theme", mode);
     setThemeMode(mode);
     location.reload();
@@ -46,7 +47,7 @@ export function Setting() {
               </div>
               <div className="flex flex-col w-full gap-1">
                 <label htmlFor="workspace-theme-input">Theme color</label>
-                <div className="flex flex w-full gap-3">
+                <div className="flex w-full gap-3">
                   <div
                     className={cn(
                       "theme-option cursor-pointer rounded-lg border-2 transition-all relative",

@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight, ChevronsLeftIcon, Database, Ellipsis, Grid2x2, LayoutDashboard, Plus, PlusCircle, Search, Square, SquareKanban, Table2, X, XIcon } from "lucide-react";
+import { ChevronDown, ChevronRight, ChevronsLeftIcon, Database, Ellipsis, Grid2x2, LayoutDashboard, Plus, PlusCircle, Search, Square, SquareKanban, Table2, XIcon } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Button } from "../../primitives/button";

@@ -1,4 +1,4 @@
-import { Eye, GripVertical, List, Plus, Text } from "lucide-react";
+import { Eye, GripVertical, List, Plus } from "lucide-react";
 import React from "react";
 import { Button } from "../../primitives/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../primitives/command";

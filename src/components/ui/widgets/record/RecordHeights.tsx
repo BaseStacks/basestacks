@@ -1,4 +1,4 @@
-import { MoveVertical, Plus } from "lucide-react";
+import { MoveVertical } from "lucide-react";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../primitives/dropdown-menu";
 import { Button } from "../../primitives/button";
 
@@ -24,7 +24,7 @@ export function RecordHeights() {
                 <DropdownMenuCheckboxItem>
                     Tall
                 </DropdownMenuCheckboxItem>
-                 <DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem>
                     Extra
                 </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
