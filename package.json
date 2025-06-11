@@ -8,9 +8,7 @@
     "build": "vite build && tsc",
     "serve": "vite preview",
     "test": "vitest run",
-    "lint": "eslint",
-    "format": "prettier",
-    "check": "prettier --write . && eslint --fix"
+    "lint": "eslint"
   },
   "dependencies": {
     "@basestacks/datagrid": "^0.1.0",
@@ -56,6 +54,7 @@
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.28.0",
+    "eslint-plugin-functional": "^9.0.2",
     "eslint-plugin-import": "^2.31.0",
     "jsdom": "^26.0.0",
     "prettier": "^3.5.3",
