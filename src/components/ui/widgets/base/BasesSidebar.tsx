@@ -1,10 +1,10 @@
 import { ChevronDown, ChevronRight, ChevronsLeftIcon, Database, Ellipsis, Grid2x2, LayoutDashboard, Plus, PlusCircle, Search, Square, SquareKanban, Table2, X, XIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
 import { Button } from "../../primitives/button";
+import { Label } from "../../primitives/label";
 import { getTextColorClass } from "@/lib/colorUtils";
 import { useBases, useSidebarStatus, useTables, useViews } from "@/states";
-import { Link } from "@tanstack/react-router";
-import { Label } from "../../primitives/label";
-import { useMemo, useState } from "react";
 import { useIsMobile } from "@/hooks/ui/useIsMobile";
 
 export function BasesSidebar() {
@@ -84,7 +84,7 @@ export function BasesSidebar() {
 function TableList() {
     const { tables, activeTableId: activeBaseId } = useTables();
 
-    const [expandedTables, setExpandedTables] = useState<string[]>(() => activeBaseId ? [activeBaseId] : [])
+    const [expandedTables, setExpandedTables] = useState<Array<string>>(() => activeBaseId ? [activeBaseId] : [])
 
     const handleToggleTable = (tableId: string) => {
         setExpandedTables((prev) => {

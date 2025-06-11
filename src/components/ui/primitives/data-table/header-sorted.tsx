@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, ChevronsUpDown } from "lucide-react";
 import { Button } from "../button";
 
 export function HeaderSorted({ title, column }) {

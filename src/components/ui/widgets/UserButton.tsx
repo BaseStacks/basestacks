@@ -1,12 +1,11 @@
+import { BadgeCheck, LogOut } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
 
 import {
-    SidebarMenuButton,
+    SidebarMenuButton, useSidebar 
 } from "@/components/ui/primitives/sidebar";
 
-import { useSidebar } from "@/components/ui/primitives/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/primitives/avatar";
-import { BadgeCheck, LogOut } from "lucide-react";
 import { useUserState } from "@/states";
 
 export function UserButton() {

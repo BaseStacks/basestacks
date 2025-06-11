@@ -1,8 +1,8 @@
+import { Separator } from "@radix-ui/react-separator";
+import { BookOpen, Copy } from "lucide-react";
 import { Button } from "@/components/ui/primitives/button";
 import { getBgColorClass } from "@/lib/colorUtils";
 import { cn } from "@/lib/utils";
-import { Separator } from "@radix-ui/react-separator";
-import { BookOpen, Copy } from "lucide-react";
 
 export function NoSQLDialogContent() {
 

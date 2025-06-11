@@ -1,7 +1,7 @@
-import { Plus, Filter, Save, Download } from "lucide-react";
+import { Download, Filter, Plus, Save } from "lucide-react";
+import React from "react";
 import { Button } from "../../primitives/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../../primitives/popover";
-import React from "react";
 import { Separator } from "../../primitives/separator";
 
 export function RecordFilters() {

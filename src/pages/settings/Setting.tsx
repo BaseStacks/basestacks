@@ -1,3 +1,5 @@
+import { Check, TriangleAlert } from "lucide-react";
+import { useState } from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -7,9 +9,7 @@ import { getBgColorClass, getBorderColorClass } from "@/lib/colorUtils";
 import { Alert, AlertTitle } from "@/components/ui/primitives/alert";
 import { CardCustom } from "@/components/ui/primitives/card-custom";
 import { Input } from "@/components/ui/primitives/input";
-import { Check, TriangleAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 
 export function Setting() {
   const [themeMode, setThemeMode] = useState<"light" | "dark" | "system">(

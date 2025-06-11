@@ -1,21 +1,21 @@
 import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/primitives/select";
-import {
-  ShieldCheck,
-  User,
   Edit,
-  MessageSquare,
   Eye,
   EyeOff,
+  MessageSquare,
+  ShieldCheck,
+  User,
 } from "lucide-react";
+import type { Color } from "@/Types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/primitives/select";
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
-import type { Color } from "@/Types";
 
 export type AccessLevel =
   | "Owner"
@@ -85,20 +85,18 @@ export function AccessSelector({
           "w-[200px] h-10 focus:ring-2 focus:ring-ring focus:ring-offset-2 data-[state=open]:ring-2 data-[state=open]:ring-ring data-[state=open]:ring-offset-2",
           "justify-start text-left !border-none rounded-md transition-colors duration-150",
           className,
-          getBgColorClass(currentRole?.color || "gray", "100"),
-          getBgColorClass(currentRole?.color || "gray", "300", "hover"),
-          getTextColorClass(currentRole?.color || "gray")
+          getBgColorClass(currentRole.color, "100"),
+          getBgColorClass(currentRole.color, "300", "hover"),
+          getTextColorClass(currentRole.color)
         )}
       >
         <SelectValue placeholder="Select access level">
-          {currentRole && (
-            <div className="flex items-center gap-x-2">
-              <currentRole.icon
-                className={getTextColorClass(currentRole.color)}
-              />
-              <span>{currentRole.label}</span>
-            </div>
-          )}
+          <div className="flex items-center gap-x-2">
+            <currentRole.icon
+              className={getTextColorClass(currentRole.color)}
+            />
+            <span>{currentRole.label}</span>
+          </div>
         </SelectValue>
       </SelectTrigger>
       <SelectContent
@@ -119,12 +117,12 @@ export function AccessSelector({
             <div
               className={cn(
                 "flex flex-1 items-center gap-x-2 w-full px-2.5 py-0.5 my-1 rounded-md transition-colors duration-100",
-                getBgColorClass(role?.color || "gray", "100"),
-                getBgColorClass(role?.color || "gray", "300", "hover"),
-                getTextColorClass(role?.color || "gray")
+                getBgColorClass(role.color, "100"),
+                getBgColorClass(role.color, "300", "hover"),
+                getTextColorClass(role.color)
               )}
             >
-              <role.icon className={getTextColorClass(role?.color || "gray")} />
+              <role.icon className={getTextColorClass(role.color)} />
               <span>{role.label}</span>
             </div>
           </SelectItem>

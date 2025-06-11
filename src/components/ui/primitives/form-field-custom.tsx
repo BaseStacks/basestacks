@@ -1,4 +1,5 @@
 import { Asterisk, Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 import {
   FormControl,
   FormField,
@@ -7,9 +8,7 @@ import {
   FormMessage,
 } from "./form";
 import { Input } from "./input";
-import type { Control } from "react-hook-form";
 import { Button } from "./button";
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -18,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./select";
+import type { Control } from "react-hook-form";
 
 type selectItem = {
   label: string;
@@ -31,7 +31,7 @@ interface FormFieldCustomProps {
   label?: string;
   placeholder?: string;
   type?: "text" | "password" | "select";
-  selectItems?: selectItem[];
+  selectItems?: Array<selectItem>;
 }
 
 export function FormFieldCustom({

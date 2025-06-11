@@ -6,6 +6,9 @@ import {
   Settings2,
 } from "lucide-react";
 
+import { Link } from "@tanstack/react-router";
+import { WorkspaceSwitcher } from "../widgets/workspace/WorkspaceSwitcher";
+import { UserButton } from "../widgets/UserButton";
 import {
   Sidebar,
   SidebarContent,
@@ -18,9 +21,6 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/primitives/sidebar";
-import { Link } from "@tanstack/react-router";
-import { WorkspaceSwitcher } from "../widgets/workspace/WorkspaceSwitcher";
-import { UserButton } from "../widgets/UserButton";
 
 const itemClassName = 'data-[status=active]:!bg-sidebar-accent data-[status=active]:!text-sidebar-accent-foreground '
 

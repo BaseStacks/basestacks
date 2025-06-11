@@ -1,10 +1,11 @@
-import { BasesSidebar } from '@/components/ui/widgets/base/BasesSidebar'
 import { createFileRoute } from '@tanstack/react-router'
+import { useMemo } from 'react';
+import { Ellipsis } from 'lucide-react';
+import type { AppBreadcrumbItem } from '@/components/ui/layout/AppBreadcrumb';
+import { BasesSidebar } from '@/components/ui/widgets/base/BasesSidebar'
 
 import { AppPage } from '@/components/ui/layout/AppPage';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
-import { useMemo } from 'react';
-import type { AppBreadcrumbItem } from '@/components/ui/layout/AppBreadcrumb';
 import { BaseSwitcher } from '@/components/ui/widgets/base/BaseSwitcher';
 import { TableSwitcher } from '@/components/ui/widgets/table/TableSwitcher';
 import { ViewSwitcher } from '@/components/ui/widgets/view/ViewSwitcher';
@@ -14,7 +15,6 @@ import { RecordSorts } from '@/components/ui/widgets/record/RecordSorts';
 import { RecordHeights } from '@/components/ui/widgets/record/RecordHeights';
 import { ViewMenu } from '@/components/ui/widgets/view/ViewMenu';
 import { Button } from '@/components/ui/primitives/button';
-import { Ellipsis } from 'lucide-react';
 import { BsDataGrid } from '@/components/grid/BsDataGrid';
 
 export const Route = createFileRoute('/')({
@@ -22,7 +22,7 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
-  const breadcrumbItems = useMemo((): AppBreadcrumbItem[] => [
+  const breadcrumbItems = useMemo((): Array<AppBreadcrumbItem> => [
     {
       type: 'menu',
       label: (<BaseSwitcher />),

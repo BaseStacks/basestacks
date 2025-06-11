@@ -1,15 +1,15 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
-
 import {
     Command,
     Plus,
 } from "lucide-react";
+import { Button } from "../../primitives/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
+
 
 import {
     SidebarMenuButton,
 } from "@/components/ui/primitives/sidebar";
 import { useWorkspaces } from "@/states";
-import { Button } from "../../primitives/button";
 
 export function WorkspaceSwitcher() {
     const { workspaces, activeWorkspaceId } = useWorkspaces();

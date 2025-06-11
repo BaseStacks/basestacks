@@ -1,15 +1,15 @@
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
-
 import {
     Check,
     ChevronDown,
     Plus,
 } from "lucide-react";
+import { useMemo } from "react";
+import { Button } from "../../primitives/button";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/primitives/dropdown-menu";
+
 
 import { useViews } from "@/states";
 import { cn } from "@/lib/utils";
-import { useMemo } from "react";
-import { Button } from "../../primitives/button";
 import { useIsMobile } from "@/hooks/ui/useIsMobile";
 
 export function ViewSwitcher() {

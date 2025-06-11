@@ -1,9 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "../primitives/breadcrumb";
 import { Fragment } from "react/jsx-runtime";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../primitives/breadcrumb";
 import type React from "react";
 import { useIsMobile } from "@/hooks/ui/useIsMobile";
-import { ChevronDown } from "lucide-react";
 
 export interface AppBreadcrumbItem {
   readonly type?: "link" | "menu" | "button";
@@ -12,14 +11,14 @@ export interface AppBreadcrumbItem {
 }
 
 interface AppBreadcrumbProps {
-  readonly items: AppBreadcrumbItem[];
+  readonly items: Array<AppBreadcrumbItem>;
 }
 
 export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
   const isMobile = useIsMobile();
 
   if (isMobile) {
-    const lastItem = items?.[items.length - 1];
+    const lastItem = items[items.length - 1];
     return (
       <Breadcrumb>
         <BreadcrumbList>
@@ -35,7 +34,7 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
     <Breadcrumb>
       <BreadcrumbList>
         {
-          items?.map((item, index) => {
+          items.map((item, index) => {
             const isLast = index === items.length - 1;
             return (
               <Fragment key={index}>

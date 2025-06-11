@@ -85,7 +85,7 @@ export const useBases = create<BasesState>((set, get) => ({
         color: 'blue',
     }],
     activeBaseId: '1',
-    getActiveBase: () => get().bases.find(base => base.id === get().activeBaseId)!,
+    getActiveBase: () => get().bases.find(base => base.id === get().activeBaseId),
     addBase: (base) => set((state) => ({ bases: [...state.bases, base] })),
 }));
 

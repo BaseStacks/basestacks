@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useMemo } from 'react';
 import { AppPage } from '@/components/ui/layout/AppPage';
 import { AppHeader } from '@/components/ui/layout/AppHeader';
-import { useMemo } from 'react';
 import { AutomationSidebar } from '@/components/ui/widgets/AutomationSidebar';
 
 export const Route = createFileRoute('/automation')({

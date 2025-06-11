@@ -1,6 +1,6 @@
 import type { Color, ColorWeight, ElementState } from "@/Types";
 
-export const getTextColorClass = (color: Color, elementState: ElementState = 'default'): string => {
+export const getTextColorClass = (color: Color | undefined, elementState: ElementState = 'default'): string => {
     switch (color) {
         case "red":
             if (elementState === 'hover') return 'hover:text-red-600';
@@ -28,11 +28,11 @@ export const getTextColorClass = (color: Color, elementState: ElementState = 'de
             if (elementState === 'hover') return 'hover:text-gray-600';
             return 'text-gray-500';
         default:
-            return color;
+            return 'text-gray-500'; // Default case for undefined or unrecognized color
     }
 };
 
-export const getBgColorClass = (color: Color, weight: ColorWeight, elementState: ElementState = 'default') => {
+export const getBgColorClass = (color: Color | undefined, weight: ColorWeight, elementState: ElementState = 'default') => {
     switch (color) {
         case "red":
             if (elementState === 'hover') return `hover:bg-red-${weight}`;
@@ -59,7 +59,7 @@ export const getBgColorClass = (color: Color, weight: ColorWeight, elementState:
             if (elementState === 'hover') return `hover:bg-gray-${weight}`;
             return `bg-gray-${weight}`;
         default:
-            return color;
+            return undefined; // Default case for undefined or unrecognized color';
     };
 };
 

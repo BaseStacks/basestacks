@@ -1,11 +1,11 @@
-import { Plus, Eye, SortAsc } from "lucide-react";
-import { Button } from "../../primitives/button";
+import { Eye, Plus, SortAsc } from "lucide-react";
 import React from "react";
+import { Button } from "../../primitives/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../primitives/command";
 import { Popover, PopoverContent, PopoverTrigger } from "../../primitives/popover";
 import { Separator } from "../../primitives/separator";
-import { useFields } from "@/states";
 import { FieldTypeIcon } from "../../icons/FieldTypIcon";
+import { useFields } from "@/states";
 
 export function RecordSorts() {
     const { fields } = useFields();

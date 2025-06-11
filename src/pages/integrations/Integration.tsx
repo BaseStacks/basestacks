@@ -1,10 +1,10 @@
+import { SQLDialogContent } from "./integration-part/SQLDialogContent";
+import { NoSQLDialogContent } from "./integration-part/NoSQLDialogContent";
 import mysqlIcon from "@/assets/integrations/MySQL 6 Logo.png";
 import postgreSQLIcon from "@/assets/integrations/PostgreSQL Elephant.png";
 import mongoIcon from "@/assets/integrations/MongoDB Icon.svg";
 import { Button } from "@/components/ui/primitives/button";
 import { DbDialog } from "@/pages/integrations/integration-part/DbDialog";
-import { SQLDialogContent } from "./integration-part/SQLDialogContent";
-import { NoSQLDialogContent } from "./integration-part/NoSQLDialogContent";
 import { cn } from "@/lib/utils";
 import { getTextColorClass } from "@/lib/colorUtils";
 

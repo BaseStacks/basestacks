@@ -1,14 +1,22 @@
 import { useState } from "react";
+import {
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
+import { Button } from "../button";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../select";
 import type {
   ColumnDef,
   SortingState,
   VisibilityState,
-} from "@tanstack/react-table";
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  getSortedRowModel,
 } from "@tanstack/react-table";
 import {
   Table,
@@ -21,14 +29,6 @@ import {
 } from "@/components/ui/primitives/table";
 import { cn } from "@/lib/utils";
 import { getBgColorClass } from "@/lib/colorUtils";
-import { Button } from "../button";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "../select";
 
 interface PaginationProps {
   pageSize: string | number;
@@ -43,12 +43,12 @@ interface DataTableColumnMeta {
 
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends unknown, TValue>
-    extends DataTableColumnMeta {}
+    extends DataTableColumnMeta { }
 }
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  columns: Array<ColumnDef<TData, TValue>>;
+  data: Array<TData>;
   paginationInfo?: PaginationProps;
   showPagination?: boolean;
 }
@@ -111,9 +111,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
@@ -121,7 +121,7 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -130,9 +130,8 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className={`text-sm py-2 px-4 ${
-                        cell.column.columnDef.meta?.cellClass ?? ""
-                      }`}
+                      className={`text-sm py-2 px-4 ${cell.column.columnDef.meta?.cellClass ?? ""
+                        }`}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -219,7 +218,7 @@ export function DataTable<TData, TValue>({
                               Math.abs(page - pagination.page) <= 1;
                             return isFirst || isLast || isNearCurrent;
                           })
-                          .reduce<number[]>((acc, page, i) => {
+                          .reduce<Array<number>>((acc, page, i) => {
                             if (i === 0 || page - acc[acc.length - 1] === 1) {
                               acc.push(page);
                             } else {

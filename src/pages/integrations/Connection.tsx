@@ -1,11 +1,11 @@
+import { Files, Pencil } from "lucide-react";
+import type { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/ui/primitives/data-table/data-table";
 import { HeaderSorted } from "@/components/ui/primitives/data-table/header-sorted";
 import SearchBox from "@/components/ui/primitives/search-box";
 import { getTextColorClass } from "@/lib/colorUtils";
 import { cn } from "@/lib/utils";
-import type { ColumnDef } from "@tanstack/react-table";
 import ActionButton from "@/components/ui/primitives/data-table/action-button";
-import { Files, Pencil } from "lucide-react";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 
 type ConnectionProps = {
@@ -18,7 +18,7 @@ type ConnectionProps = {
 };
 
 export function Connection() {
-  const columns: ColumnDef<ConnectionProps>[] = [
+  const columns: Array<ColumnDef<ConnectionProps>> = [
     {
       accessorKey: "select",
       header: ({ table }) => (
@@ -124,7 +124,7 @@ export function Connection() {
     },
   ];
 
-  const typedConnectionData: ConnectionProps[] = [
+  const typedConnectionData: Array<ConnectionProps> = [
     {
       id: "conn-1",
       name: "Logs-1",

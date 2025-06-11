@@ -1,14 +1,14 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/primitives/resizable'
-import { useIsMobile } from '@/hooks/ui/useIsMobile';
-import { useSidebarStatus } from '@/states';
-import { SheetContent, Sheet, SheetTitle } from '../primitives/sheet';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { AppMenu } from './AppMenu';
+import { Link } from '@tanstack/react-router';
+import { Home } from 'lucide-react';
+import { Sheet, SheetContent, SheetTitle } from '../primitives/sheet';
 import { WorkspaceSwitcher } from '../widgets/workspace/WorkspaceSwitcher';
 import { UserButton } from '../widgets/UserButton';
 import { Button } from '../primitives/button';
-import { Link } from '@tanstack/react-router';
-import { Home } from 'lucide-react';
+import { AppMenu } from './AppMenu';
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/primitives/resizable'
+import { useIsMobile } from '@/hooks/ui/useIsMobile';
+import { useSidebarStatus } from '@/states';
 
 interface AppPageProps {
     readonly sidebar?: React.ReactNode;

@@ -1,3 +1,4 @@
+import { Button } from "./button";
 import {
   Card,
   CardAction,
@@ -7,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/primitives/card";
-import { Button } from "./button";
 
 interface CardCustomProps {
   title?: string;

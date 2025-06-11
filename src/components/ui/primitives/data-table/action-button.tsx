@@ -6,9 +6,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../dropdown-menu";
+import type { Color } from "@/Types";
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
-import type { Color } from "@/Types";
 
 type actionListItem = {
   title: string;
@@ -19,7 +19,7 @@ type actionListItem = {
 };
 interface ActionButtonProps {
   id: string;
-  listAction: actionListItem[];
+  listAction: Array<actionListItem>;
 }
 function ActionButton(props: ActionButtonProps) {
   return (
@@ -43,17 +43,19 @@ function ActionButton(props: ActionButtonProps) {
               className={cn(
                 "flex flex-1 items-center gap-x-2 rounded-md transition-colors duration-100",
                 "px-2.5 py-1.5 rounded-md",
-                getBgColorClass(item?.color, "100"),
-                getBgColorClass(item?.color, "300", "hover"),
-                getTextColorClass(item?.color || "gray")
+                getBgColorClass(item.color, "100"),
+                getBgColorClass(item.color, "300", "hover"),
+                getTextColorClass(item.color || "gray")
               )}
             >
-              <item.icon
-                className={cn(
-                  item.className,
-                  getTextColorClass(item?.color || "gray")
-                )}
-              />
+              {item.icon && (
+                <item.icon
+                  className={cn(
+                    item.className,
+                    getTextColorClass(item.color || "gray")
+                  )}
+                />
+              )}
               <span>{item.title}</span>
             </div>
           </DropdownMenuItem>

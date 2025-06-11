@@ -1,3 +1,7 @@
+import { BookOpen, Copy, Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
+import { ImportByUrl } from "./ImportByUrl";
 import {
   Accordion,
   AccordionContent,
@@ -14,10 +18,6 @@ import { Switch } from "@/components/ui/primitives/switch";
 import { Textarea } from "@/components/ui/primitives/textarea";
 import { getBgColorClass } from "@/lib/colorUtils";
 import { cn } from "@/lib/utils";
-import { BookOpen, Copy, Trash2 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import { ImportByUrl } from "./ImportByUrl";
 
 type DatabaseType = {
   connectionName: string;
@@ -27,10 +27,10 @@ type DatabaseType = {
   password: string;
   databaseName: string;
   ssl?: string;
-  parameters: {
+  parameters: Array<{
     key: string;
     value: string;
-  }[];
+  }>;
 };
 export function SQLDialogContent() {
   const form = useForm<DatabaseType>({

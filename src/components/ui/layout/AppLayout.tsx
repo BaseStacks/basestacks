@@ -1,7 +1,6 @@
 import { ThemeProvider } from "../ThemeProvider";
 import { AppMenu } from "./AppMenu";
-import { SidebarProvider } from "@/components/ui/primitives/sidebar";
-import { SidebarInset } from "@/components/ui/primitives/sidebar";
+import { SidebarInset, SidebarProvider  } from "@/components/ui/primitives/sidebar";
 
 type ProviderProps = {
   children: React.ReactNode;

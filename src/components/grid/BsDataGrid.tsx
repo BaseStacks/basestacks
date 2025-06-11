@@ -1,9 +1,9 @@
-import { cn } from '@/lib/utils';
-import { DataGridCell, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridScrollArea, useDataGrid, usePlugin, LayoutPlugin, useDataGridState, DataGridRowContainer, DataGridCellContent, CellSelectionPlugin } from '@basestacks/datagrid';
+import { CellSelectionPlugin, DataGridCell, DataGridCellContent, DataGridContainer, DataGridHeader, DataGridHeaderGroup, DataGridProvider, DataGridRow, DataGridRowContainer, DataGridScrollArea, LayoutPlugin, useDataGrid, useDataGridState, usePlugin } from '@basestacks/datagrid';
 import { useMemo, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 export function BsDataGrid() {
-    const [data, setData] = useState<any[]>([{
+    const [data, setData] = useState<Array<any>>([{
         id: 1,
         name: 'John Doe',
         email: 's@gmail.com'

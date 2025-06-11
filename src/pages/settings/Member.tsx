@@ -1,13 +1,14 @@
+import { Trash2 } from "lucide-react";
+import {  AccessSelector } from "./AccessSelector";
+import type {AccessLevel} from "./AccessSelector";
+import type { ColumnDef } from "@tanstack/react-table";
 import { HeaderSorted } from "@/components/ui/primitives/data-table/header-sorted";
 import ActionButton from "@/components/ui/primitives/data-table/action-button";
 import { DataTable } from "@/components/ui/primitives/data-table/data-table";
 import { DialogCustom } from "@/components/ui/primitives/dialog-custom";
-import { AccessSelector, type AccessLevel } from "./AccessSelector";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 import SearchBox from "@/components/ui/primitives/search-box";
 import { Input } from "@/components/ui/primitives/input";
-import type { ColumnDef } from "@tanstack/react-table";
-import { Trash2 } from "lucide-react";
 
 export interface MemberProps {
   id: string;
@@ -16,7 +17,7 @@ export interface MemberProps {
   dateJoined: string;
 }
 
-const columns: ColumnDef<MemberProps>[] = [
+const columns: Array<ColumnDef<MemberProps>> = [
   {
     accessorKey: "select",
     header: ({ table }) => (
@@ -103,7 +104,7 @@ const columns: ColumnDef<MemberProps>[] = [
   },
 ];
 
-const data: MemberProps[] = [
+const data: Array<MemberProps> = [
   {
     id: "728ed52f",
     users: "m@example.com",

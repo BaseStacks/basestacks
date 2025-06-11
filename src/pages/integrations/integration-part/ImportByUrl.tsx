@@ -1,3 +1,5 @@
+import { Link } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/primitives/button";
 import {
   Popover,
@@ -5,8 +7,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/primitives/popover";
 import { Textarea } from "@/components/ui/primitives/textarea";
-import { Link } from "lucide-react";
-import { useState } from "react";
 
 export function ImportByUrl() {
   const [open, setOpen] = useState<boolean>();

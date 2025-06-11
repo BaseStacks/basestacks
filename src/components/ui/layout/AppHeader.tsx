@@ -1,12 +1,13 @@
 import { ChevronsLeftIcon, ChevronsRight, Menu } from "lucide-react";
 import { Button } from "../primitives/button";
+import { AppBreadcrumb } from "./AppBreadcrumb";
+import type { AppBreadcrumbItem } from "./AppBreadcrumb";
 import { useSidebarStatus } from "@/states";
-import { AppBreadcrumb, type AppBreadcrumbItem } from "./AppBreadcrumb";
 import { useIsMobile } from "@/hooks/ui/useIsMobile";
 import { cn } from "@/lib/utils";
 
 interface AppHeaderProps {
-    readonly breadcrumb?: AppBreadcrumbItem[];
+    readonly breadcrumb?: Array<AppBreadcrumbItem>;
     readonly showSidebarTrigger?: boolean;
 }
 
@@ -31,7 +32,7 @@ export function AppHeader({ breadcrumb, showSidebarTrigger }: AppHeaderProps) {
                                 variant="ghost"
                                 onClick={() => sidebarStatus.toggle()}
                             >
-                                {sidebarStatus.visible ? <ChevronsLeftIcon /> : <ChevronsRight />}
+                                <ChevronsRight />
                             </Button>
                         )
                 }

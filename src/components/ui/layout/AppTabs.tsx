@@ -9,7 +9,7 @@ interface AppTabItem {
 
 interface AppTabsProps {
     readonly activeTab?: string;
-    readonly tabs: AppTabItem[];
+    readonly tabs: Array<AppTabItem>;
 }
 
 export function AppTabs({  tabs }: AppTabsProps) {
