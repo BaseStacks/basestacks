@@ -1,0 +1,21 @@
+name: Lint
+
+on:
+  pull_request:
+    branches: [ "main" ] # Or your default branch
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22' # Specify your Node.js version
+    - name: Install pnpm
+      run: npm install -g pnpm
+    - name: Install dependencies
+      run: pnpm install # Or pnpm install / yarn install
+    - name: Run lint
+      run: pnpm run lint # Or your specific lint command
