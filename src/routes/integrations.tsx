@@ -1,8 +1,8 @@
 import { AppHeader } from "@/components/ui/layout/AppHeader";
 import { AppPage } from "@/components/ui/layout/AppPage";
 import { AppTabs } from "@/components/ui/layout/AppTabs";
-import Connection from "@/pages/integrations/connection";
-import Integration from "@/pages/integrations/integration";
+import { Connection } from "@/pages/integrations/Connection";
+import { Integration } from "@/pages/integrations/Integration";
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { Blocks, GitCommitHorizontal } from "lucide-react";
 import { useMemo } from "react";
