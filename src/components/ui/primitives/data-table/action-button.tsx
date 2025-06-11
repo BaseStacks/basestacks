@@ -36,7 +36,7 @@ function ActionButton(props: ActionButtonProps) {
       <DropdownMenuContent align="end" className="!p-1 !w-fit !min-w-fit">
         {props.listAction.map((item) => (
           <DropdownMenuItem
-            onClick={() => item.onClick}
+            onClick={() => item.onClick()}
             className="!p-0 !w-fit"
           >
             <div
