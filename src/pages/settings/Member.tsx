@@ -1,13 +1,13 @@
 import { Trash2 } from "lucide-react";
-import {  AccessSelector } from "./AccessSelector";
-import type {AccessLevel} from "./AccessSelector";
+import { AccessSelector } from "./AccessSelector";
+import type { AccessLevel } from "./AccessSelector";
 import type { ColumnDef } from "@tanstack/react-table";
 import { HeaderSorted } from "@/components/ui/primitives/data-table/header-sorted";
-import ActionButton from "@/components/ui/primitives/data-table/action-button";
+import { ActionButton } from "@/components/ui/primitives/data-table/action-button";
 import { DataTable } from "@/components/ui/primitives/data-table/data-table";
 import { DialogCustom } from "@/components/ui/primitives/dialog-custom";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
-import SearchBox from "@/components/ui/primitives/search-box";
+import { SearchBox } from "@/components/ui/primitives/search-box";
 import { Input } from "@/components/ui/primitives/input";
 
 export interface MemberProps {
@@ -92,7 +92,7 @@ const columns: Array<ColumnDef<MemberProps>> = [
             title: "Remove user",
             icon: Trash2,
             color: "red",
-            onClick: () => {},
+            onClick: () => { },
           },
         ]}
       />
@@ -178,7 +178,7 @@ export function Member() {
     <div className="container mx-auto py-10">
       <div className="flex flex-col justify-center text-center">
         <div className="flex justify-between mb-6">
-          <SearchBox placeholder="Search member..." setSearch={() => {}} />
+          <SearchBox placeholder="Search member..." setSearch={() => { }} />
 
           <DialogCustom
             buttonText="+ Add Member"
@@ -186,7 +186,7 @@ export function Member() {
             submitText="Invite to Workspace"
           >
             <Input placeholder="Enter email addresses" />
-            <AccessSelector value="No_Access" onChange={() => {}} />
+            <AccessSelector value="No_Access" onChange={() => { }} />
           </DialogCustom>
         </div>
         <DataTable columns={columns} data={data} />
