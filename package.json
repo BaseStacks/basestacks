@@ -56,6 +56,7 @@
     "eslint": "^9.28.0",
     "eslint-plugin-functional": "^9.0.2",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-only-warn": "^1.1.0",
     "jsdom": "^26.0.0",
     "prettier": "^3.5.3",
     "tw-animate-css": "^1.3.0",

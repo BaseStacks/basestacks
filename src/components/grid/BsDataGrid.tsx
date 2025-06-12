@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { Button } from '../ui/primitives/button';
 import { Checkbox } from '../ui/primitives/checkbox';
 
+import { NewFieldButton } from '../ui/widgets/field/NewFieldButton';
 import type { Column, ColumnKey, RowKey } from '@basestacks/datagrid';
 import { cn } from '@/lib/utils';
 
@@ -89,15 +90,10 @@ export function BsDataGrid() {
         <DataGridProvider dataGrid={dataGrid}>
             <DataGridContainer className={clxs.container}>
                 <DataGridHeaderGroup className={clxs.headerGroup}>
-                    {headers.map((header, index) => (
-                        <DataGridHeader key={index} header={header} className={cn(clxs.header, clxs.cellPinned)} />
+                    {headers.map((header) => (
+                        <DataGridHeader key={header.id} header={header} className={cn(clxs.header, clxs.cellPinned)} />
                     ))}
-                    <Button
-                        variant="ghost"
-                        className='absolute right-0 top-0 translate-x-full w-[42px] h-[42px] border-b border-r rounded-none'
-                    >
-                        <Plus />
-                    </Button>
+                    <NewFieldButton />
                 </DataGridHeaderGroup>
                 <DataGridScrollArea className="flex-grow overflow-auto">
                     <DataGridRowContainer className="relative">

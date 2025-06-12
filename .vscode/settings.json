@@ -9,6 +9,9 @@
     "**/routeTree.gen.ts": true
   },
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
   "sonarlint.connectedMode.project": {
     "connectionId": "basestacks",
     "projectKey": "BaseStacks_basestacks"

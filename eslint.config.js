@@ -1,3 +1,5 @@
+import "eslint-plugin-only-warn";
+
 import { tanstackConfig } from "@tanstack/eslint-config";
 import tseslint from 'typescript-eslint';
 import functional from "eslint-plugin-functional";
