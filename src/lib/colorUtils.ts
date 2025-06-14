@@ -36,27 +36,35 @@ export const getBgColorClass = (color: Color | undefined, weight: ColorWeight, e
     switch (color) {
         case "red":
             if (elementState === 'hover') return `hover:bg-red-${weight}`;
+            if (elementState === 'dark') return `dark:bg-red-${weight}`;
             return `bg-red-${weight}`;
         case "blue":
             if (elementState === 'hover') return `hover:bg-blue-${weight}`;
+            if (elementState === 'dark') return `dark:bg-blue-${weight}`;
             return `bg-blue-${weight}`;
         case "green":
             if (elementState === 'hover') return `hover:bg-green-${weight}`;
+            if (elementState === 'dark') return `dark:bg-green-${weight}`;
             return `bg-green-${weight}`;
         case "yellow":
             if (elementState === 'hover') return `hover:bg-yellow-${weight}`;
+            if (elementState === 'dark') return `dark:bg-yellow-${weight}`;
             return `bg-yellow-${weight}`;
         case "purple":
             if (elementState === 'hover') return `hover:bg-purple-${weight}`;
+            if (elementState === 'dark') return `dark:bg-purple-${weight}`;
             return `bg-purple-${weight}`;
         case "pink":
             if (elementState === 'hover') return `hover:bg-pink-${weight}`;
+            if (elementState === 'dark') return `dark:bg-pink-${weight}`;
             return `bg-pink-${weight}`;
         case "orange":
             if (elementState === 'hover') return `hover:bg-orange-${weight}`;
+            if (elementState === 'dark') return `dark:bg-orange-${weight}`;
             return `bg-orange-${weight}`;
         case "gray":
             if (elementState === 'hover') return `hover:bg-gray-${weight}`;
+            if (elementState === 'dark') return `dark:bg-gray-${weight}`;
             return `bg-gray-${weight}`;
         default:
             return undefined; // Default case for undefined or unrecognized color';

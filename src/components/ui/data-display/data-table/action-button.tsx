@@ -1,14 +1,15 @@
 import { EllipsisVertical } from "lucide-react";
-import { Button } from "../button";
+import { Button } from "../../primitives/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../dropdown-menu";
+} from "../../navigation/dropdown-menu";
 import type { Color } from "@/Types";
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
+import { TooltipCustom } from "../../feedback/tooltip-custom";
 
 type actionListItem = {
   title: string;
@@ -20,9 +21,39 @@ type actionListItem = {
 interface ActionButtonProps {
   id: string;
   listAction: Array<actionListItem>;
+  type?: "button" | "dropdown";
 }
-function ActionButton(props: ActionButtonProps) {
-  return (
+function ActionButton({
+  id,
+  listAction,
+  type = "dropdown",
+}: ActionButtonProps) {
+  return type === "button" ? (
+    <div className="flex gap-x-1">
+      {listAction.map((item) => (
+        <TooltipCustom value={item.title} key={`action-${id}-${item.title}`}>
+          <Button
+            size="icon"
+            variant="ghost"
+            className={cn(
+              getBgColorClass(item.color, "100", "hover"),
+              getTextColorClass(item.color)
+            )}
+            onClick={() => item.onClick()}
+          >
+            {item.icon && (
+              <item.icon
+                className={cn(
+                  item.className,
+                  getTextColorClass(item.color || "gray")
+                )}
+              />
+            )}
+          </Button>
+        </TooltipCustom>
+      ))}
+    </div>
+  ) : (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
@@ -34,10 +65,11 @@ function ActionButton(props: ActionButtonProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="!p-1 !w-fit !min-w-fit">
-        {props.listAction.map((item) => (
+        {listAction.map((item) => (
           <DropdownMenuItem
+            key={`action-${id}`}
             onClick={() => item.onClick()}
-            className="!p-0 !w-fit"
+            className="!p-0 !w-fit cursor-pointer"
           >
             <div
               className={cn(

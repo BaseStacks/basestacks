@@ -1,4 +1,4 @@
-import { createFileRoute, useSearch } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Settings, Users } from "lucide-react";
 import { useMemo } from "react";
 import { z } from "zod";
@@ -7,6 +7,7 @@ import { AppPage } from "@/components/ui/layout/AppPage";
 import { AppTabs } from "@/components/ui/layout/AppTabs";
 import { Member } from "@/pages/settings/Member";
 import { Setting } from "@/pages/settings/Setting";
+import { useSearchParams } from "@/hooks/useSearchParams";
 
 const searchSchema = z.object({
   page: z.string().optional(),
@@ -34,8 +35,9 @@ function RouteComponent() {
     []
   );
 
-  const { page = "members" } = useSearch({
+  const search = useSearchParams({
     from: "/settings",
+    page: "members",
   });
 
   return (
@@ -43,9 +45,9 @@ function RouteComponent() {
       <AppHeader breadcrumb={breadcrumbItems} />
       <AppTabs tabs={tabs} />
       <div className="p-4">
-        {page === "members" ? (
+        {search.page === "members" ? (
           <Member />
-        ) : page === "settings" ? (
+        ) : search.page === "settings" ? (
           <Setting />
         ) : (
           <div>Select a tab to view content.</div>

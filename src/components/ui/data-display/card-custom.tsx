@@ -1,4 +1,4 @@
-import { Button } from "./button";
+import { Button } from "../primitives/button";
 import {
   Card,
   CardAction,
@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/primitives/card";
+} from "@/components/ui/data-display/card";
 
 interface CardCustomProps {
   title?: string;
@@ -20,6 +20,7 @@ interface CardCustomProps {
   textCancel?: string;
   onSubmit?: () => void;
   className?: string;
+  disabledSubmit?: boolean;
 }
 
 export function CardCustom(props: CardCustomProps) {
@@ -44,7 +45,10 @@ export function CardCustom(props: CardCustomProps) {
                 </Button>
               )}
               {props.submitButton && (
-                <Button onClick={props.onSubmit}>
+                <Button
+                  onClick={props.onSubmit}
+                  disabled={props.disabledSubmit}
+                >
                   {props.textSubmit ? props.textSubmit : "Submit"}
                 </Button>
               )}

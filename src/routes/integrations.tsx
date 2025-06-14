@@ -1,4 +1,4 @@
-import { createFileRoute, useSearch } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Blocks, GitCommitHorizontal } from "lucide-react";
 import { useMemo } from "react";
 import { z } from "zod";
@@ -7,6 +7,7 @@ import { AppPage } from "@/components/ui/layout/AppPage";
 import { AppTabs } from "@/components/ui/layout/AppTabs";
 import { Connection } from "@/pages/integrations/Connection";
 import { Integration } from "@/pages/integrations/Integration";
+import { useSearchParams } from "@/hooks/useSearchParams";
 
 const searchSchema = z.object({
   page: z.string().optional(),
@@ -38,8 +39,9 @@ function RouteComponent() {
     []
   );
 
-  const { page = "integrations" } = useSearch({
+  const search = useSearchParams({
     from: "/integrations",
+    page: "integrations",
   });
 
   return (
@@ -47,9 +49,9 @@ function RouteComponent() {
       <AppHeader breadcrumb={breadcrumbItems} />
       <AppTabs tabs={tabs} />
       <div className="p-4">
-        {page === "integrations" ? (
+        {search.page === "integrations" ? (
           <Integration />
-        ) : page === "connections" ? (
+        ) : search.page === "connections" ? (
           <Connection />
         ) : (
           <div>Select a tab to view content.</div>

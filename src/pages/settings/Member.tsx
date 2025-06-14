@@ -1,11 +1,11 @@
 import { Trash2 } from "lucide-react";
-import {  AccessSelector } from "./AccessSelector";
-import type {AccessLevel} from "./AccessSelector";
+import { AccessSelector } from "./AccessSelector";
+import type { AccessLevel } from "./AccessSelector";
 import type { ColumnDef } from "@tanstack/react-table";
-import { HeaderSorted } from "@/components/ui/primitives/data-table/header-sorted";
-import ActionButton from "@/components/ui/primitives/data-table/action-button";
-import { DataTable } from "@/components/ui/primitives/data-table/data-table";
-import { DialogCustom } from "@/components/ui/primitives/dialog-custom";
+import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
+import ActionButton from "@/components/ui/data-display/data-table/action-button";
+import { DataTable } from "@/components/ui/data-display/data-table/data-table";
+import { DialogCustom } from "@/components/ui/overlay/dialog-custom";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 import SearchBox from "@/components/ui/primitives/search-box";
 import { Input } from "@/components/ui/primitives/input";

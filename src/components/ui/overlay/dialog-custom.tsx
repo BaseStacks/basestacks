@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/primitives/dialog";
+} from "@/components/ui/overlay/dialog";
 
 interface DialogCustomProps {
   buttonText: string;

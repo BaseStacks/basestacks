@@ -4,17 +4,17 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/primitives/avatar";
+} from "@/components/ui/data-display/avatar";
 import { getBgColorClass, getBorderColorClass } from "@/lib/colorUtils";
-import { Alert, AlertTitle } from "@/components/ui/primitives/alert";
-import { CardCustom } from "@/components/ui/primitives/card-custom";
+import { Alert, AlertTitle } from "@/components/ui/feedback/alert";
+import { CardCustom } from "@/components/ui/data-display/card-custom";
 import { Input } from "@/components/ui/primitives/input";
 import { cn } from "@/lib/utils";
 import type { Theme } from "@/components/ui/ThemeProvider";
 
 export function Setting() {
   const [themeMode, setThemeMode] = useState<Theme>(
-    (localStorage.getItem("theme") || 'system') as Theme
+    (localStorage.getItem("theme") || "system") as Theme
   );
 
   const themeColorChangeHandler = (mode: Theme) => {
