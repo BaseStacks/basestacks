@@ -3,11 +3,11 @@ import { AccessSelector } from "./AccessSelector";
 import type { AccessLevel } from "./AccessSelector";
 import type { ColumnDef } from "@tanstack/react-table";
 import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
-import ActionButton from "@/components/ui/data-display/data-table/action-button";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
 import { DialogCustom } from "@/components/ui/overlay/dialog-custom";
+import { ActionButton } from "@/components/ui/data-display/data-table/action-button";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
-import SearchBox from "@/components/ui/primitives/search-box";
+import { SearchBox } from "@/components/ui/primitives/search-box";
 import { Input } from "@/components/ui/primitives/input";
 
 export interface MemberProps {

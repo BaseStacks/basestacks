@@ -8,5 +8,9 @@
   "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "sonarlint.connectedMode.project": {
+    "connectionId": "basestacks",
+    "projectKey": "BaseStacks_basestacks"
+  }
 }

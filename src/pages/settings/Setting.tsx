@@ -1,5 +1,6 @@
 import { Check, TriangleAlert } from "lucide-react";
 import { useState } from "react";
+import type { Theme } from "@/components/ui/ThemeProvider";
 import {
   Avatar,
   AvatarFallback,
@@ -10,7 +11,6 @@ import { Alert, AlertTitle } from "@/components/ui/feedback/alert";
 import { CardCustom } from "@/components/ui/data-display/card-custom";
 import { Input } from "@/components/ui/primitives/input";
 import { cn } from "@/lib/utils";
-import type { Theme } from "@/components/ui/ThemeProvider";
 
 export function Setting() {
   const [themeMode, setThemeMode] = useState<Theme>(

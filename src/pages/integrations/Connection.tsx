@@ -2,10 +2,10 @@ import { Files, Pencil } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
 import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
-import SearchBox from "@/components/ui/primitives/search-box";
+import { SearchBox } from "@/components/ui/primitives/search-box";
 import { getTextColorClass } from "@/lib/colorUtils";
 import { cn } from "@/lib/utils";
-import ActionButton from "@/components/ui/data-display/data-table/action-button";
+import { ActionButton } from "@/components/ui/data-display/data-table/action-button";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 
 type ConnectionProps = {

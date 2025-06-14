@@ -1,11 +1,12 @@
 import { SearchIcon } from "lucide-react";
 import { Input } from "./input";
 
-interface searchBoxProps {
+interface SearchBoxProps {
   setSearch: (value: string) => void;
   placeholder?: string;
 }
-function SearchBox(props: searchBoxProps) {
+
+export function SearchBox(props: SearchBoxProps) {
   const { setSearch, placeholder } = props;
   return (
     <div className="search-box border border-gray-300 rounded-lg flex items-center pl-2 gap-2 w-fit">
@@ -19,5 +20,3 @@ function SearchBox(props: searchBoxProps) {
     </div>
   );
 }
-
-export default SearchBox;
