@@ -1,12 +1,12 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ChevronsLeftRight, User } from "lucide-react";
+import { useMemo } from "react";
 import { AppHeader } from "@/components/ui/layout/AppHeader";
 import { AppPage } from "@/components/ui/layout/AppPage";
 import { AccountSidebar } from "@/components/ui/widgets/AccountSidebar";
 import { useSearchParams } from "@/hooks/useSearchParams";
 import { Profile } from "@/pages/account/Profile";
 import { Tokens } from "@/pages/account/Tokens";
-import { createFileRoute } from "@tanstack/react-router";
-import { ChevronsLeftRight, User } from "lucide-react";
-import { useMemo } from "react";
 
 export const Route = createFileRoute("/account")({
   component: RouteComponent,

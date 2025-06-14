@@ -1,9 +1,9 @@
 import { ChevronsLeftIcon, ChevronsLeftRight, User, XIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Separator } from "../primitives/separator";
 import { Button } from "../primitives/button";
 import { useSidebarStatus } from "@/states";
 import { useIsMobile } from "@/hooks/ui/useIsMobile";
-import { Link } from "@tanstack/react-router";
-import { Separator } from "../primitives/separator";
 
 export function AccountSidebar() {
   const isMobile = useIsMobile();

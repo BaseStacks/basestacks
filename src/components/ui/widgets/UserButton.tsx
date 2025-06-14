@@ -1,4 +1,5 @@
 import { LogOut, Settings } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +18,6 @@ import {
   AvatarImage,
 } from "@/components/ui/data-display/avatar";
 import { useUserState } from "@/states";
-import { Link } from "@tanstack/react-router";
 
 export function UserButton() {
   const { user } = useUserState();
