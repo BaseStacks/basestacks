@@ -1,16 +1,14 @@
-import {
-  useDeleteDialog,
-  type DeleteDialogContent,
-} from "@/components/ui/DeleteDialogProvider";
-import { Button } from "@/components/ui/primitives/button";
-import ActionButton from "@/components/ui/data-display/data-table/action-button";
-import { DataTable } from "@/components/ui/data-display/data-table/data-table";
-import type { ColumnDef } from "@tanstack/react-table";
-import { Copy, Eye, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { Copy, Eye, Trash2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import type { ColumnDef } from "@tanstack/react-table";
+import type { DeleteDialogContent } from "@/components/ui/DeleteDialogProvider";
+import { useDeleteDialog } from "@/components/ui/DeleteDialogProvider";
+import { Button } from "@/components/ui/primitives/button";
+import { ActionButton } from "@/components/ui/data-display/data-table/action-button";
+import { DataTable } from "@/components/ui/data-display/data-table/data-table";
 import { Toast } from "@/lib/toast";
 import { Form } from "@/components/ui/primitives/form";
-import { useForm } from "react-hook-form";
 import { TableCell, TableRow } from "@/components/ui/data-display/table";
 import { Input } from "@/components/ui/primitives/input";
 import noData from "@/assets/No Data.svg";
@@ -22,7 +20,7 @@ export type TokenProps = {
   token: string;
 };
 
-const listToken: TokenProps[] = [
+const listToken: Array<TokenProps> = [
   {
     id: "1",
     name: "Admin Access",
@@ -44,8 +42,8 @@ const listToken: TokenProps[] = [
 ];
 
 export function Tokens() {
-  const [data, setData] = useState<TokenProps[]>(listToken);
-  const [showedToken, setShowedToken] = useState<string[]>([]);
+  const [data, setData] = useState<Array<TokenProps>>(listToken);
+  const [showedToken, setShowedToken] = useState<Array<string>>([]);
   const [showAddToken, setShowAddToken] = useState(false);
   const { openDialog } = useDeleteDialog();
 
@@ -59,7 +57,8 @@ export function Tokens() {
   });
   const handleClickDelete = (token: DeleteDialogContent) => {
     openDialog(token, (item) => {
-      setData((prev) => prev.filter((token) => token.id !== item.id));
+      const dataRemoved = data.filter((o) => o.id != item.id);
+      setData(dataRemoved);
       Toast.error({
         title: "Token deleted",
         description: `Token "${item.value}" has been deleted.`,
@@ -153,11 +152,11 @@ export function Tokens() {
     },
   ];
 
-  const onSubmit = (data: TokenProps) => {
+  const onSubmit = (formData: TokenProps) => {
     setData((prev) => [
       ...prev,
       {
-        ...data,
+        ...formData,
         id: String(prev.length + 1),
         creator: "user@example.com",
         token:
@@ -169,7 +168,7 @@ export function Tokens() {
     form.reset();
     Toast.success({
       title: "Token created",
-      description: `Token "${data.name}" has been created.`,
+      description: `Token "${formData.name}" has been created.`,
     });
   };
   const onCancel = () => {

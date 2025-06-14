@@ -6,6 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../navigation/dropdown-menu";
+import { TooltipCustom } from "../../feedback/tooltip-custom";
 import type { Color } from "@/Types";
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
@@ -21,9 +22,39 @@ type ActionListItem = {
 interface ActionButtonProps {
   id: string;
   listAction: Array<ActionListItem>;
+  type?: "button" | "dropdown";
 }
-export function ActionButton({ id, listAction }: ActionButtonProps) {
-  return (
+export function ActionButton({
+  id,
+  listAction,
+  type = "dropdown",
+}: ActionButtonProps) {
+  return type === "button" ? (
+    <div className="flex gap-x-1">
+      {listAction.map((item) => (
+        <TooltipCustom value={item.title} key={`action-${id}-${item.title}`}>
+          <Button
+            size="icon"
+            variant="ghost"
+            className={cn(
+              getBgColorClass(item.color, "100", "hover"),
+              getTextColorClass(item.color)
+            )}
+            onClick={() => item.onClick()}
+          >
+            {item.icon && (
+              <item.icon
+                className={cn(
+                  item.className,
+                  getTextColorClass(item.color || "gray")
+                )}
+              />
+            )}
+          </Button>
+        </TooltipCustom>
+      ))}
+    </div>
+  ) : (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button

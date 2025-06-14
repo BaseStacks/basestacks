@@ -1,8 +1,9 @@
 import { toast } from "sonner";
-import { CheckCircle, XCircle, Info, AlertTriangle, X } from "lucide-react";
+import { AlertTriangle, CheckCircle, Info, X, XCircle } from "lucide-react";
 import { cn } from "./utils";
 import { getBgColorClass } from "./colorUtils";
 import type { ToastType } from "@/Types";
+import { Button } from "@/components/ui/primitives/button";
 
 interface ToastOptions {
   title: string;
@@ -53,7 +54,8 @@ function show(type: ToastType, options: ToastOptions) {
           <p className="text-xs mt-1">{options.description}</p>
         )}
       </div>
-      <div
+      <Button
+        variant="ghost"
         onClick={() => {
           options.onAction?.();
           toast.dismiss(t);
@@ -61,7 +63,7 @@ function show(type: ToastType, options: ToastOptions) {
         className="cursor-pointer"
       >
         <X size={24} />
-      </div>
+      </Button>
     </div>
   ));
 }

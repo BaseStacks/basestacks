@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from "react";
+import { Input } from "./primitives/input";
+import { Button } from "./primitives/button";
 import {
   Dialog,
   DialogContent,
   DialogOverlay,
   DialogPortal,
 } from "@/components/ui/overlay/dialog";
-import { Button } from "./primitives/button";
-import { Input } from "./primitives/input";
 
 type DeleteDialogContextType = {
   openDialog: (
@@ -58,21 +58,21 @@ export function DeleteDialogProvider({
           <DialogOverlay className="fixed inset-0 bg-black/30" />
           <DialogContent className="p-6 rounded-lg border border-destructive max-w-md">
             <h2 className="text-lg text-destructive font-semibold mb-2">
-              {item?.title ? item?.title : "Xác nhận xóa?"}
+              {item?.title ? item.title : "Xác nhận xóa?"}
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
               {item?.description
-                ? item?.description
+                ? item.description
                 : "Hành động này không thể hoàn tác."}
             </p>
-            {item?.value && <Input disabled value={item?.value} />}
+            {item?.value && <Input disabled value={item.value} />}
             <div className="flex justify-end gap-2">
               <Button
                 variant="secondary"
                 onClick={closeDialog}
                 className="btn btn-outline"
               >
-                {item?.cancelText ? item?.cancelText : "Cancel"}
+                {item?.cancelText ? item.cancelText : "Cancel"}
               </Button>
               <Button
                 onClick={() => {
@@ -81,7 +81,7 @@ export function DeleteDialogProvider({
                 }}
                 className="bg-destructive text-white hover:bg-destructive/90 disabled:opacity-50 disabled:pointer-events-none"
               >
-                {item?.confirmText ? item?.confirmText : "Delete"}
+                {item?.confirmText ? item.confirmText : "Delete"}
               </Button>
             </div>
           </DialogContent>
@@ -96,5 +96,5 @@ export function useDeleteDialog() {
   if (!context) {
     throw new Error("useDeleteDialog must be used within DeleteDialogProvider");
   }
-  return context as DeleteDialogContextType;
+  return context;
 }
