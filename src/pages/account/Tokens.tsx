@@ -158,9 +158,7 @@ export function Tokens() {
         ...formData,
         id: String(prev.length + 1),
         creator: "user@example.com",
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
-          Math.random().toString(36).substring(2, 15),
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." + crypto.randomUUID(),
       },
     ]);
     setShowAddToken(false);
