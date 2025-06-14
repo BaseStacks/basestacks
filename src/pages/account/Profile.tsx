@@ -4,11 +4,11 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/data-display/avatar";
-import { getBgColorClass, getBorderColorClass } from "@/lib/colorUtils";
+import { getBorderColorClass } from "@/lib/colorUtils";
 import { Alert, AlertTitle } from "@/components/ui/feedback/alert";
 import { CardCustom } from "@/components/ui/data-display/card-custom";
 import { Input } from "@/components/ui/primitives/input";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/primitives/button";
 
 export function Profile() {
   return (
@@ -52,16 +52,12 @@ export function Profile() {
           description="Delete your account permanently"
           className={getBorderColorClass("red", "500")}
           footer={
-            <div
-              className={cn(
-                "flex flex-1 items-center gap-x-2 rounded-md transition-colors duration-100",
-                "text-destructive px-2.5 py-1.5 rounded-md border cursor-pointer",
-                getBgColorClass("red", "100", "hover")
-              )}
+            <Button
+              variant="destructive"
               onClick={() => alert("Workspace removed!")}
             >
               <span>Remove Account</span>
-            </div>
+            </Button>
           }
         >
           <div className="flex flex-col gap-3">
