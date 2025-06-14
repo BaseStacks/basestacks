@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/primitives/button";
 import { Form, FormLabel } from "@/components/ui/primitives/form";
 import { FormFieldCustom } from "@/components/ui/primitives/form-field-custom";
 import { Label } from "@/components/ui/primitives/label";
-
 import { Separator } from "@/components/ui/primitives/separator";
 import { Switch } from "@/components/ui/primitives/switch";
 import { Textarea } from "@/components/ui/primitives/textarea";
@@ -180,7 +179,10 @@ export function SQLDialogContent() {
                 <Separator className="my-2" />
                 <div key="form-section-4" className="space-y-4 pt-4">
                   <div className="grid grid-cols-1 gap-3">
-                    <div key="ssl-switch" className="flex items-center space-x-2">
+                    <div
+                      key="ssl-switch"
+                      className="flex items-center space-x-2"
+                    >
                       <Switch
                         id="use-ssl"
                         defaultChecked={useSSL}

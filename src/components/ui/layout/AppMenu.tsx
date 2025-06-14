@@ -1,10 +1,4 @@
-import {
-  Blocks,
-  Cog,
-  Home,
-  Search,
-  Settings2,
-} from "lucide-react";
+import { Blocks, Cog, Home, Search, Settings2 } from "lucide-react";
 
 import { Link } from "@tanstack/react-router";
 import { WorkspaceSwitcher } from "../widgets/workspace/WorkspaceSwitcher";
@@ -20,9 +14,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
-} from "@/components/ui/primitives/sidebar";
+} from "@/components/ui/navigation/sidebar";
 
-const itemClassName = 'data-[status=active]:!bg-sidebar-accent data-[status=active]:!text-sidebar-accent-foreground '
+const itemClassName =
+  "data-[status=active]:!bg-sidebar-accent data-[status=active]:!text-sidebar-accent-foreground ";
 
 export function AppMenu() {
   return (
@@ -37,17 +32,25 @@ export function AppMenu() {
       <SidebarContent className="py-2">
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu >
+            <SidebarMenu>
               {/* Bases */}
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="bases" className={itemClassName}>
-                  <Link to="/" >
+                <SidebarMenuButton
+                  asChild
+                  tooltip="bases"
+                  className={itemClassName}
+                >
+                  <Link to="/">
                     <Home />
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Automation" className={itemClassName}>
+                <SidebarMenuButton
+                  asChild
+                  tooltip="Automation"
+                  className={itemClassName}
+                >
                   <Link to="/automation">
                     <Cog />
                   </Link>
@@ -62,7 +65,11 @@ export function AppMenu() {
               <SidebarSeparator />
               {/* Settings */}
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Settings" className={itemClassName}>
+                <SidebarMenuButton
+                  asChild
+                  tooltip="Settings"
+                  className={itemClassName}
+                >
                   <Link to="/settings">
                     <Settings2 />
                   </Link>
@@ -70,7 +77,11 @@ export function AppMenu() {
               </SidebarMenuItem>
               {/* Integrations */}
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Integrations" className={itemClassName}>
+                <SidebarMenuButton
+                  asChild
+                  tooltip="Integrations"
+                  className={itemClassName}
+                >
                   <Link to="/integrations">
                     <Blocks />
                   </Link>

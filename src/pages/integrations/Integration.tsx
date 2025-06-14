@@ -9,6 +9,23 @@ import { cn } from "@/lib/utils";
 import { getTextColorClass } from "@/lib/colorUtils";
 
 export function Integration() {
+  const integrations = [
+    {
+      name: "MySQL",
+      icon: mysqlIcon,
+      dialogContent: <SQLDialogContent />,
+    },
+    {
+      name: "PostgreSQL",
+      icon: postgreSQLIcon,
+      dialogContent: <SQLDialogContent />,
+    },
+    {
+      name: "MongoDB",
+      icon: mongoIcon,
+      dialogContent: <NoSQLDialogContent />,
+    },
+  ];
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="flex flex-col justify-center gap-10">
@@ -27,93 +44,38 @@ export function Integration() {
         </span>
         <div className="flex flex-col gap-4">
           <div className="database-title">Database</div>
-          <div className="flex gap-4 ">
-            <div className="integration-item basis-full md:basis-1/6">
-              <DbDialog
-                buttonClassName="rounded-xl flex items-center gap-4 border p-3 w-full"
-                title="MYSQL"
-                showSubmit
-                showFooter={false}
-                width="!max-w-[60vw]"
-                rightContent={
-                  <>
-                    <Button variant="secondary" size="sm">
-                      Test Connection
-                    </Button>
-                    <Button variant="secondary" size="sm" disabled>
-                      Create Connection
-                    </Button>
-                  </>
-                }
-                dialogContent={<SQLDialogContent />}
-              >
-                <span className="integration-icon p-2">
-                  <img
-                    src={mysqlIcon}
-                    alt="MySQL"
-                    className="w-[32px] h-[32px]"
-                  />
-                </span>
-                <span className="integration-name">MySQL</span>
-              </DbDialog>
-            </div>
-            <div className="integration-item basis-full md:basis-1/6">
-              <DbDialog
-                buttonClassName="rounded-xl flex items-center gap-4 border p-3 w-full"
-                title="PostgreSQL"
-                showSubmit
-                showFooter={false}
-                width="!max-w-[60vw]"
-                rightContent={
-                  <>
-                    <Button variant="secondary" size="sm">
-                      Test Connection
-                    </Button>
-                    <Button variant="secondary" size="sm" disabled>
-                      Create Connection
-                    </Button>
-                  </>
-                }
-                dialogContent={<SQLDialogContent />}
-              >
-                <span className="integration-icon p-2">
-                  <img
-                    src={postgreSQLIcon}
-                    alt="PostgreSQL"
-                    className="w-[32px] h-[32px]"
-                  />
-                </span>
-                <span className="integration-name">PostgreSQL</span>
-              </DbDialog>
-            </div>
-            <div className="integration-item basis-full md:basis-1/6">
-              <DbDialog
-                buttonClassName="rounded-xl flex items-center gap-4 border p-3 w-full"
-                title="MongoDB"
-                showSubmit
-                showFooter={false}
-                width="!max-w-[60vw]"
-                rightContent={
-                  <>
-                    <Button variant="secondary" size="sm">
-                      Test Connection
-                    </Button>
-                    <Button variant="secondary" size="sm" disabled>
-                      Create Connection
-                    </Button>
-                  </>
-                }
-                dialogContent={<NoSQLDialogContent />}
-              >
-                <span className="integration-icon p-2">
-                  <img
-                    src={mongoIcon}
-                    alt="MongoDB"
-                    className="w-[32px] h-[32px]"
-                  />
-                </span>
-                <span className="integration-name">MongoDB</span>
-              </DbDialog>
+          <div className="grid gap-4 ">
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+              {integrations.map((db) => (
+                <DbDialog
+                  key={db.name}
+                  title={db.name}
+                  buttonClassName="rounded-xl flex items-center gap-4 border p-3 w-full"
+                  width="!max-w-[60vw]"
+                  showSubmit
+                  showFooter={false}
+                  rightContent={
+                    <>
+                      <Button variant="secondary" size="sm">
+                        Test Connection
+                      </Button>
+                      <Button variant="secondary" size="sm" disabled>
+                        Create Connection
+                      </Button>
+                    </>
+                  }
+                  dialogContent={db.dialogContent}
+                >
+                  <span className="integration-icon p-2">
+                    <img
+                      src={db.icon}
+                      alt={db.name}
+                      className="w-[32px] h-[32px]"
+                    />
+                  </span>
+                  <span className="integration-name">{db.name}</span>
+                </DbDialog>
+              ))}
             </div>
           </div>
         </div>

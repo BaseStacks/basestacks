@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   User,
 } from "lucide-react";
+import { Controller } from "react-hook-form";
 import type { Color } from "@/Types";
 import {
   Select,
@@ -17,7 +18,7 @@ import {
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
 
-export type AccessLevel =
+export type RoleLevel =
   | "Owner"
   | "Creator"
   | "Editor"
@@ -25,14 +26,12 @@ export type AccessLevel =
   | "Viewer"
   | "No_Access";
 
-export const accessMap: Record<
-  AccessLevel,
-  {
-    icon: React.ComponentType<{ className?: string }>;
-    label: string;
-    color?: Color;
-  }
-> = {
+interface Role {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  color?: Color;
+}
+export const accessMap: Record<RoleLevel, Role> = {
   Owner: {
     icon: ShieldCheck,
     label: "Owner",
@@ -65,21 +64,41 @@ export const accessMap: Record<
   },
 };
 
-interface AccessSelectorProps {
-  value: AccessLevel;
-  onChange: (value: AccessLevel) => void;
-  className?: string;
+interface RoleSelectorProps {
+  readonly value?: RoleLevel;
+  readonly onChange?: (value: RoleLevel) => void;
+  readonly className?: string;
+  readonly name?: string;
+  readonly control?: any;
 }
 
-export function AccessSelector({
+export function RoleSelector({
   value,
   onChange,
   className,
-}: AccessSelectorProps) {
-  const currentRole = accessMap[value];
+  name,
+  control,
+}: RoleSelectorProps) {
+  const currentRole = accessMap[value || "No_Access"];
+
+  if (control && name) {
+    return (
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <RoleSelector
+            value={field.value}
+            onChange={field.onChange}
+            className={className}
+          />
+        )}
+      />
+    );
+  }
 
   return (
-    <Select value={value} onValueChange={(v) => onChange(v as AccessLevel)}>
+    <Select value={value} onValueChange={(v) => onChange?.(v as RoleLevel)}>
       <SelectTrigger
         className={cn(
           "w-[200px] h-10 focus:ring-2 focus:ring-ring focus:ring-offset-2 data-[state=open]:ring-2 data-[state=open]:ring-ring data-[state=open]:ring-offset-2",
@@ -108,7 +127,7 @@ export function AccessSelector({
         {Object.entries(accessMap).map(([key, role]) => (
           <SelectItem
             key={key}
-            value={key as AccessLevel}
+            value={key as RoleLevel}
             className={cn(
               "p-0 m-1 rounded-md relative flex w-full cursor-default select-none items-center text-sm outline-none transition-colors",
               "focus:bg-accent/50 focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
