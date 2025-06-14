@@ -95,7 +95,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      {table.getRowModel().rows.length || customRow ? (
+      {table.getRowModel().rows.length || customRow ?
         <div className="rounded-md border overflow-hidden">
           <Table>
             <TableHeader
@@ -118,12 +118,12 @@ export function DataTable<TData, TValue>({
                           header.column.columnDef.meta?.headerClass ?? ""
                         )}
                       >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                        {header.isPlaceholder ? null : (
+                          flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )
+                        )}
                       </TableHead>
                     );
                   })}
@@ -232,17 +232,16 @@ export function DataTable<TData, TValue>({
                               return acc;
                             }, [])
                             .map((page, i) =>
-                              page === -1 ? (
+                              page === -1 ?
                                 <span key={`ellipsis-${i}`} className="px-2">
                                   ...
                                 </span>
-                              ) : (
-                                <Button
+                              : <Button
                                   key={page}
                                   variant={
-                                    pagination.page === page
-                                      ? "default"
-                                      : "outline"
+                                    pagination.page === page ?
+                                      "default"
+                                    : "outline"
                                   }
                                   size="icon"
                                   className="size-8"
@@ -252,7 +251,6 @@ export function DataTable<TData, TValue>({
                                 >
                                   {page}
                                 </Button>
-                              )
                             )}
                           <Button
                             variant="outline"
@@ -291,15 +289,14 @@ export function DataTable<TData, TValue>({
             )}
           </Table>
         </div>
-      ) : (
-        <div className="flex flex-col items-center justify-center gap-4 p-8">
+      : <div className="flex flex-col items-center justify-center gap-4 p-8">
           {emptyTable || (
             <>
               <p className="text-muted-foreground">No data available.</p>
             </>
           )}
         </div>
-      )}
+      }
     </div>
   );
 }

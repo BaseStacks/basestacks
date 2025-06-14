@@ -1,110 +1,29 @@
+import { useState } from "react";
 import { Trash2 } from "lucide-react";
-import { AccessSelector } from "./AccessSelector";
-import type { AccessLevel } from "./AccessSelector";
+import { useForm } from "react-hook-form";
+import { AddMember } from "./AddMember";
+import { RoleSelector } from "./RoleSelector";
+import type { RoleLevel } from "./RoleSelector";
 import type { ColumnDef } from "@tanstack/react-table";
+import type { DeleteModalContent } from "@/components/ui/DeleteDialogProvider";
 import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
-import { DialogCustom } from "@/components/ui/overlay/dialog-custom";
 import { ActionButton } from "@/components/ui/data-display/data-table/action-button";
+import { useDeleteModal } from "@/components/ui/DeleteDialogProvider";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 import { SearchBox } from "@/components/ui/primitives/search-box";
-import { Input } from "@/components/ui/primitives/input";
+import { Button } from "@/components/ui/primitives/button";
+import { useDialog } from "@/components/ui/DialogProvider";
+import { Toast } from "@/lib/toast";
 
 export interface MemberProps {
-  id: string;
-  users: string;
-  access: AccessLevel;
-  dateJoined: string;
+  readonly id: string;
+  readonly users: string;
+  readonly access: RoleLevel;
+  readonly dateJoined: string;
 }
 
-const columns: Array<ColumnDef<MemberProps>> = [
-  {
-    accessorKey: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() ? "indeterminate" : false)
-        }
-        onCheckedChange={(value) => {
-          table.toggleAllPageRowsSelected(!!value);
-        }}
-        aria-label="Select all"
-        className="border-gray-200 bg-white"
-      />
-    ),
-    cell: ({ row }: any) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="border-gray-200 bg-white"
-      />
-    ),
-    meta: {
-      headerClass: "text-center",
-      cellClass: "text-center",
-    },
-  },
-  {
-    accessorKey: "users",
-    header: ({ column }) => {
-      return <HeaderSorted title="User" column={column} />;
-    },
-    meta: {
-      headerClass: "text-left",
-      cellClass: "text-left",
-    },
-  },
-  {
-    accessorKey: "access",
-    header: ({ column }) => {
-      return <HeaderSorted title="Access" column={column} />;
-    },
-    cell: ({ row }: any) => (
-      <AccessSelector
-        value={row.original.access}
-        onChange={(value) => console.log("Access changed:", value)}
-        className="px-1 py-0.5 w-fit !h-fit"
-      />
-    ),
-    meta: {
-      headerClass: "text-left",
-      cellClass: "text-left",
-    },
-  },
-  {
-    accessorKey: "dateJoined",
-    header: "Date Joined",
-    meta: {
-      headerClass: "text-left",
-      cellClass: "text-left",
-    },
-  },
-  {
-    accessorKey: "actions",
-    header: "Actions",
-    cell: ({ row }) => (
-      <ActionButton
-        id={row.original.id}
-        listAction={[
-          {
-            title: "Remove user",
-            icon: Trash2,
-            color: "red",
-            onClick: () => {},
-          },
-        ]}
-      />
-    ),
-    meta: {
-      headerClass: "text-right",
-      cellClass: "text-right",
-    },
-  },
-];
-
-const data: Array<MemberProps> = [
+const defaultData: Array<MemberProps> = [
   {
     id: "728ed52f",
     users: "m@example.com",
@@ -174,20 +93,163 @@ const data: Array<MemberProps> = [
 ];
 
 export function Member() {
+  const { openDialog, closeDialog } = useDialog();
+  const { openModal } = useDeleteModal();
+  const [data, setData] = useState<Array<MemberProps>>(defaultData);
+  const form = useForm({
+    defaultValues: {
+      email: "",
+      access: "Viewer",
+    },
+  });
+
+  const updateData = (id: string, value: RoleLevel) => {
+    const newData = data.map((item) =>
+      item.id === id ? { ...item, access: value } : item
+    );
+    setData(newData);
+    Toast.success({ title: "Member: " + id + " role updated successfully!" });
+    console.log("Updated data:", newData);
+  };
+
+  const handleClickDelete = (member: DeleteModalContent) => {
+    openModal(member, (item) => {
+      setData((prevData) => prevData.filter((o) => o.id !== item.id));
+      Toast.success({
+        title: "Member: " + item.id + " removed successfully!",
+      });
+    });
+  };
+
+  const columns: Array<ColumnDef<MemberProps>> = [
+    {
+      accessorKey: "select",
+      header: ({ table }) => (
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() ? "indeterminate" : false)
+          }
+          onCheckedChange={(value) => {
+            table.toggleAllPageRowsSelected(!!value);
+          }}
+          aria-label="Select all"
+          className="border-gray-200 bg-white"
+        />
+      ),
+      cell: ({ row }: any) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+          className="border-gray-200 bg-white"
+        />
+      ),
+      meta: {
+        headerClass: "text-center",
+        cellClass: "text-center",
+      },
+    },
+    {
+      accessorKey: "users",
+      header: ({ column }) => {
+        return <HeaderSorted title="User" column={column} />;
+      },
+      meta: {
+        headerClass: "text-left",
+        cellClass: "text-left",
+      },
+    },
+    {
+      accessorKey: "access",
+      header: ({ column }) => {
+        return <HeaderSorted title="Access" column={column} />;
+      },
+      cell: ({ row }: any) => (
+        <RoleSelector
+          value={row.original.access}
+          onChange={(value) => updateData(row.original.id, value)}
+          className="px-1 py-0.5 w-fit !h-fit"
+        />
+      ),
+      meta: {
+        headerClass: "text-left",
+        cellClass: "text-left",
+      },
+    },
+    {
+      accessorKey: "dateJoined",
+      header: "Date Joined",
+      meta: {
+        headerClass: "text-left",
+        cellClass: "text-left",
+      },
+    },
+    {
+      accessorKey: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <ActionButton
+          id={row.original.id}
+          listAction={[
+            {
+              title: "Remove user",
+              icon: Trash2,
+              color: "red",
+              onClick: () => {
+                handleClickDelete({
+                  title: "Confirm Delete",
+                  description: `Are you sure you want to delete the member "${row.original.users}"? This action cannot be undone.`,
+                  value: row.original.users,
+                  id: row.original.id,
+                });
+              },
+            },
+          ]}
+        />
+      ),
+      meta: {
+        headerClass: "text-right",
+        cellClass: "text-right",
+      },
+    },
+  ];
+
   return (
     <div className="container mx-auto py-10">
       <div className="flex flex-col justify-center text-center">
         <div className="flex justify-between mb-6">
           <SearchBox placeholder="Search member..." setSearch={() => {}} />
 
-          <DialogCustom
-            buttonText="+ Add Member"
-            title="Invite to Workspace"
-            submitText="Invite to Workspace"
+          <Button
+            onClick={() =>
+              openDialog(
+                {
+                  title: "Invite to Workspace",
+                  confirmText: "Invite to Workspace",
+                  value: <AddMember form={form} />,
+                },
+                () => {
+                  form.handleSubmit((value) => {
+                    setData((prevData) => [
+                      ...prevData,
+                      {
+                        id: (prevData.length + 1).toString(),
+                        users: value.email,
+                        access: value.access as RoleLevel,
+                        dateJoined: new Date().toISOString().split("T")[0],
+                      },
+                    ]);
+                    form.reset();
+                    Toast.success({ title: "Member added successfully!" });
+                    closeDialog();
+                  })();
+                }
+              )
+            }
           >
-            <Input placeholder="Enter email addresses" />
-            <AccessSelector value="No_Access" onChange={() => {}} />
-          </DialogCustom>
+            + Add Member
+          </Button>
         </div>
         <DataTable columns={columns} data={data} />
       </div>

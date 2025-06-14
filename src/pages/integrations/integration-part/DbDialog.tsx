@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/overlay/dialog";
 
-interface DialogCustomProps {
+interface DbDialogProps {
   buttonClassName?: string;
   dialogContent?: React.ReactNode;
   title?: string;
@@ -32,7 +32,7 @@ export function DbDialog({
   showSubmit = false,
   showFooter = true,
   width,
-}: DialogCustomProps) {
+}: DbDialogProps) {
   return (
     <Dialog>
       <DialogTrigger className={buttonClassName}>{children}</DialogTrigger>

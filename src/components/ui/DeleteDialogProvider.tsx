@@ -8,13 +8,13 @@ import {
   DialogPortal,
 } from "@/components/ui/overlay/dialog";
 
-type DeleteDialogContextType = {
-  openDialog: (
-    item: DeleteDialogContent,
-    onConfirm: (item: DeleteDialogContent) => void
+type DeleteModalContextType = {
+  openModal: (
+    item: DeleteModalContent,
+    onConfirm: (item: DeleteModalContent) => void
   ) => void;
 };
-export type DeleteDialogContent<T = any> = {
+export type DeleteModalContent<T = any> = {
   id?: string;
   title?: string;
   description?: string;
@@ -22,21 +22,21 @@ export type DeleteDialogContent<T = any> = {
   cancelText?: string;
   value?: T;
 };
-const DeleteDialogContext = createContext<DeleteDialogContextType | null>(null);
+const DeleteModalContext = createContext<DeleteModalContextType | null>(null);
 
-export function DeleteDialogProvider({
+export function DeleteModalProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
-  const [item, setItem] = useState<DeleteDialogContent | null>();
+  const [item, setItem] = useState<DeleteModalContent | null>();
   const [onConfirm, setOnConfirm] = useState<((item: any) => void) | null>(
     null
   );
 
-  const openDialog = (
-    item: DeleteDialogContent,
+  const openModal = (
+    item: DeleteModalContent,
     onConfirmCallback: (item: any) => void
   ) => {
     setItem(item);
@@ -51,7 +51,7 @@ export function DeleteDialogProvider({
   };
 
   return (
-    <DeleteDialogContext.Provider value={{ openDialog }}>
+    <DeleteModalContext.Provider value={{ openModal }}>
       {children}
       <Dialog open={open} onOpenChange={closeDialog}>
         <DialogPortal>
@@ -61,9 +61,9 @@ export function DeleteDialogProvider({
               {item?.title ? item.title : "Xác nhận xóa?"}
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
-              {item?.description
-                ? item.description
-                : "Hành động này không thể hoàn tác."}
+              {item?.description ?
+                item.description
+              : "Hành động này không thể hoàn tác."}
             </p>
             {item?.value && <Input disabled value={item.value} />}
             <div className="flex justify-end gap-2">
@@ -87,14 +87,14 @@ export function DeleteDialogProvider({
           </DialogContent>
         </DialogPortal>
       </Dialog>
-    </DeleteDialogContext.Provider>
+    </DeleteModalContext.Provider>
   );
 }
 
-export function useDeleteDialog() {
-  const context = useContext(DeleteDialogContext);
+export function useDeleteModal() {
+  const context = useContext(DeleteModalContext);
   if (!context) {
-    throw new Error("useDeleteDialog must be used within DeleteDialogProvider");
+    throw new Error("useDeleteModal must be used within DeleteModalProvider");
   }
   return context;
 }

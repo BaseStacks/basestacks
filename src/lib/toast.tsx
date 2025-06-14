@@ -43,11 +43,13 @@ function show(type: ToastType, options: ToastOptions) {
   toast.custom((t) => (
     <div
       className={cn(
-        "flex items-start gap-3 p-4 shadow-lg w-[320px] text-white rounded-lg justify-between items-center",
+        "flex items-start gap-3 p-4 shadow-lg w-[400px] text-white rounded-lg justify-between items-center",
         getStyle(type)
       )}
     >
-      {options.Icon ? <options.Icon /> : getIcon(type)}
+      {options.Icon ?
+        <options.Icon />
+      : getIcon(type)}
       <div className="flex-1">
         <p className="text-sm font-bold">{options.title}</p>
         {options.description && (

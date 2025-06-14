@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Copy, Eye, Trash2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import type { ColumnDef } from "@tanstack/react-table";
-import type { DeleteDialogContent } from "@/components/ui/DeleteDialogProvider";
-import { useDeleteDialog } from "@/components/ui/DeleteDialogProvider";
+import type { DeleteModalContent } from "@/components/ui/DeleteDialogProvider";
+import { useDeleteModal } from "@/components/ui/DeleteDialogProvider";
 import { Button } from "@/components/ui/primitives/button";
 import { ActionButton } from "@/components/ui/data-display/data-table/action-button";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
@@ -45,7 +45,7 @@ export function Tokens() {
   const [data, setData] = useState<Array<TokenProps>>(listToken);
   const [showedToken, setShowedToken] = useState<Array<string>>([]);
   const [showAddToken, setShowAddToken] = useState(false);
-  const { openDialog } = useDeleteDialog();
+  const { openModal } = useDeleteModal();
 
   const form = useForm<TokenProps>({
     defaultValues: {
@@ -55,8 +55,8 @@ export function Tokens() {
       token: "",
     },
   });
-  const handleClickDelete = (token: DeleteDialogContent) => {
-    openDialog(token, (item) => {
+  const handleClickDelete = (token: DeleteModalContent) => {
+    openModal(token, (item) => {
       const dataRemoved = data.filter((o) => o.id != item.id);
       setData(dataRemoved);
       Toast.error({
@@ -65,6 +65,7 @@ export function Tokens() {
       });
     });
   };
+
   const columns: Array<ColumnDef<TokenProps>> = [
     {
       accessorKey: "name",
@@ -91,11 +92,9 @@ export function Tokens() {
       },
       cell: ({ row }) => (
         <div className="w-70 overflow-hidden whitespace-nowrap text-ellipsis">
-          {showedToken.find((o) => o === row.original.id) ? (
+          {showedToken.find((o) => o === row.original.id) ?
             <p className="truncate">{row.original.token}</p>
-          ) : (
-            <span>************************************</span>
-          )}
+          : <span>************************************</span>}
         </div>
       ),
     },
@@ -112,9 +111,9 @@ export function Tokens() {
               icon: Eye,
               onClick: () => {
                 setShowedToken((prev) =>
-                  prev.includes(row.original.id)
-                    ? prev.filter((o) => o !== row.original.id)
-                    : [...prev, row.original.id]
+                  prev.includes(row.original.id) ?
+                    prev.filter((o) => o !== row.original.id)
+                  : [...prev, row.original.id]
                 );
               },
             },
@@ -171,6 +170,7 @@ export function Tokens() {
       description: `Token "${formData.name}" has been created.`,
     });
   };
+
   const onCancel = () => {
     setShowAddToken(false);
     form.reset();
@@ -193,7 +193,7 @@ export function Tokens() {
             columns={columns}
             data={data}
             customRow={
-              showAddToken ? (
+              showAddToken ?
                 <TableRow>
                   <TableCell colSpan={columns.length}>
                     <form
@@ -217,7 +217,7 @@ export function Tokens() {
                     </form>
                   </TableCell>
                 </TableRow>
-              ) : null
+              : null
             }
             emptyTable={
               <div className="flex flex-col items-center justify-center gap-4 text-center">
