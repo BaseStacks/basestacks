@@ -55,7 +55,7 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
   );
 }
 
-function AppBreadcrumbItem({ item }: { item: AppBreadcrumbItem }) {
+function AppBreadcrumbItem({ item }: Readonly<{ readonly item: AppBreadcrumbItem }>) {
   if (item.type === "link") {
     return (
       <BreadcrumbLink asChild>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import { Input } from "./primitives/input";
 import { Button } from "./primitives/button";
 import {
@@ -9,79 +9,83 @@ import {
 } from "@/components/ui/overlay/dialog";
 
 type DeleteModalContextType = {
-  openModal: (
-    item: DeleteModalContent,
-    onConfirm: (item: DeleteModalContent) => void
+  readonly openModal: (
+    content: DeleteModalContent,
+    onConfirm: (content: DeleteModalContent) => void
   ) => void;
 };
 export type DeleteModalContent<T = any> = {
-  id?: string;
-  title?: string;
-  description?: string;
-  confirmText?: string;
-  cancelText?: string;
-  value?: T;
+  readonly id?: string;
+  readonly title?: string;
+  readonly description?: string;
+  readonly confirmText?: string;
+  readonly cancelText?: string;
+  readonly value?: T;
 };
 const DeleteModalContext = createContext<DeleteModalContextType | null>(null);
 
 export function DeleteModalProvider({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: Readonly<{
+  readonly children: React.ReactNode;
+}>) {
   const [open, setOpen] = useState(false);
-  const [item, setItem] = useState<DeleteModalContent | null>();
-  const [onConfirm, setOnConfirm] = useState<((item: any) => void) | null>(
-    null
-  );
+  const [content, setContent] = useState<DeleteModalContent | null>(null);
+  const [onConfirm, setOnConfirm] = useState<((content: any) => void) | null>(null);
 
-  const openModal = (
-    item: DeleteModalContent,
-    onConfirmCallback: (item: any) => void
-  ) => {
-    setItem(item);
-    setOnConfirm(() => onConfirmCallback);
-    setOpen(true);
-  };
+  const openModal = useCallback(
+    (
+      nextContent: DeleteModalContent,
+      onConfirmCallback: (content: any) => void
+    ) => {
+      setContent(nextContent);
+      setOnConfirm(() => onConfirmCallback);
+      setOpen(true);
+    },
+    []
+  );
 
   const closeDialog = () => {
     setOpen(false);
-    setItem(null);
+    setContent(null);
     setOnConfirm(null);
   };
 
+  const contextValue = useMemo(
+    () => ({ openModal }),
+    [openModal]
+  );
+
   return (
-    <DeleteModalContext.Provider value={{ openModal }}>
+    <DeleteModalContext.Provider value={contextValue}>
       {children}
       <Dialog open={open} onOpenChange={closeDialog}>
         <DialogPortal>
           <DialogOverlay className="fixed inset-0 bg-black/30" />
           <DialogContent className="p-6 rounded-lg border border-destructive max-w-md">
             <h2 className="text-lg text-destructive font-semibold mb-2">
-              {item?.title ? item.title : "Xác nhận xóa?"}
+              {content?.title ?? "Xác nhận xóa?"}
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
-              {item?.description ?
-                item.description
-              : "Hành động này không thể hoàn tác."}
+              {content?.description ?? "Hành động này không thể hoàn tác."}
             </p>
-            {item?.value && <Input disabled value={item.value} />}
+            {content?.value && <Input disabled value={content.value} />}
             <div className="flex justify-end gap-2">
               <Button
                 variant="secondary"
                 onClick={closeDialog}
                 className="btn btn-outline"
               >
-                {item?.cancelText ? item.cancelText : "Cancel"}
+                {content?.cancelText ?? "Cancel"}
               </Button>
               <Button
                 onClick={() => {
-                  onConfirm?.(item);
+                  onConfirm?.(content);
                   closeDialog();
                 }}
                 className="bg-destructive text-white hover:bg-destructive/90 disabled:opacity-50 disabled:pointer-events-none"
               >
-                {item?.confirmText ? item.confirmText : "Delete"}
+                {content?.confirmText ?? "Delete"}
               </Button>
             </div>
           </DialogContent>

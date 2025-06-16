@@ -10,17 +10,17 @@ import {
 } from "@/components/ui/data-display/card";
 
 interface CardCustomProps {
-  title?: string;
-  description?: string;
-  children: React.ReactNode;
-  footer?: React.ReactNode;
-  submitButton?: boolean;
-  cancelButton?: boolean;
-  textSubmit?: string;
-  textCancel?: string;
-  onSubmit?: () => void;
-  className?: string;
-  disabledSubmit?: boolean;
+  readonly title?: string;
+  readonly description?: string;
+  readonly children: React.ReactNode;
+  readonly footer?: React.ReactNode;
+  readonly submitButton?: boolean;
+  readonly cancelButton?: boolean;
+  readonly textSubmit?: string;
+  readonly textCancel?: string;
+  readonly onSubmit?: () => void;
+  readonly className?: string;
+  readonly disabledSubmit?: boolean;
 }
 
 export function CardCustom(props: CardCustomProps) {

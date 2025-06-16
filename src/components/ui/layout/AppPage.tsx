@@ -60,7 +60,7 @@ export function AppPage({ children, sidebar }: AppPageProps) {
 
 const menuItemClassName = 'text-sidebar-accent-foreground/60 data-[status=active]:!bg-sidebar-accent data-[status=active]:!text-sidebar-accent-foreground '
 
-function AppPageFloatingSidebar({ children }: { children: React.ReactNode }) {
+function AppPageFloatingSidebar({ children }: Readonly<{ readonly children: React.ReactNode }>) {
     const sidebarStatus = useSidebarStatus();
 
     return (

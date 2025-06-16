@@ -8,14 +8,14 @@ import { cn } from "@/lib/utils";
 import { ActionButton } from "@/components/ui/data-display/data-table/action-button";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 
-type ConnectionProps = {
-  id: string;
-  name: string;
-  type: "Mysql" | "PostgreSQL" | "MongoDB";
-  date: string;
-  addBy: string;
-  usage: number;
-};
+type ConnectionProps = Readonly<{
+  readonly id: string;
+  readonly name: string;
+  readonly type: "Mysql" | "PostgreSQL" | "MongoDB";
+  readonly date: string;
+  readonly addBy: string;
+  readonly usage: number;
+}>;
 
 export function Connection() {
   const columns: Array<ColumnDef<ConnectionProps>> = [

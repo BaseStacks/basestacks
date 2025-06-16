@@ -17,9 +17,9 @@ const Form = FormProvider
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = {
-  name: TName
-}
+> = Readonly<{
+  readonly name: TName
+}>
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
   {} as FormFieldContextValue
@@ -57,9 +57,9 @@ const useFormField = () => {
   }
 }
 
-type FormItemContextValue = {
-  id: string
-}
+type FormItemContextValue = Readonly<{
+  readonly id: string
+}>
 
 const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue

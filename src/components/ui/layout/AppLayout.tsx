@@ -2,9 +2,9 @@ import { AppProviders } from "./AppProviders";
 import { AppMenu } from "./AppMenu";
 import { SidebarInset } from "@/components/ui/navigation/sidebar";
 
-type ProviderProps = {
-  children: React.ReactNode;
-};
+type ProviderProps = Readonly<{
+  readonly children: React.ReactNode;
+}>;
 
 export function AppLayout({ children }: ProviderProps) {
   return (

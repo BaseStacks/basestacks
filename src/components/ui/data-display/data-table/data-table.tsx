@@ -36,14 +36,14 @@ import { cn } from "@/lib/utils";
 import { getBgColorClass } from "@/lib/colorUtils";
 
 interface PaginationProps {
-  pageSize: string | number;
-  totalItems: number;
-  pageCount: number;
-  page: number;
+  readonly pageSize: string | number;
+  readonly totalItems: number;
+  readonly pageCount: number;
+  readonly page: number;
 }
 interface DataTableColumnMeta {
-  headerClass?: string;
-  cellClass?: string;
+  readonly headerClass?: string;
+  readonly cellClass?: string;
 }
 
 declare module "@tanstack/react-table" {
@@ -52,12 +52,12 @@ declare module "@tanstack/react-table" {
 }
 
 interface DataTableProps<TData, TValue> {
-  columns: Array<ColumnDef<TData, TValue>>;
-  data: Array<TData>;
-  paginationInfo?: PaginationProps;
-  showPagination?: boolean;
-  customRow?: React.ReactNode;
-  emptyTable?: React.ReactNode;
+  readonly columns: Array<ColumnDef<TData, TValue>>;
+  readonly data: Array<TData>;
+  readonly paginationInfo?: PaginationProps;
+  readonly showPagination?: boolean;
+  readonly customRow?: React.ReactNode;
+  readonly emptyTable?: React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({

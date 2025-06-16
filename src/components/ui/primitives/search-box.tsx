@@ -2,8 +2,8 @@ import { SearchIcon } from "lucide-react";
 import { Input } from "./input";
 
 interface SearchBoxProps {
-  setSearch: (value: string) => void;
-  placeholder?: string;
+  readonly setSearch: (value: string) => void;
+  readonly placeholder?: string;
 }
 
 export function SearchBox(props: SearchBoxProps) {

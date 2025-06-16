@@ -8,7 +8,6 @@ export const getTextColorClass = (color: Color | undefined, elementState: Elemen
         case "blue":
             if (elementState === 'hover') return 'hover:text-blue-600';
             return 'text-blue-500';
-            break;
         case "green":
             if (elementState === 'hover') return 'hover:text-green-600';
             return 'text-green-500';

@@ -6,11 +6,11 @@ import type { ToastType } from "@/Types";
 import { Button } from "@/components/ui/primitives/button";
 
 interface ToastOptions {
-  title: string;
-  description?: string;
-  actionLabel?: string;
-  onAction?: () => void;
-  Icon?: React.ComponentType<{ className?: string }>;
+  readonly title: string;
+  readonly description?: string;
+  readonly actionLabel?: string;
+  readonly onAction?: () => void;
+  readonly Icon?: React.ComponentType<Readonly<{ readonly className?: string }>>;
 }
 
 function getIcon(type: ToastType) {

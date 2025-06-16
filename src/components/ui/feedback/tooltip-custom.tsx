@@ -5,8 +5,8 @@ import {
 } from "@/components/ui/feedback/tooltip";
 
 interface TooltipCustomProps {
-  children?: React.ReactNode;
-  value?: string;
+  readonly children?: React.ReactNode;
+  readonly value?: string;
 }
 
 export function TooltipCustom({ children, value }: TooltipCustomProps) {

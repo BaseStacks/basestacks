@@ -11,18 +11,18 @@ import type { Color } from "@/Types";
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
 
-type ActionListItem = {
-  title: string;
-  icon?: React.ComponentType<{ className?: string }>;
-  color?: Color;
-  className?: string;
-  onClick: () => void;
-};
+type ActionListItem = Readonly<{
+  readonly title: string;
+  readonly icon?: React.ComponentType<Readonly<{ readonly className?: string }>>;
+  readonly color?: Color;
+  readonly className?: string;
+  readonly onClick: () => void;
+}>;
 
 interface ActionButtonProps {
-  id: string;
-  listAction: Array<ActionListItem>;
-  type?: "button" | "dropdown";
+  readonly id: string;
+  readonly listAction: Array<ActionListItem>;
+  readonly type?: "button" | "dropdown";
 }
 export function ActionButton({
   id,

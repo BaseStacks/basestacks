@@ -32,10 +32,10 @@ function CommandDialog({
   description = "Search for a command to run...",
   children,
   ...props
-}: React.ComponentProps<typeof Dialog> & {
-  title?: string;
-  description?: string;
-}) {
+}: React.ComponentProps<typeof Dialog> & Readonly<{
+  readonly title?: string;
+  readonly description?: string;
+}>) {
   return (
     <Dialog {...props}>
       <DialogHeader className="sr-only">

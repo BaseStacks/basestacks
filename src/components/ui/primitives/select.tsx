@@ -27,9 +27,9 @@ function SelectTrigger({
   size = "default",
   children,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
-  size?: "sm" | "default"
-}) {
+}: React.ComponentProps<typeof SelectPrimitive.Trigger> & Readonly<{
+  readonly size?: "sm" | "default"
+}>) {
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"

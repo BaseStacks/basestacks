@@ -2,16 +2,16 @@ import { createContext, useContext, useEffect, useState } from "react"
 
 export type Theme = "dark" | "light" | "system"
 
-type ThemeProviderProps = {
-  children: React.ReactNode
-  defaultTheme?: Theme
-  storageKey?: string
-}
+type ThemeProviderProps = Readonly<{
+  readonly children: React.ReactNode
+  readonly defaultTheme?: Theme
+  readonly storageKey?: string
+}>
 
-type ThemeProviderState = {
-  theme: Theme
-  setTheme: (theme: Theme) => void
-}
+type ThemeProviderState = Readonly<{
+  readonly theme: Theme
+  readonly setTheme: (theme: Theme) => void
+}>
 
 const initialState: ThemeProviderState = {
   theme: "system",

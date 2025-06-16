@@ -2,10 +2,10 @@ import { create } from 'zustand'
 import type { Color } from './Types';
 
 interface UseSidebarStatus {
-    visible: boolean;
-    mobileVisible: boolean;
-    toggle: () => void;
-    toggleMobile: () => void;
+    readonly visible: boolean;
+    readonly mobileVisible: boolean;
+    readonly toggle: () => void;
+    readonly toggleMobile: () => void;
 }
 
 export const useSidebarStatus = create<UseSidebarStatus>((set) => ({
@@ -15,13 +15,15 @@ export const useSidebarStatus = create<UseSidebarStatus>((set) => ({
     toggleMobile: () => set((state) => ({ mobileVisible: !state.mobileVisible })),
 }))
 
+interface User {
+    readonly name: string;
+    readonly email: string;
+    readonly avatar?: string;
+}
+
 export interface UserState {
-    user: {
-        name: string;
-        email: string;
-        avatar?: string;
-    };
-    setUser: (user: { name: string; email: string; avatar?: string }) => void;
+    readonly user: User;
+    readonly setUser: (user: User) => void;
 }
 
 export const useUserState = create<UserState>((set) => ({
@@ -33,14 +35,15 @@ export const useUserState = create<UserState>((set) => ({
     setUser: (user) => set({ user }),
 }));
 
+interface Workspace {
+    readonly id: string;
+    readonly name: string;
+}
 
 export interface WorkspacesState {
-    workspaces: Array<{
-        id: string;
-        name: string;
-    }>;
-    activeWorkspaceId: string;
-    addWorkspace: (workspace: { name: string }) => void;
+    readonly workspaces: Array<Workspace>;
+    readonly activeWorkspaceId: string;
+    readonly addWorkspace: (workspace: Pick<Workspace, 'name'>) => void;
 }
 
 export const useWorkspaces = create<WorkspacesState>((set) => ({
@@ -59,17 +62,17 @@ export const useWorkspaces = create<WorkspacesState>((set) => ({
 }));
 
 export interface Base {
-    id: string;
-    name: string;
-    description?: string;
-    color: Color;
+    readonly id: string;
+    readonly name: string;
+    readonly description?: string;
+    readonly color: Color;
 }
 
 export interface BasesState {
-    bases: Array<Base>;
-    activeBaseId: string;
-    getActiveBase: () => Base;
-    addBase: (base: Base) => void;
+    readonly bases: Array<Base>;
+    readonly activeBaseId: string;
+    readonly getActiveBase: () => Base;
+    readonly addBase: (base: Base) => void;
 }
 
 export const useBases = create<BasesState>((set, get) => ({
@@ -96,16 +99,16 @@ export const useBases = create<BasesState>((set, get) => ({
 }));
 
 export interface Table {
-    id: string;
-    name: string;
-    baseId: string;
-    showViews?: boolean;
+    readonly id: string;
+    readonly name: string;
+    readonly baseId: string;
+    readonly showViews?: boolean;
 }
 
 export interface TablesState {
-    tables: Array<Table>;
-    activeTableId?: string;
-    addTable: (table: Table) => void;
+    readonly tables: Array<Table>;
+    readonly activeTableId?: string;
+    readonly addTable: (table: Table) => void;
 }
 
 export const useTables = create<TablesState>((set) => ({
@@ -128,17 +131,17 @@ export const useTables = create<TablesState>((set) => ({
 }));
 
 export interface View {
-    id: string;
-    name: string;
-    type: 'grid' | 'kanban' | 'calendar' | 'gallery';
-    tableId: string;
+    readonly id: string;
+    readonly name: string;
+    readonly type: 'grid' | 'kanban' | 'calendar' | 'gallery';
+    readonly tableId: string;
 }
 
 export interface ViewsState {
-    views: Array<View>;
-    activeViewId?: string;
-    getViewsByTableId: (tableId: string) => Array<View>;
-    addView: (view: View) => void;
+    readonly views: Array<View>;
+    readonly activeViewId?: string;
+    readonly getViewsByTableId: (tableId: string) => Array<View>;
+    readonly addView: (view: View) => void;
 }
 
 export const useViews = create<ViewsState>((set, get) => ({
@@ -159,17 +162,17 @@ export const useViews = create<ViewsState>((set, get) => ({
 }));
 
 export interface Field {
-    id: string;
-    name: string;
-    type: 'single-line-text' | 'number' | 'date' | 'select' | 'checkbox';
-    options?: Array<string>; // For select fields
-    tableId: string;
+    readonly id: string;
+    readonly name: string;
+    readonly type: 'single-line-text' | 'number' | 'date' | 'select' | 'checkbox';
+    readonly options?: Array<string>; // For select fields
+    readonly tableId: string;
 }
 
 export interface FieldsState {
-    fields: Array<Field>;
-    addField: (field: Field) => void;
-    getFieldsByTableId: (tableId: string) => Array<Field>;
+    readonly fields: Array<Field>;
+    readonly addField: (field: Field) => void;
+    readonly getFieldsByTableId: (tableId: string) => Array<Field>;
 }
 
 export const useFields = create<FieldsState>((set, get) => ({

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { Button } from "./primitives/button";
 import {
   Dialog,
@@ -8,46 +8,57 @@ import {
 } from "@/components/ui/overlay/dialog";
 
 type DialogContextType = {
-  openDialog: (
+  readonly openDialog: (
     item: DialogContent,
     onConfirm: (item: DialogContent) => void
   ) => void;
-  closeDialog: () => void;
+  readonly closeDialog: () => void;
 };
 export interface DialogContent {
-  id?: string;
-  title?: string;
-  description?: string;
-  confirmText?: string;
-  cancelText?: string;
-  value?: React.ReactNode;
+  readonly id?: string;
+  readonly title?: string;
+  readonly description?: string;
+  readonly confirmText?: string;
+  readonly cancelText?: string;
+  readonly value?: React.ReactNode;
 }
 const DialogContext = createContext<DialogContextType | null>(null);
 
-export function DialogProvider({ children }: { children: React.ReactNode }) {
+export function DialogProvider({ children }: { readonly children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const [item, setItem] = useState<DialogContent | null>();
+  const [item, setItem] = useState<DialogContent | null>(null);
   const [onConfirm, setOnConfirm] = useState<((item: any) => void) | null>(
     null
   );
 
-  const openDialog = (
-    dialogItem: DialogContent,
-    onConfirmCallback: (item: any) => void
-  ) => {
-    setItem(dialogItem);
-    setOnConfirm(() => onConfirmCallback);
-    setOpen(true);
-  };
+  const openDialog = React.useCallback(
+    (
+      dialogItem: DialogContent,
+      onConfirmCallback: (item: any) => void
+    ) => {
+      setItem(dialogItem);
+      setOnConfirm(() => onConfirmCallback);
+      setOpen(true);
+    },
+    [setItem, setOnConfirm, setOpen]
+  );
 
-  const closeDialog = () => {
+  const closeDialog = React.useCallback(() => {
     setOpen(false);
     setItem(null);
     setOnConfirm(null);
-  };
+  }, [setOpen, setItem, setOnConfirm]);
+
+  const contextValue = React.useMemo(
+    () => ({
+      openDialog,
+      closeDialog,
+    }),
+    [openDialog, closeDialog]
+  );
 
   return (
-    <DialogContext.Provider value={{ openDialog, closeDialog }}>
+    <DialogContext.Provider value={contextValue}>
       {children}
       <Dialog open={open} onOpenChange={closeDialog}>
         <DialogPortal>
@@ -73,10 +84,10 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
                   onClick={closeDialog}
                   className="btn btn-outline"
                 >
-                  {item?.cancelText ? item.cancelText : "Cancel"}
+                  {item?.cancelText ?? "Cancel"}
                 </Button>
                 <Button type="submit">
-                  {item?.confirmText ? item.confirmText : "Save"}
+                  {item?.confirmText ?? "Save"}
                 </Button>
               </div>
             </form>

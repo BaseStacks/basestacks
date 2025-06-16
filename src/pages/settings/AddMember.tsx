@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/primitives/form";
 import { Input } from "@/components/ui/primitives/input";
 
-export function AddMember({ form }: { form: any }) {
+export function AddMember({ form }: Readonly<{ readonly form: any }>) {
   return (
     <div className="flex gap-2">
       <FormProvider {...form}>

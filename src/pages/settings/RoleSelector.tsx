@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { Controller } from "react-hook-form";
 import type { Color } from "@/Types";
+import type { HTMLProps } from "react";
 import {
   Select,
   SelectContent,
@@ -27,9 +28,9 @@ export type RoleLevel =
   | "No_Access";
 
 interface Role {
-  icon: React.ComponentType<{ className?: string }>;
-  label: string;
-  color?: Color;
+  readonly icon: React.ComponentType<HTMLProps<SVGSVGElement>>;
+  readonly label: string;
+  readonly color?: Color;
 }
 export const accessMap: Record<RoleLevel, Role> = {
   Owner: {
@@ -79,7 +80,7 @@ export function RoleSelector({
   name,
   control,
 }: RoleSelectorProps) {
-  const currentRole = accessMap[value || "No_Access"];
+  const currentRole = accessMap[value ?? "No_Access"];
 
   if (control && name) {
     return (

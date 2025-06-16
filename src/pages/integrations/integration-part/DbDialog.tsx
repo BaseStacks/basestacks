@@ -11,15 +11,15 @@ import {
 } from "@/components/ui/overlay/dialog";
 
 interface DbDialogProps {
-  buttonClassName?: string;
-  dialogContent?: React.ReactNode;
-  title?: string;
-  description?: string;
-  rightContent?: React.ReactNode;
-  children?: React.ReactNode;
-  showSubmit?: boolean;
-  showFooter?: boolean;
-  width?: string;
+  readonly buttonClassName?: string;
+  readonly dialogContent?: React.ReactNode;
+  readonly title?: string;
+  readonly description?: string;
+  readonly rightContent?: React.ReactNode;
+  readonly children?: React.ReactNode;
+  readonly showSubmit?: boolean;
+  readonly showFooter?: boolean;
+  readonly width?: string;
 }
 
 export function DbDialog({
