@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/primitives/button";
 import { Form, FormLabel } from "@/components/ui/primitives/form";
 import { FormFieldCustom } from "@/components/ui/primitives/form-field-custom";
 import { Label } from "@/components/ui/primitives/label";
-
 import { Separator } from "@/components/ui/primitives/separator";
 import { Switch } from "@/components/ui/primitives/switch";
 import { Textarea } from "@/components/ui/primitives/textarea";
@@ -20,18 +19,19 @@ import { getBgColorClass } from "@/lib/colorUtils";
 import { cn } from "@/lib/utils";
 
 type DatabaseType = {
-  connectionName: string;
-  hostName: string;
-  port: string;
-  username: string;
-  password: string;
-  databaseName: string;
-  ssl?: string;
-  parameters: Array<{
-    key: string;
-    value: string;
+  readonly connectionName: string;
+  readonly hostName: string;
+  readonly port: string;
+  readonly username: string;
+  readonly password: string;
+  readonly databaseName: string;
+  readonly ssl?: string;
+  readonly parameters: Array<{
+    readonly key: string;
+    readonly value: string;
   }>;
 };
+
 export function SQLDialogContent() {
   const form = useForm<DatabaseType>({
     defaultValues: {
@@ -61,7 +61,7 @@ export function SQLDialogContent() {
     control: form.control,
     name: "parameters",
   });
-  const onSubmit = () => {};
+  const onSubmit = () => { };
 
   const dataSSL = [
     { label: "No", value: "no" },
@@ -141,16 +141,17 @@ export function SQLDialogContent() {
                   <div key="form-section-3" className="space-y-2">
                     <FormLabel>Connection parameters</FormLabel>
                     {fields.map((field, index) => (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div
+                        key={field.id}
+                        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                      >
                         <FormFieldCustom
-                          key={`parameters.${index}.key`}
                           name={`parameters.${field.id}.key`}
                           control={form.control}
                           placeholder="Key"
                         />
                         <div className="flex gap-2">
                           <FormFieldCustom
-                            key={`parameters.${index}.key`}
                             name={`parameters.${field.id}.key`}
                             control={form.control}
                             placeholder="Value"
@@ -180,7 +181,10 @@ export function SQLDialogContent() {
                 <Separator className="my-2" />
                 <div key="form-section-4" className="space-y-4 pt-4">
                   <div className="grid grid-cols-1 gap-3">
-                    <div key="ssl-switch" className="flex items-center space-x-2">
+                    <div
+                      key="ssl-switch"
+                      className="flex items-center space-x-2"
+                    >
                       <Switch
                         id="use-ssl"
                         defaultChecked={useSSL}
@@ -222,7 +226,7 @@ export function SQLDialogContent() {
                                 const parsed = JSON.parse(newValue);
                                 form.reset(parsed);
                               } catch (error) {
-                                console.warn("Invalid JSON");
+                                console.error("Invalid JSON");
                               }
                             }}
                           />

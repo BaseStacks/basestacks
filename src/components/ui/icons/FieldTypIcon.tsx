@@ -1,6 +1,6 @@
 import { Calendar, Check, Hash, SquareCheck, Type } from "lucide-react";
 
-export function FieldTypeIcon({ type }: { type: string }) {
+export function FieldTypeIcon({ type }: Readonly<{ readonly type: string }>) {
     switch (type) {
         case 'single-line-text':
             return <Type />;

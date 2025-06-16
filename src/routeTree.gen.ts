@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as SettingsImport } from './routes/settings'
 import { Route as IntegrationsImport } from './routes/integrations'
 import { Route as AutomationImport } from './routes/automation'
+import { Route as AccountImport } from './routes/account'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -36,6 +37,12 @@ const AutomationRoute = AutomationImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AccountRoute = AccountImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
@@ -51,6 +58,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountImport
       parentRoute: typeof rootRoute
     }
     '/automation': {
@@ -81,6 +95,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
   '/settings': typeof SettingsRoute
@@ -88,6 +103,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
   '/settings': typeof SettingsRoute
@@ -96,6 +112,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
   '/settings': typeof SettingsRoute
@@ -103,15 +120,22 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/automation' | '/integrations' | '/settings'
+  fullPaths: '/' | '/account' | '/automation' | '/integrations' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/automation' | '/integrations' | '/settings'
-  id: '__root__' | '/' | '/automation' | '/integrations' | '/settings'
+  to: '/' | '/account' | '/automation' | '/integrations' | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/account'
+    | '/automation'
+    | '/integrations'
+    | '/settings'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
   AutomationRoute: typeof AutomationRoute
   IntegrationsRoute: typeof IntegrationsRoute
   SettingsRoute: typeof SettingsRoute
@@ -119,6 +143,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
   AutomationRoute: AutomationRoute,
   IntegrationsRoute: IntegrationsRoute,
   SettingsRoute: SettingsRoute,
@@ -135,6 +160,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/account",
         "/automation",
         "/integrations",
         "/settings"
@@ -142,6 +168,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/account": {
+      "filePath": "account.tsx"
     },
     "/automation": {
       "filePath": "automation.tsx"

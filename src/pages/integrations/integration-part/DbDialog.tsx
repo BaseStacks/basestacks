@@ -8,18 +8,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/primitives/dialog";
+} from "@/components/ui/overlay/dialog";
 
-interface DialogCustomProps {
-  buttonClassName?: string;
-  dialogContent?: React.ReactNode;
-  title?: string;
-  description?: string;
-  rightContent?: React.ReactNode;
-  children?: React.ReactNode;
-  showSubmit?: boolean;
-  showFooter?: boolean;
-  width?: string;
+interface DbDialogProps {
+  readonly buttonClassName?: string;
+  readonly dialogContent?: React.ReactNode;
+  readonly title?: string;
+  readonly description?: string;
+  readonly rightContent?: React.ReactNode;
+  readonly children?: React.ReactNode;
+  readonly showSubmit?: boolean;
+  readonly showFooter?: boolean;
+  readonly width?: string;
 }
 
 export function DbDialog({
@@ -32,7 +32,7 @@ export function DbDialog({
   showSubmit = false,
   showFooter = true,
   width,
-}: DialogCustomProps) {
+}: DbDialogProps) {
   return (
     <Dialog>
       <DialogTrigger className={buttonClassName}>{children}</DialogTrigger>

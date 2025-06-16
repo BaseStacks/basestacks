@@ -1,30 +1,60 @@
 import { EllipsisVertical } from "lucide-react";
-import { Button } from "../button";
+import { Button } from "../../primitives/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../dropdown-menu";
+} from "../../navigation/dropdown-menu";
+import { TooltipCustom } from "../../feedback/tooltip-custom";
 import type { Color } from "@/Types";
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
 
-type ActionListItem = {
-  title: string;
-  icon?: React.ComponentType<{ className?: string }>;
-  color?: Color;
-  className?: string;
-  onClick: () => void;
-};
+type ActionListItem = Readonly<{
+  readonly title: string;
+  readonly icon?: React.ComponentType<Readonly<{ readonly className?: string }>>;
+  readonly color?: Color;
+  readonly className?: string;
+  readonly onClick: () => void;
+}>;
 
 interface ActionButtonProps {
-  id: string;
-  listAction: Array<ActionListItem>;
+  readonly id: string;
+  readonly listAction: Array<ActionListItem>;
+  readonly type?: "button" | "dropdown";
 }
-
-export function ActionButton(props: ActionButtonProps) {
-  return (
+export function ActionButton({
+  id,
+  listAction,
+  type = "dropdown",
+}: ActionButtonProps) {
+  return type === "button" ? (
+    <div className="flex gap-x-1">
+      {listAction.map((item) => (
+        <TooltipCustom value={item.title} key={`action-${id}-${item.title}`}>
+          <Button
+            size="icon"
+            variant="ghost"
+            className={cn(
+              getBgColorClass(item.color, "100", "hover"),
+              getTextColorClass(item.color)
+            )}
+            onClick={() => item.onClick()}
+          >
+            {item.icon && (
+              <item.icon
+                className={cn(
+                  item.className,
+                  getTextColorClass(item.color || "gray")
+                )}
+              />
+            )}
+          </Button>
+        </TooltipCustom>
+      ))}
+    </div>
+  ) : (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
@@ -36,10 +66,11 @@ export function ActionButton(props: ActionButtonProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="!p-1 !w-fit !min-w-fit">
-        {props.listAction.map((item) => (
+        {listAction.map((item) => (
           <DropdownMenuItem
+            key={`action-${id}`}
             onClick={() => item.onClick()}
-            className="!p-0 !w-fit"
+            className="!p-0 !w-fit cursor-pointer"
           >
             <div
               className={cn(

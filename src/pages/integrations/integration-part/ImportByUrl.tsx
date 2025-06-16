@@ -5,7 +5,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/primitives/popover";
+} from "@/components/ui/feedback/popover";
 import { Textarea } from "@/components/ui/primitives/textarea";
 
 export function ImportByUrl() {
@@ -26,7 +26,7 @@ export function ImportByUrl() {
           <span className="text-sm">
             Auto populate connection configuration using database connection URL
           </span>
-          <Textarea className="h-[100px]" placeholder="Enter Url"/>
+          <Textarea className="h-[100px]" placeholder="Enter Url" />
           <div className="flex justify-end gap-2">
             <Button
               className="border"

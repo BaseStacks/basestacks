@@ -189,7 +189,7 @@ function ViewList({ tableId }: ViewListProps) {
     );
 }
 
-function ViewIcon({ type }: { type: string }) {
+function ViewIcon({ type }: Readonly<{ readonly type: string }>) {
     switch (type) {
         case 'grid':
             return <Grid2x2 />;

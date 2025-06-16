@@ -19,19 +19,19 @@ import {
 } from "./select";
 import type { Control } from "react-hook-form";
 
-type SelectItemType = {
-  label: string;
-  value: string;
-};
+type SelectItemType = Readonly<{
+  readonly label: string;
+  readonly value: string;
+}>;
 
 interface FormFieldCustomProps {
-  name: string;
-  control: Control<any>;
-  required?: boolean;
-  label?: string;
-  placeholder?: string;
-  type?: "text" | "password" | "select";
-  selectItems?: Array<SelectItemType>;
+  readonly name: string;
+  readonly control: Control<any>;
+  readonly required?: boolean;
+  readonly label?: string;
+  readonly placeholder?: string;
+  readonly type?: "text" | "password" | "select";
+  readonly selectItems?: Array<SelectItemType>;
 }
 
 export function FormFieldCustom({

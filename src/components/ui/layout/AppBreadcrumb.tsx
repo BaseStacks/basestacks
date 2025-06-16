@@ -1,6 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { Fragment } from "react/jsx-runtime";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../primitives/breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "../navigation/breadcrumb";
 import type React from "react";
 import { useIsMobile } from "@/hooks/ui/useIsMobile";
 
@@ -33,38 +39,35 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        {
-          items.map((item, index) => {
-            const isLast = index === items.length - 1;
-            return (
-              <Fragment key={index}>
-                <BreadcrumbItem>
-                  <AppBreadcrumbItem item={item} />
-                </BreadcrumbItem>
-                {!isLast && <BreadcrumbSeparator />}
-              </Fragment>
-            );
-          })
-        }
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
+          return (
+            <Fragment key={index}>
+              <BreadcrumbItem>
+                <AppBreadcrumbItem item={item} />
+              </BreadcrumbItem>
+              {!isLast && <BreadcrumbSeparator />}
+            </Fragment>
+          );
+        })}
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }
 
-function AppBreadcrumbItem({ item }: { item: AppBreadcrumbItem; }) {
+function AppBreadcrumbItem({ item }: Readonly<{ readonly item: AppBreadcrumbItem }>) {
   if (item.type === "link") {
     return (
       <BreadcrumbLink asChild>
-        <Link to={item.href ?? "#"} className="text-sidebar-accent-foreground/60 hover:text-sidebar-accent-foreground">
+        <Link
+          to={item.href ?? "#"}
+          className="text-sidebar-accent-foreground/60 hover:text-sidebar-accent-foreground"
+        >
           {item.label}
         </Link>
       </BreadcrumbLink>
     );
   }
 
-  return (
-    <span className="text-foreground font-normal">
-      {item.label}
-    </span>
-  );
+  return <span className="text-foreground font-normal">{item.label}</span>;
 }
