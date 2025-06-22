@@ -1,4 +1,4 @@
-import { Asterisk, Eye, EyeOff } from "lucide-react";
+import { Asterisk, Eye, EyeOff, Plus } from "lucide-react";
 import { useState } from "react";
 import {
   FormControl,
@@ -17,11 +17,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./select";
+import { Separator } from "./separator";
 import type { Control } from "react-hook-form";
 
 type SelectItemType = Readonly<{
   readonly label: string;
   readonly value: string;
+  readonly onClick?: () => void;
+  readonly disabled?: boolean;
 }>;
 
 interface FormFieldCustomProps {
@@ -32,6 +35,7 @@ interface FormFieldCustomProps {
   readonly placeholder?: string;
   readonly type?: "text" | "password" | "select";
   readonly selectItems?: Array<SelectItemType>;
+  readonly actionItems?: Array<SelectItemType>;
 }
 
 export function FormFieldCustom({
@@ -42,6 +46,7 @@ export function FormFieldCustom({
   placeholder,
   type = "text",
   selectItems,
+  actionItems,
 }: FormFieldCustomProps) {
   const [show, setShow] = useState(false);
 
@@ -58,9 +63,9 @@ export function FormFieldCustom({
             </FormLabel>
           )}
           <FormControl>
-            {type === "text" ? (
+            {type === "text" ?
               <Input placeholder={placeholder} {...field} />
-            ) : type === "password" ? (
+            : type === "password" ?
               <div className="relative">
                 <Input type={show ? "text" : "password"} {...field} />
                 <Button
@@ -68,29 +73,53 @@ export function FormFieldCustom({
                   onClick={() => setShow((prev) => !prev)}
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
                 >
-                  {show ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {show ?
+                    <EyeOff size={18} />
+                  : <Eye size={18} />}
                 </Button>
               </div>
-            ) : (
-              <Select
+            : <Select
                 onValueChange={field.onChange}
                 value={field.value}
                 defaultValue={field.value}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
                     {selectItems?.map((item) => (
-                      <SelectItem key={item.value} value={item.value}>
+                      <SelectItem
+                        key={item.value}
+                        value={item.value}
+                        disabled={item.disabled}
+                        onClick={item.onClick}
+                        className="cursor-pointer"
+                      >
                         {item.label}
                       </SelectItem>
                     ))}
+                    {actionItems && (
+                      <>
+                        <Separator className="my-1" />
+                        {actionItems.map((item) => (
+                          <Button
+                            key={item.value}
+                            variant="link"
+                            value={item.value}
+                            onClick={item.onClick}
+                            disabled={item.disabled}
+                          >
+                            <Plus />
+                            {item.label}
+                          </Button>
+                        ))}
+                      </>
+                    )}
                   </SelectGroup>
                 </SelectContent>
               </Select>
-            )}
+            }
           </FormControl>
           <FormMessage />
         </FormItem>

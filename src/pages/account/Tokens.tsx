@@ -45,7 +45,7 @@ export function Tokens() {
   const [data, setData] = useState<Array<TokenProps>>(listToken);
   const [showedToken, setShowedToken] = useState<Array<string>>([]);
   const [showAddToken, setShowAddToken] = useState(false);
-  const { openModal } = useDeleteModal();
+  const { openDeleteModal } = useDeleteModal();
 
   const form = useForm<TokenProps>({
     defaultValues: {
@@ -56,7 +56,7 @@ export function Tokens() {
     },
   });
   const handleClickDelete = (token: DeleteModalContent) => {
-    openModal(token, (item) => {
+    openDeleteModal(token, (item) => {
       const dataRemoved = data.filter((o) => o.id != item.id);
       setData(dataRemoved);
       Toast.error({
@@ -94,7 +94,7 @@ export function Tokens() {
         <div className="w-70 overflow-hidden whitespace-nowrap text-ellipsis">
           {showedToken.find((o) => o === row.original.id) ?
             <p className="truncate">{row.original.token}</p>
-            : <span>************************************</span>}
+          : <span>************************************</span>}
         </div>
       ),
     },
@@ -113,7 +113,7 @@ export function Tokens() {
                 setShowedToken((prev) =>
                   prev.includes(row.original.id) ?
                     prev.filter((o) => o !== row.original.id)
-                    : [...prev, row.original.id]
+                  : [...prev, row.original.id]
                 );
               },
             },
@@ -215,7 +215,7 @@ export function Tokens() {
                     </form>
                   </TableCell>
                 </TableRow>
-                : null
+              : null
             }
             emptyTable={
               <div className="flex flex-col items-center justify-center gap-4 text-center">

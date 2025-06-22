@@ -13,8 +13,8 @@ import { useDeleteModal } from "@/components/ui/DeleteDialogProvider";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 import { SearchBox } from "@/components/ui/primitives/search-box";
 import { Button } from "@/components/ui/primitives/button";
-import { useDialog } from "@/components/ui/DialogProvider";
 import { Toast } from "@/lib/toast";
+import { useModal } from "@/components/ui/ModalProvider";
 
 export interface MemberProps {
   readonly id: string;
@@ -93,8 +93,8 @@ const defaultData: Array<MemberProps> = [
 ];
 
 export function Member() {
-  const { openDialog, closeDialog } = useDialog();
-  const { openModal } = useDeleteModal();
+  const { openModal, closeModal } = useModal();
+  const { openDeleteModal } = useDeleteModal();
   const [data, setData] = useState<Array<MemberProps>>(defaultData);
   const form = useForm({
     defaultValues: {
@@ -109,11 +109,10 @@ export function Member() {
     );
     setData(newData);
     Toast.success({ title: "Member: " + id + " role updated successfully!" });
-    console.log("Updated data:", newData);
   };
 
   const handleClickDelete = (member: DeleteModalContent) => {
-    openModal(member, (item) => {
+    openDeleteModal(member, (item) => {
       setData((prevData) => prevData.filter((o) => o.id !== item.id));
       Toast.success({
         title: "Member: " + item.id + " removed successfully!",
@@ -223,11 +222,11 @@ export function Member() {
 
           <Button
             onClick={() =>
-              openDialog(
+              openModal(
                 {
                   title: "Invite to Workspace",
                   confirmText: "Invite to Workspace",
-                  value: <AddMember form={form} />,
+                  content: <AddMember form={form} />,
                 },
                 () => {
                   form.handleSubmit((value) => {
@@ -242,7 +241,7 @@ export function Member() {
                     ]);
                     form.reset();
                     Toast.success({ title: "Member added successfully!" });
-                    closeDialog();
+                    closeModal();
                   })();
                 }
               )

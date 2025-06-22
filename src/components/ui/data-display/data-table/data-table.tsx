@@ -58,6 +58,7 @@ interface DataTableProps<TData, TValue> {
   readonly showPagination?: boolean;
   readonly customRow?: React.ReactNode;
   readonly emptyTable?: React.ReactNode;
+  readonly onRowClick?: (id: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -72,6 +73,7 @@ export function DataTable<TData, TValue>({
   showPagination = false,
   customRow,
   emptyTable,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -136,6 +138,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => onRowClick?.(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

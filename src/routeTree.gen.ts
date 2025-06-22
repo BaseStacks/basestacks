@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SettingsImport } from './routes/settings'
+import { Route as OverviewImport } from './routes/overview'
 import { Route as IntegrationsImport } from './routes/integrations'
 import { Route as AutomationImport } from './routes/automation'
 import { Route as AccountImport } from './routes/account'
@@ -22,6 +23,12 @@ import { Route as IndexImport } from './routes/index'
 const SettingsRoute = SettingsImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OverviewRoute = OverviewImport.update({
+  id: '/overview',
+  path: '/overview',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,6 +88,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IntegrationsImport
       parentRoute: typeof rootRoute
     }
+    '/overview': {
+      id: '/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof OverviewImport
+      parentRoute: typeof rootRoute
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -98,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
+  '/overview': typeof OverviewRoute
   '/settings': typeof SettingsRoute
 }
 
@@ -106,6 +121,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
+  '/overview': typeof OverviewRoute
   '/settings': typeof SettingsRoute
 }
 
@@ -115,20 +131,34 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/automation': typeof AutomationRoute
   '/integrations': typeof IntegrationsRoute
+  '/overview': typeof OverviewRoute
   '/settings': typeof SettingsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/account' | '/automation' | '/integrations' | '/settings'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/automation'
+    | '/integrations'
+    | '/overview'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account' | '/automation' | '/integrations' | '/settings'
+  to:
+    | '/'
+    | '/account'
+    | '/automation'
+    | '/integrations'
+    | '/overview'
+    | '/settings'
   id:
     | '__root__'
     | '/'
     | '/account'
     | '/automation'
     | '/integrations'
+    | '/overview'
     | '/settings'
   fileRoutesById: FileRoutesById
 }
@@ -138,6 +168,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   AutomationRoute: typeof AutomationRoute
   IntegrationsRoute: typeof IntegrationsRoute
+  OverviewRoute: typeof OverviewRoute
   SettingsRoute: typeof SettingsRoute
 }
 
@@ -146,6 +177,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   AutomationRoute: AutomationRoute,
   IntegrationsRoute: IntegrationsRoute,
+  OverviewRoute: OverviewRoute,
   SettingsRoute: SettingsRoute,
 }
 
@@ -163,6 +195,7 @@ export const routeTree = rootRoute
         "/account",
         "/automation",
         "/integrations",
+        "/overview",
         "/settings"
       ]
     },
@@ -177,6 +210,9 @@ export const routeTree = rootRoute
     },
     "/integrations": {
       "filePath": "integrations.tsx"
+    },
+    "/overview": {
+      "filePath": "overview.tsx"
     },
     "/settings": {
       "filePath": "settings.tsx"
