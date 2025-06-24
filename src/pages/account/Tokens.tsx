@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Copy, Eye, Trash2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import type { ColumnDef } from "@tanstack/react-table";
+import type { TokenType } from "@/components/api/data-type/account/account";
 import type { DeleteModalContent } from "@/components/ui/DeleteDialogProvider";
 import { useDeleteModal } from "@/components/ui/DeleteDialogProvider";
 import { Button } from "@/components/ui/primitives/button";
@@ -13,14 +14,7 @@ import { TableCell, TableRow } from "@/components/ui/data-display/table";
 import { Input } from "@/components/ui/primitives/input";
 import noData from "@/assets/No Data.svg";
 
-export type TokenProps = {
-  readonly id: string;
-  readonly name: string;
-  readonly creator: string;
-  readonly token: string;
-};
-
-const listToken: Array<TokenProps> = [
+const listToken: Array<TokenType> = [
   {
     id: "1",
     name: "Admin Access",
@@ -42,12 +36,12 @@ const listToken: Array<TokenProps> = [
 ];
 
 export function Tokens() {
-  const [data, setData] = useState<Array<TokenProps>>(listToken);
+  const [data, setData] = useState<Array<TokenType>>(listToken);
   const [showedToken, setShowedToken] = useState<Array<string>>([]);
   const [showAddToken, setShowAddToken] = useState(false);
   const { openDeleteModal } = useDeleteModal();
 
-  const form = useForm<TokenProps>({
+  const form = useForm<TokenType>({
     defaultValues: {
       id: "",
       name: "",
@@ -66,7 +60,7 @@ export function Tokens() {
     });
   };
 
-  const columns: Array<ColumnDef<TokenProps>> = [
+  const columns: Array<ColumnDef<TokenType>> = [
     {
       accessorKey: "name",
       header: "Token Name",
@@ -151,7 +145,7 @@ export function Tokens() {
     },
   ];
 
-  const onSubmit = (formData: TokenProps) => {
+  const onSubmit = (formData: TokenType) => {
     setData((prev) => [
       ...prev,
       {

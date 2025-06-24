@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { HardDrive, Pencil, Trash2 } from "lucide-react";
 import { ConnectionLayoutDialog } from "../shared/ConnectionLayoutDialog";
-import { EditDataSource } from "./data-source-part/EditDataSource";
+import { EditDataSourceTabs } from "./data-source-part/EditDataSourceTabs";
 import { AddDataSource } from "./data-source-part/AddDataSource";
-import type { DataSourceType } from "./data-source-part/AddDataSource";
 import type { ColumnDef } from "@tanstack/react-table";
-import type { DbType } from "../integrations/Connection";
+import type { DbType } from "@/components/api/data-type/intergration/intergration";
+import type { DataSourceType } from "@/components/api/data-type/overview/overview";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
 import { Toast } from "@/lib/toast";
 import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
@@ -31,7 +31,7 @@ import mongoIcon from "@/assets/integrations/MongoDB Icon.svg";
 const defaultData: Array<DataSourceType> = [
   {
     id: "1",
-    name: "MySQL Database",
+    sourceName: "MySQL Database",
     type: "Mysql",
     connection: "MySQL Connection",
     visible: true,
@@ -39,14 +39,14 @@ const defaultData: Array<DataSourceType> = [
   },
   {
     id: "2",
-    name: "PostgreSQL Database",
+    sourceName: "PostgreSQL Database",
     type: "PostgreSQL",
     connection: "PostgreSQL Connection",
     visible: false,
   },
   {
     id: "3",
-    name: "MongoDB Database",
+    sourceName: "MongoDB Database",
     type: "MongoDB",
     connection: "MongoDB Connection",
     visible: true,
@@ -68,13 +68,9 @@ export function DataSources() {
     openDialog(
       {
         title: "Edit Data Source",
-        iconTitle: HardDrive,
         showFooter: true,
-        content: (
-          <ConnectionLayoutDialog
-            children={<EditDataSource initialData={row} />}
-          />
-        ),
+        headerClassName: "border-b-0",
+        content: <EditDataSourceTabs initialData={row} />,
         leftContent: (
           <Breadcrumb>
             <BreadcrumbList>
@@ -85,7 +81,7 @@ export function DataSources() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem className="font-semibold">
-                <BreadcrumbLink href="#">{row.name}</BreadcrumbLink>
+                <BreadcrumbLink href="#">{row.sourceName}</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -134,7 +130,7 @@ export function DataSources() {
       },
     },
     {
-      accessorKey: "name",
+      accessorKey: "sourceName",
       header: ({ column }) => {
         return <HeaderSorted title="Name" column={column} />;
       },
@@ -199,7 +195,7 @@ export function DataSources() {
                       "Are you sure you want to delete this data source? This action cannot be undone.",
                     confirmText: "Delete",
                     cancelText: "Cancel",
-                    value: row.original.name,
+                    value: row.original.sourceName,
                   },
                   () => {
                     setData((prevData) =>
@@ -226,7 +222,6 @@ export function DataSources() {
       <div className="flex flex-col justify-center text-center">
         <div className="flex justify-between mb-6">
           <SearchBox placeholder="Search here..." setSearch={() => {}} />
-
           <Button
             onClick={() =>
               openDialog(
@@ -262,7 +257,7 @@ export function DataSources() {
                       ...prevData,
                       {
                         id: (prevData.length + 1).toString(),
-                        name: value.email,
+                        sourceName: value.email,
                         type: value.type,
                         connection: "New Connection",
                         visible: true,

@@ -1,5 +1,6 @@
 import { Files, Pencil } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
+import type { ConnectionType } from "@/components/api/data-type/intergration/intergration";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
 import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
 import { SearchBox } from "@/components/ui/primitives/search-box";
@@ -8,18 +9,8 @@ import { cn } from "@/lib/utils";
 import { ActionButton } from "@/components/ui/data-display/data-table/action-button";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 
-export type DbType = "Mysql" | "PostgreSQL" | "MongoDB";
-export type ConnectionProps = Readonly<{
-  readonly id: string;
-  readonly name: string;
-  readonly type: DbType;
-  readonly date: string;
-  readonly addBy: string;
-  readonly usage: number;
-}>;
-
 export function Connection() {
-  const columns: Array<ColumnDef<ConnectionProps>> = [
+  const columns: Array<ColumnDef<ConnectionType>> = [
     {
       accessorKey: "select",
       header: ({ table }) => (
@@ -125,7 +116,7 @@ export function Connection() {
     },
   ];
 
-  const typedConnectionData: Array<ConnectionProps> = [
+  const typedConnectionData: Array<ConnectionType> = [
     {
       id: "conn-1",
       name: "Logs-1",

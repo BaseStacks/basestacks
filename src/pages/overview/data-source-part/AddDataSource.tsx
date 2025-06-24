@@ -1,19 +1,10 @@
 import { GitCommitHorizontal } from "lucide-react";
 import { FormProvider, useForm } from "react-hook-form";
-import type { DbType } from "@/pages/integrations/Connection";
+import type { DbType } from "@/components/api/data-type/intergration/intergration";
 import { useDialog } from "@/components/ui/DialogProvider";
 import { FormFieldCustom } from "@/components/ui/primitives/form-field-custom";
 import { Toast } from "@/lib/toast";
 import { Integration } from "@/pages/integrations/Integration";
-
-export type DataSourceType = {
-  id: string;
-  name: string;
-  type: DbType;
-  connection: string;
-  database?: string;
-  visible: boolean;
-};
 
 export function AddDataSource() {
   const form = useForm({
@@ -32,7 +23,7 @@ export function AddDataSource() {
         <FormFieldCustom
           label="Data Source Name"
           required
-          name="name"
+          name="sourceName"
           control={form.control}
           placeholder="Enter data source name"
         />

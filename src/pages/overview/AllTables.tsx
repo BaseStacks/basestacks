@@ -1,18 +1,12 @@
 import { Download, HardDrive, SquarePlus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
+import type { AllTableType } from "@/components/api/data-type/overview/overview";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
 import { cn } from "@/lib/utils";
 
-type AllTableProps = Readonly<{
-  readonly name: string;
-  readonly description: string;
-  readonly source: string;
-  readonly createdOn: string;
-}>;
-
 export function AllTables() {
-  const columns: Array<ColumnDef<AllTableProps>> = [
+  const columns: Array<ColumnDef<AllTableType>> = [
     {
       header: "Name",
       accessorKey: "name",
@@ -30,7 +24,7 @@ export function AllTables() {
       accessorKey: "createdOn",
     },
   ];
-  const defaultData: Array<AllTableProps> = [
+  const defaultData: Array<AllTableType> = [
     {
       name: "Users",
       description: "User data table",

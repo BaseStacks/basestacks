@@ -3,8 +3,11 @@ import { Trash2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { AddMember } from "./AddMember";
 import { RoleSelector } from "./RoleSelector";
-import type { RoleLevel } from "./RoleSelector";
 import type { ColumnDef } from "@tanstack/react-table";
+import type {
+  MemberType,
+  RoleLevel,
+} from "@/components/api/data-type/settings/setting";
 import type { DeleteModalContent } from "@/components/ui/DeleteDialogProvider";
 import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
@@ -16,14 +19,7 @@ import { Button } from "@/components/ui/primitives/button";
 import { Toast } from "@/lib/toast";
 import { useModal } from "@/components/ui/ModalProvider";
 
-export interface MemberProps {
-  readonly id: string;
-  readonly users: string;
-  readonly access: RoleLevel;
-  readonly dateJoined: string;
-}
-
-const defaultData: Array<MemberProps> = [
+const defaultData: Array<MemberType> = [
   {
     id: "728ed52f",
     users: "m@example.com",
@@ -95,7 +91,7 @@ const defaultData: Array<MemberProps> = [
 export function Member() {
   const { openModal, closeModal } = useModal();
   const { openDeleteModal } = useDeleteModal();
-  const [data, setData] = useState<Array<MemberProps>>(defaultData);
+  const [data, setData] = useState<Array<MemberType>>(defaultData);
   const form = useForm({
     defaultValues: {
       email: "",
@@ -120,7 +116,7 @@ export function Member() {
     });
   };
 
-  const columns: Array<ColumnDef<MemberProps>> = [
+  const columns: Array<ColumnDef<MemberType>> = [
     {
       accessorKey: "select",
       header: ({ table }) => (

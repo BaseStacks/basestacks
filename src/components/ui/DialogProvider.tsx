@@ -22,14 +22,14 @@ type DialogContextType = {
   readonly closeDialog: () => void;
 };
 type ButtonList = {
-  type?: "cancel" | "submit" | "button";
-  label?: string;
-  onClick?: () => void;
-  icon?: React.ComponentType<HTMLProps<SVGSVGElement>>;
-  disabled?: boolean;
-  className?: string;
-  loading?: boolean;
-  variant?:
+  readonly type?: "cancel" | "submit" | "button";
+  readonly label?: string;
+  readonly onClick?: () => void;
+  readonly icon?: React.ComponentType<HTMLProps<SVGSVGElement>>;
+  readonly disabled?: boolean;
+  readonly className?: string;
+  readonly loading?: boolean;
+  readonly variant?:
     | "default"
     | "destructive"
     | "outline"
@@ -41,6 +41,7 @@ export interface DialogContent {
   readonly id?: string;
   readonly title?: string;
   readonly iconTitle?: React.ComponentType<HTMLProps<SVGSVGElement>>;
+  readonly headerClassName?: string;
   readonly leftContent?: React.ReactNode;
   readonly content?: React.ReactNode;
   readonly showFooter?: boolean;
@@ -113,7 +114,12 @@ export function DialogProvider({
                 }}
                 className="relative"
               >
-                <DialogHeader className="p-4 border-b-1 h-[65px]">
+                <DialogHeader
+                  className={cn(
+                    "p-4 h-[65px] border-b-1",
+                    item.headerClassName
+                  )}
+                >
                   <div className="flex items-center justify-between">
                     {item.leftContent ?
                       item.leftContent

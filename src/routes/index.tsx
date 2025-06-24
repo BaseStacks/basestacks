@@ -17,7 +17,6 @@ import { RecordHeights } from "@/components/ui/widgets/record/RecordHeights";
 import { ViewMenu } from "@/components/ui/widgets/view/ViewMenu";
 import { Button } from "@/components/ui/primitives/button";
 import { BsDataGrid } from "@/components/grid/BsDataGrid";
-import { useSearchParams } from "@/hooks/useSearchParams";
 
 const searchSchema = z.object({
   page: z.string().optional(),

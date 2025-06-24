@@ -2,6 +2,7 @@ import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { ImportByUrl } from "./ImportByUrl";
+import type { DatabaseType } from "@/components/api/data-type/intergration/intergration";
 import {
   Accordion,
   AccordionContent,
@@ -16,20 +17,6 @@ import { Separator } from "@/components/ui/primitives/separator";
 import { Switch } from "@/components/ui/primitives/switch";
 import { Textarea } from "@/components/ui/primitives/textarea";
 import { ConnectionLayoutDialog } from "@/pages/shared/ConnectionLayoutDialog";
-
-type DatabaseType = {
-  readonly connectionName: string;
-  readonly hostName: string;
-  readonly port: string;
-  readonly username: string;
-  readonly password: string;
-  readonly databaseName: string;
-  readonly ssl?: string;
-  readonly parameters: Array<{
-    readonly key: string;
-    readonly value: string;
-  }>;
-};
 
 export function SQLDialogContent() {
   const form = useForm<DatabaseType>({

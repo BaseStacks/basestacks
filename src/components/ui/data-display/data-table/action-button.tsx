@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
 
 type ActionListItem = Readonly<{
-  readonly title: string;
+  readonly title?: string;
   readonly icon?: React.ComponentType<
     Readonly<{ readonly className?: string }>
   >;
@@ -25,15 +25,18 @@ type ActionListItem = Readonly<{
 interface ActionButtonProps {
   readonly id: string;
   readonly listAction: Array<ActionListItem>;
-  readonly type?: "button" | "dropdown";
+  readonly type?: "button" | "dropdown" | "group";
+  readonly className?: string;
 }
 export function ActionButton({
   id,
   listAction,
   type = "dropdown",
+  className,
 }: ActionButtonProps) {
-  return type === "button" ?
-      <div className="flex gap-x-1">
+  return (
+    type === "button" ?
+      <div className={cn("flex", className)}>
         {listAction.map((item) => (
           <TooltipCustom value={item.title} key={`action-${id}-${item.title}`}>
             <Button
@@ -55,6 +58,26 @@ export function ActionButton({
               )}
             </Button>
           </TooltipCustom>
+        ))}
+      </div>
+    : type == "group" ?
+      <div className={cn("flex divide-x divide-muted-foreground", className)}>
+        {listAction.map((item) => (
+          <Button
+            key={`action-${id}-${item.title}`}
+            variant="secondary"
+            className={cn(
+              "rounded-none first:rounded-l-md last:rounded-r-md border-gray-200 px-2.5 py-1.5",
+              getTextColorClass(item.color)
+            )}
+            onClick={() => item.onClick()}
+            disabled={!item.onClick}
+          >
+            {item.icon && (
+              <item.icon className={getTextColorClass(item.color)} />
+            )}
+            {item.title && item.title}
+          </Button>
         ))}
       </div>
     : <DropdownMenu>
@@ -101,5 +124,6 @@ export function ActionButton({
             </>
           ))}
         </DropdownMenuContent>
-      </DropdownMenu>;
+      </DropdownMenu>
+  );
 }
