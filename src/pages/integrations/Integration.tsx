@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { getTextColorClass } from "@/lib/colorUtils";
 import { useDialog } from "@/components/ui/DialogProvider";
 import { Toast } from "@/lib/toast";
+import { Button } from "@/components/ui/primitives/button";
 
 export function Integration() {
   const { openDialog } = useDialog();
@@ -49,8 +50,10 @@ export function Integration() {
           <div className="grid gap-4 ">
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
               {integrations.map((db) => (
-                <div
-                  className="rounded-xl flex items-center gap-4 border p-3 w-full"
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="flex items-center justify-start gap-4 border p-3 w-full h-full rounded-xl "
                   onClick={() => {
                     openDialog(
                       {
@@ -84,7 +87,7 @@ export function Integration() {
                     />
                   </span>
                   <span className="integration-name">{db.name}</span>
-                </div>
+                </Button>
               ))}
             </div>
           </div>

@@ -76,7 +76,7 @@ export function ActionButton({
             {item.icon && (
               <item.icon className={getTextColorClass(item.color)} />
             )}
-            {item.title && item.title}
+            {item.title}
           </Button>
         ))}
       </div>
