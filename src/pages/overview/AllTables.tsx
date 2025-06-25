@@ -49,8 +49,7 @@ export function AllTables() {
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         <div
           className={cn(
-            "flex flex-col gap-3 p-4 rounded-lg hover:shadow-sm transition-shadow",
-            getBgColorClass("gray", "100")
+            "flex flex-col gap-3 p-4 rounded-lg hover:shadow-sm transition-shadow bg-muted"
           )}
         >
           <SquarePlus color="blue" size={30} />
@@ -65,8 +64,7 @@ export function AllTables() {
         </div>
         <div
           className={cn(
-            "flex flex-col gap-3 p-4 rounded-lg hover:shadow-sm transition-shadow",
-            getBgColorClass("gray", "100")
+            "flex flex-col gap-3 p-4 rounded-lg hover:shadow-sm transition-shadow bg-muted"
           )}
         >
           <Download color="orange" size={30} />
@@ -81,8 +79,7 @@ export function AllTables() {
         </div>
         <div
           className={cn(
-            "flex flex-col gap-3 p-4 rounded-lg hover:shadow-sm transition-shadow",
-            getBgColorClass("gray", "100")
+            "flex flex-col gap-3 p-4 rounded-lg hover:shadow-sm transition-shadow bg-muted"
           )}
         >
           <HardDrive color="green" size={30} />

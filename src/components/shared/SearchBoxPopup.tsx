@@ -133,6 +133,8 @@ export function SearchBoxPopup() {
       if (event.key === "Enter" && open && selectedItem) {
         event.preventDefault();
         const item = flatItems.find((i) => i.id === selectedItem);
+        console.log("Mouse enter on item:", item);
+
         if (item) {
           handleResultClick(item);
         }
@@ -144,7 +146,7 @@ export function SearchBoxPopup() {
       window.removeEventListener("keydown", handleKeyDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, selectedItem]);
 
   const handleStepClick = (item?: SearchFlow) => {
     if (item && item.type == "Bases") {
@@ -226,11 +228,13 @@ export function SearchBoxPopup() {
             }}
             className="flex flex-col"
           >
-            <div className="flex items-center gap-2 border-b p-4 overflow-hidden">
+            <div className="flex items-center border-b p-4 overflow-hidden">
               <div className="flex items-center gap-2">
                 <Search />
-                <span
-                  className="flex gap-2 items-center cursor-pointer "
+                <Button
+                  variant="ghost"
+                  type="button"
+                  className="flex gap-2 items-center cursor-pointer pl-0"
                   onClick={() => handleStepClick()}
                 >
                   <Avatar className="h-8 w-8 rounded-lg">
@@ -240,31 +244,34 @@ export function SearchBoxPopup() {
                   <DialogTitle className="max-w-15 text-ellipsis overflow-hidden whitespace-nowrap">
                     {user.name}
                   </DialogTitle>
-                </span>
+                </Button>
                 <span>/</span>
               </div>
               {activeStep.map((item, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  {item.icon && <item.icon color={item.color} />}
+                <>
                   <Button
                     variant="ghost"
                     type="button"
-                    className="max-w-15 text-ellipsis overflow-hidden whitespace-nowrap"
+                    key={index}
+                    className="flex items-center gap-2"
                     onClick={() =>
                       item.type == "Bases" && handleStepClick(item)
                     }
                   >
-                    {item.name}
+                    {item.icon && <item.icon color={item.color} />}
+                    <span className="max-w-15 text-ellipsis overflow-hidden whitespace-nowrap">
+                      {item.name}
+                    </span>
                   </Button>
                   <span>/</span>
-                </div>
+                </>
               ))}
               <Input
                 type="text"
                 value={search}
                 placeholder="Search workspace, bases, tables, views & more..."
                 onChange={(e) => setSearchState(e.target.value)}
-                className="w-full border-none !bg-transparent shadow-none !focus:outline-none !focus:ring-0 !focus:border-transparent focus-visible:ring-1 focus-visible:ring-transparent px-0"
+                className="w-full border-none !bg-transparent shadow-none !focus:outline-none !focus:ring-0 !focus:border-transparent focus-visible:ring-1 focus-visible:ring-transparent"
               />
             </div>
             <div className="flex flex-col gap-2 pb-2 min-h-[400px]">
@@ -308,14 +315,20 @@ export function SearchBoxPopup() {
             </div>
             <DialogFooter className="border-t p-4">
               <div className="flex gap-2 items-center justify-between w-full">
-                <div className="flex items-center gap-1">
+                <Button
+                  variant="ghost"
+                  type="button"
+                  className="flex items-center gap-1"
+                >
                   <FileSearch size={16} />
                   <span className="text-xs">Document</span>
                   <kbd className="pointer-events-none inline-flex select-none items-center bg-muted rounded-lg border text-sm p-1">
                     <span className="text-xs">Ctrl + J</span>
                   </kbd>
-                </div>
-                <div
+                </Button>
+                <Button
+                  variant="ghost"
+                  type="button"
                   className={cn(
                     "flex items-center gap-1",
                     getTextColorClass("blue")
@@ -331,14 +344,18 @@ export function SearchBoxPopup() {
                   >
                     <span className="text-sm text-white">Ctrl + K</span>
                   </kbd>
-                </div>
-                <div className="flex items-center gap-1">
+                </Button>
+                <Button
+                  variant="ghost"
+                  type="button"
+                  className="flex items-center gap-1"
+                >
                   <Clock size={16} />
                   <span className="text-sm">Recent</span>
                   <kbd className="pointer-events-none inline-flex select-none items-center bg-muted rounded-lg border text-sm p-1">
                     <span className="text-xs">Ctrl + L</span>
                   </kbd>
-                </div>
+                </Button>
               </div>
             </DialogFooter>
           </form>
