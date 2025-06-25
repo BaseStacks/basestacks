@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   Plus,
   PlusCircle,
-  Search,
   Square,
   SquareKanban,
   Table2,
@@ -21,6 +20,7 @@ import { Label } from "../../primitives/label";
 import { getTextColorClass } from "@/lib/colorUtils";
 import { useBases, useSidebarStatus, useTables, useViews } from "@/states";
 import { useIsMobile } from "@/hooks/ui/useIsMobile";
+import { SearchBoxPopup } from "@/components/shared/SearchBoxPopup";
 
 interface NavigationProps {
   readonly isOverviewPage?: boolean;
@@ -61,15 +61,7 @@ export function BasesSidebar({ isOverviewPage = false }: NavigationProps) {
       </div>
       <div className="flex flex-col gap-2 px-4">
         <div className="py-2 w-full">
-          <Button variant="outline" className="!px-4 w-full">
-            <Search />
-            <span className="grow text-left block font-light">
-              Quick search
-            </span>
-            <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-              <span className="text-xs">Ctrl K</span>
-            </kbd>
-          </Button>
+          <SearchBoxPopup />
         </div>
         <div className="w-full flex flex-col gap-1 mb-4">
           <Button variant="ghost" className="!px-4 w-full">

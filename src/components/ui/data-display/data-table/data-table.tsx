@@ -100,13 +100,7 @@ export function DataTable<TData, TValue>({
       {table.getRowModel().rows.length || customRow ?
         <div className="rounded-md border overflow-hidden">
           <Table>
-            <TableHeader
-              className={cn(
-                "rounded-lg",
-                `dark:${getBgColorClass("gray", "600")}`,
-                getBgColorClass("gray", "100")
-              )}
-            >
+            <TableHeader className={cn("rounded-lg", "bg-muted")}>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
@@ -115,8 +109,7 @@ export function DataTable<TData, TValue>({
                         key={header.id}
                         className={cn(
                           "text-sm font-medium px-4",
-                          getBgColorClass("gray", "100"),
-                          `dark:${getBgColorClass("gray", "800")}`,
+                          "bg-muted",
                           header.column.columnDef.meta?.headerClass ?? ""
                         )}
                       >

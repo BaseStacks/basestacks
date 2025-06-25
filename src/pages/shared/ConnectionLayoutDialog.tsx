@@ -1,7 +1,7 @@
 import { BookOpen, Copy } from "lucide-react";
 import { Button } from "@/components/ui/primitives/button";
 import { Separator } from "@/components/ui/primitives/separator";
-import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
+import { getTextColorClass } from "@/lib/colorUtils";
 import { cn } from "@/lib/utils";
 
 export function ConnectionLayoutDialog({
@@ -16,13 +16,7 @@ export function ConnectionLayoutDialog({
           <div className="mx-auto space-y-8">{children}</div>
         </div>
       </div>
-      <div
-        className={cn(
-          "basis-full md:basis-1/6 border-l-1",
-          getBgColorClass("gray", "100"),
-          `dark:${getBgColorClass("gray", "800")}`
-        )}
-      >
+      <div className={cn("basis-full md:basis-1/6 border-l-1", "bg-muted")}>
         <div className="flex flex-col p-5 gap-3">
           <div className="text-sm font-semibold">Whitelist IPs</div>
           <div
