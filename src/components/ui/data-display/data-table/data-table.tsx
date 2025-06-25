@@ -33,7 +33,6 @@ import {
   TableRow,
 } from "@/components/ui/data-display/table";
 import { cn } from "@/lib/utils";
-import { getBgColorClass } from "@/lib/colorUtils";
 
 interface PaginationProps {
   readonly pageSize: string | number;

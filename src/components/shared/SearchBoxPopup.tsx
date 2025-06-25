@@ -246,14 +246,16 @@ export function SearchBoxPopup() {
               {activeStep.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
                   {item.icon && <item.icon color={item.color} />}
-                  <span
-                    className="max-w-15 text-ellipsis overflow-hidden whitespace-nowrap cursor-pointer "
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    className="max-w-15 text-ellipsis overflow-hidden whitespace-nowrap"
                     onClick={() =>
                       item.type == "Bases" && handleStepClick(item)
                     }
                   >
                     {item.name}
-                  </span>
+                  </Button>
                   <span>/</span>
                 </div>
               ))}
@@ -270,16 +272,17 @@ export function SearchBoxPopup() {
                 <div key={type}>
                   <div className="text-xs font-semibold p-3">{type}</div>
                   {items.map((item, index) => (
-                    <div
+                    <Button
+                      variant="ghost"
+                      type="button"
                       key={index}
                       className={cn(
                         selectedItem === item.id &&
                           cn(
-                            "border-l-4",
-                            getBorderColorClass("blue", "500"),
-                            "bg-muted"
+                            "border-l-4 bg-muted",
+                            getBorderColorClass("blue", "500")
                           ),
-                        "flex items-center justify-between gap-2 p-4 cursor-pointer rounded-0"
+                        "flex items-center justify-between gap-2 py-4 px-5 rounded rounded-0 w-full"
                       )}
                       onClick={() => handleResultClick(item)}
                       onMouseEnter={() => {
@@ -291,12 +294,14 @@ export function SearchBoxPopup() {
                         <span>{item.name}</span>
                       </div>
                       {selectedItem === item.id && (
-                        <kbd className="pointer-events-none inline-flex select-none items-center bg-muted rounded-lg border font-mono text-sm p-1">
+                        <kbd className="pointer-events-none inline-flex select-none items-center bg-muted rounded-lg border font-mono text-sm p-1 gap-2">
                           <span className="text-xs">Enter +</span>
-                          <CornerDownLeft className="w-5 h-5 bg-white rounded-md" />
+                          <CornerDownLeft
+                            className={`w-5 h-5 bg-white dark:${getBgColorClass("gray", "200")} rounded-md p-0.5`}
+                          />
                         </kbd>
                       )}
-                    </div>
+                    </Button>
                   ))}
                 </div>
               ))}
