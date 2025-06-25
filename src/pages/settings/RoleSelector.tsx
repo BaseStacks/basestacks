@@ -9,6 +9,7 @@ import {
 import { Controller } from "react-hook-form";
 import type { Color } from "@/Types";
 import type { HTMLProps } from "react";
+import type { RoleLevel } from "@/components/api/data-type/settings/setting";
 import {
   Select,
   SelectContent,
@@ -18,14 +19,6 @@ import {
 } from "@/components/ui/primitives/select";
 import { cn } from "@/lib/utils";
 import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
-
-export type RoleLevel =
-  | "Owner"
-  | "Creator"
-  | "Editor"
-  | "Commenter"
-  | "Viewer"
-  | "No_Access";
 
 interface Role {
   readonly icon: React.ComponentType<HTMLProps<SVGSVGElement>>;

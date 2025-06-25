@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { Input } from "./primitives/input";
 import { Button } from "./primitives/button";
 import {
@@ -9,7 +15,7 @@ import {
 } from "@/components/ui/overlay/dialog";
 
 type DeleteModalContextType = {
-  readonly openModal: (
+  readonly openDeleteModal: (
     content: DeleteModalContent,
     onConfirm: (content: DeleteModalContent) => void
   ) => void;
@@ -31,9 +37,11 @@ export function DeleteModalProvider({
 }>) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState<DeleteModalContent | null>(null);
-  const [onConfirm, setOnConfirm] = useState<((content: any) => void) | null>(null);
+  const [onConfirm, setOnConfirm] = useState<((content: any) => void) | null>(
+    null
+  );
 
-  const openModal = useCallback(
+  const openDeleteModal = useCallback(
     (
       nextContent: DeleteModalContent,
       onConfirmCallback: (content: any) => void
@@ -45,21 +53,18 @@ export function DeleteModalProvider({
     []
   );
 
-  const closeDialog = () => {
+  const closeDeleteDialog = () => {
     setOpen(false);
     setContent(null);
     setOnConfirm(null);
   };
 
-  const contextValue = useMemo(
-    () => ({ openModal }),
-    [openModal]
-  );
+  const contextValue = useMemo(() => ({ openDeleteModal }), [openDeleteModal]);
 
   return (
     <DeleteModalContext.Provider value={contextValue}>
       {children}
-      <Dialog open={open} onOpenChange={closeDialog}>
+      <Dialog open={open} onOpenChange={closeDeleteDialog}>
         <DialogPortal>
           <DialogOverlay className="fixed inset-0 bg-black/30" />
           <DialogContent className="p-6 rounded-lg border border-destructive max-w-md">
@@ -73,7 +78,7 @@ export function DeleteModalProvider({
             <div className="flex justify-end gap-2">
               <Button
                 variant="secondary"
-                onClick={closeDialog}
+                onClick={closeDeleteDialog}
                 className="btn btn-outline"
               >
                 {content?.cancelText ?? "Cancel"}
@@ -81,7 +86,7 @@ export function DeleteModalProvider({
               <Button
                 onClick={() => {
                   onConfirm?.(content);
-                  closeDialog();
+                  closeDeleteDialog();
                 }}
                 className="bg-destructive text-white hover:bg-destructive/90 disabled:opacity-50 disabled:pointer-events-none"
               >

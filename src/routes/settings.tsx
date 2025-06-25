@@ -45,13 +45,11 @@ function RouteComponent() {
       <AppHeader breadcrumb={breadcrumbItems} />
       <AppTabs tabs={tabs} />
       <div className="p-4">
-        {search.page === "members" ? (
+        {search.page === "members" ?
           <Member />
-        ) : search.page === "settings" ? (
+        : search.page === "settings" ?
           <Setting />
-        ) : (
-          <div>Select a tab to view content.</div>
-        )}
+        : <div>Select a tab to view content.</div>}
       </div>
     </AppPage>
   );

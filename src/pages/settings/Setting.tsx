@@ -11,8 +11,10 @@ import { Alert, AlertTitle } from "@/components/ui/feedback/alert";
 import { CardCustom } from "@/components/ui/data-display/card-custom";
 import { Input } from "@/components/ui/primitives/input";
 import { cn } from "@/lib/utils";
+import { useUserState } from "@/states";
 
 export function Setting() {
+  const { user } = useUserState();
   const [themeMode, setThemeMode] = useState<Theme>(
     (localStorage.getItem("theme") || "system") as Theme
   );
@@ -34,7 +36,7 @@ export function Setting() {
         >
           <div className="flex items-start gap-4">
             <Avatar className="rounded-lg w-[66px] h-[66px]">
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage src={user.avatar} title={user.name} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="flex flex-col w-full gap-3">

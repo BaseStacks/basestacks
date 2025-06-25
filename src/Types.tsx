@@ -17,5 +17,5 @@ export type ColorWeight =
   | "700"
   | "800"
   | "900";
-export type ElementState = "default" | "hover" | "active" | "disabled" | "dark";
+export type ElementState = "default" | "hover" | "active" | "disabled";
 export type ToastType = "success" | "error" | "info" | "warning" | "custom";

@@ -33,7 +33,6 @@ import {
   TableRow,
 } from "@/components/ui/data-display/table";
 import { cn } from "@/lib/utils";
-import { getBgColorClass } from "@/lib/colorUtils";
 
 interface PaginationProps {
   readonly pageSize: string | number;
@@ -58,6 +57,7 @@ interface DataTableProps<TData, TValue> {
   readonly showPagination?: boolean;
   readonly customRow?: React.ReactNode;
   readonly emptyTable?: React.ReactNode;
+  readonly onRowClick?: (id: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -72,6 +72,7 @@ export function DataTable<TData, TValue>({
   showPagination = false,
   customRow,
   emptyTable,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -98,13 +99,7 @@ export function DataTable<TData, TValue>({
       {table.getRowModel().rows.length || customRow ?
         <div className="rounded-md border overflow-hidden">
           <Table>
-            <TableHeader
-              className={cn(
-                "rounded-lg",
-                `dark:${getBgColorClass("gray", "600")}`,
-                getBgColorClass("gray", "100")
-              )}
-            >
+            <TableHeader className={cn("rounded-lg", "bg-muted")}>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
@@ -113,8 +108,7 @@ export function DataTable<TData, TValue>({
                         key={header.id}
                         className={cn(
                           "text-sm font-medium px-4",
-                          getBgColorClass("gray", "100"),
-                          `dark:${getBgColorClass("gray", "800")}`,
+                          "bg-muted",
                           header.column.columnDef.meta?.headerClass ?? ""
                         )}
                       >
@@ -136,6 +130,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => onRowClick?.(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

@@ -3,12 +3,14 @@ import { NoSQLDialogContent } from "./integration-part/NoSQLDialogContent";
 import mysqlIcon from "@/assets/integrations/MySQL 6 Logo.png";
 import postgreSQLIcon from "@/assets/integrations/PostgreSQL Elephant.png";
 import mongoIcon from "@/assets/integrations/MongoDB Icon.svg";
-import { Button } from "@/components/ui/primitives/button";
-import { DbDialog } from "@/pages/integrations/integration-part/DbDialog";
 import { cn } from "@/lib/utils";
 import { getTextColorClass } from "@/lib/colorUtils";
+import { useDialog } from "@/components/ui/DialogProvider";
+import { Toast } from "@/lib/toast";
+import { Button } from "@/components/ui/primitives/button";
 
 export function Integration() {
+  const { openDialog } = useDialog();
   const integrations = [
     {
       name: "MySQL",
@@ -26,8 +28,9 @@ export function Integration() {
       dialogContent: <NoSQLDialogContent />,
     },
   ];
+
   return (
-    <div className="container mx-auto px-4 py-10">
+    <div className="container mx-auto p-10">
       <div className="flex flex-col justify-center gap-10">
         <span className="text-sm font-normal text-gray-600 mb-2">
           Connect integrations with NocoDB.
@@ -47,24 +50,34 @@ export function Integration() {
           <div className="grid gap-4 ">
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
               {integrations.map((db) => (
-                <DbDialog
-                  key={db.name}
-                  title={db.name}
-                  buttonClassName="rounded-xl flex items-center gap-4 border p-3 w-full"
-                  width="!max-w-[60vw]"
-                  showSubmit
-                  showFooter={false}
-                  rightContent={
-                    <>
-                      <Button variant="secondary" size="sm">
-                        Test Connection
-                      </Button>
-                      <Button variant="secondary" size="sm" disabled>
-                        Create Connection
-                      </Button>
-                    </>
-                  }
-                  dialogContent={db.dialogContent}
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="flex items-center justify-start gap-4 border p-3 w-full h-full rounded-xl "
+                  onClick={() => {
+                    openDialog(
+                      {
+                        title: db.name,
+                        content: db.dialogContent,
+                        buttons: [
+                          {
+                            type: "button",
+                            label: "Test Connection",
+                          },
+                          {
+                            type: "submit",
+                            label: "Create Connection",
+                            variant: "secondary",
+                          },
+                        ],
+                      },
+                      () => {
+                        Toast.success({
+                          title: `${db.name} connection created successfully!`,
+                        });
+                      }
+                    );
+                  }}
                 >
                   <span className="integration-icon p-2">
                     <img
@@ -74,7 +87,7 @@ export function Integration() {
                     />
                   </span>
                   <span className="integration-name">{db.name}</span>
-                </DbDialog>
+                </Button>
               ))}
             </div>
           </div>

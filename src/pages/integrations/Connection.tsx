@@ -1,5 +1,6 @@
 import { Files, Pencil } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
+import type { ConnectionType } from "@/components/api/data-type/intergration/intergration";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
 import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
 import { SearchBox } from "@/components/ui/primitives/search-box";
@@ -8,17 +9,8 @@ import { cn } from "@/lib/utils";
 import { ActionButton } from "@/components/ui/data-display/data-table/action-button";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 
-type ConnectionProps = Readonly<{
-  readonly id: string;
-  readonly name: string;
-  readonly type: "Mysql" | "PostgreSQL" | "MongoDB";
-  readonly date: string;
-  readonly addBy: string;
-  readonly usage: number;
-}>;
-
 export function Connection() {
-  const columns: Array<ColumnDef<ConnectionProps>> = [
+  const columns: Array<ColumnDef<ConnectionType>> = [
     {
       accessorKey: "select",
       header: ({ table }) => (
@@ -124,11 +116,11 @@ export function Connection() {
     },
   ];
 
-  const typedConnectionData: Array<ConnectionProps> = [
+  const typedConnectionData: Array<ConnectionType> = [
     {
       id: "conn-1",
       name: "Logs-1",
-      type: "PostgreSQL",
+      type: "Mysql",
       date: "2024-07-11",
       addBy: "Eve",
       usage: 315,
@@ -159,7 +151,7 @@ export function Connection() {
     },
   ];
   return (
-    <div className="container mx-auto px-4 py-10">
+    <div className="container mx-auto p-10">
       <div className="flex flex-col justify-center gap-4">
         <div className="text-sm font-normal text-gray-600 mb-2">
           Manage connections for your integrations.
