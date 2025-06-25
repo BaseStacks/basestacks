@@ -2,7 +2,7 @@ import { Download, HardDrive, SquarePlus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { AllTableType } from "@/components/api/data-type/overview/overview";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
-import { getBgColorClass, getTextColorClass } from "@/lib/colorUtils";
+import { getTextColorClass } from "@/lib/colorUtils";
 import { cn } from "@/lib/utils";
 
 export function AllTables() {
