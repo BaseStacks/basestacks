@@ -3,8 +3,11 @@ import { Trash2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { AddMember } from "./AddMember";
 import { RoleSelector } from "./RoleSelector";
-import type { RoleLevel } from "./RoleSelector";
 import type { ColumnDef } from "@tanstack/react-table";
+import type {
+  MemberType,
+  RoleLevel,
+} from "@/components/api/data-type/settings/setting";
 import type { DeleteModalContent } from "@/components/ui/DeleteDialogProvider";
 import { HeaderSorted } from "@/components/ui/data-display/data-table/header-sorted";
 import { DataTable } from "@/components/ui/data-display/data-table/data-table";
@@ -13,17 +16,10 @@ import { useDeleteModal } from "@/components/ui/DeleteDialogProvider";
 import { Checkbox } from "@/components/ui/primitives/checkbox";
 import { SearchBox } from "@/components/ui/primitives/search-box";
 import { Button } from "@/components/ui/primitives/button";
-import { useDialog } from "@/components/ui/DialogProvider";
 import { Toast } from "@/lib/toast";
+import { useModal } from "@/components/ui/ModalProvider";
 
-export interface MemberProps {
-  readonly id: string;
-  readonly users: string;
-  readonly access: RoleLevel;
-  readonly dateJoined: string;
-}
-
-const defaultData: Array<MemberProps> = [
+const defaultData: Array<MemberType> = [
   {
     id: "728ed52f",
     users: "m@example.com",
@@ -93,9 +89,9 @@ const defaultData: Array<MemberProps> = [
 ];
 
 export function Member() {
-  const { openDialog, closeDialog } = useDialog();
-  const { openModal } = useDeleteModal();
-  const [data, setData] = useState<Array<MemberProps>>(defaultData);
+  const { openModal, closeModal } = useModal();
+  const { openDeleteModal } = useDeleteModal();
+  const [data, setData] = useState<Array<MemberType>>(defaultData);
   const form = useForm({
     defaultValues: {
       email: "",
@@ -109,11 +105,10 @@ export function Member() {
     );
     setData(newData);
     Toast.success({ title: "Member: " + id + " role updated successfully!" });
-    console.log("Updated data:", newData);
   };
 
   const handleClickDelete = (member: DeleteModalContent) => {
-    openModal(member, (item) => {
+    openDeleteModal(member, (item) => {
       setData((prevData) => prevData.filter((o) => o.id !== item.id));
       Toast.success({
         title: "Member: " + item.id + " removed successfully!",
@@ -121,7 +116,7 @@ export function Member() {
     });
   };
 
-  const columns: Array<ColumnDef<MemberProps>> = [
+  const columns: Array<ColumnDef<MemberType>> = [
     {
       accessorKey: "select",
       header: ({ table }) => (
@@ -223,11 +218,11 @@ export function Member() {
 
           <Button
             onClick={() =>
-              openDialog(
+              openModal(
                 {
                   title: "Invite to Workspace",
                   confirmText: "Invite to Workspace",
-                  value: <AddMember form={form} />,
+                  content: <AddMember form={form} />,
                 },
                 () => {
                   form.handleSubmit((value) => {
@@ -242,7 +237,7 @@ export function Member() {
                     ]);
                     form.reset();
                     Toast.success({ title: "Member added successfully!" });
-                    closeDialog();
+                    closeModal();
                   })();
                 }
               )
